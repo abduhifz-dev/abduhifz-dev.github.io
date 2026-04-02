@@ -917,9 +917,9 @@ async function submitForm(){
   const email=document.getElementById('fe').value.trim();
   const subj=document.getElementById('fs').value.trim();
   const msg=document.getElementById('fm').value.trim();
-  if(!name){alert('Apna naam likhein!');return;}
-  if(!email||!email.includes('@')){alert('Sahi email likhein!');return;}
-  if(!msg){alert('Message likhein!');return;}
+  if(!name){alert('Enter your name!');return;}
+  if(!email||!email.includes('@')){alert('Enter valid email!');return;}
+  if(!msg){alert('Enter message!');return;}
   btn.innerHTML='Sending... &#x23F3;';
   btn.disabled=true;btn.style.opacity='0.6';
   try{
