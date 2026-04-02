@@ -16,7 +16,7 @@ public class AbdulRehman extends AndroidDeveloper {
     String name       = "Abdul Rehman";
     String role       = "Senior Android & Java Developer";
     String company    = "ProIT — Islamabad, Pakistan";
-    int    experience = 5; // years
+    int    experience = 5;
     String crashFree  = "99.9%";
 
     String[] stack = {
