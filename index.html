@@ -26,12 +26,12 @@
   --text:#dde6f0;--text2:#8899aa;
   --mono:'Space Mono',monospace;--display:'Plus Jakarta Sans',sans-serif;
 }
-*{margin:0;padding:0;box-sizing:border-box}
-html{scroll-behavior:smooth;cursor:none}
+*{margin:0;padding:0;box-sizing:border-box} a,button{cursor:pointer}
+html{scroll-behavior:smooth}
 .cdot{width:6px;height:6px;background:var(--lime);border-radius:50%;position:fixed;pointer-events:none;z-index:99999;transform:translate(-50%,-50%)}
 .cring{width:32px;height:32px;border:1px solid rgba(198,241,53,.5);border-radius:50%;position:fixed;pointer-events:none;z-index:99998;transform:translate(-50%,-50%);transition:all .14s ease}
 .cring.big{width:56px;height:56px;background:rgba(198,241,53,.05);border-color:var(--lime)}
-body{background:var(--bg);color:var(--text);font-family:var(--display);overflow-x:hidden;font-size:16px;line-height:1.65}
+body{background:var(--bg);color:var(--text);font-family:var(--display);overflow-x:hidden;font-size:16px;line-height:1.65;cursor:default}
 body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(198,241,53,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(198,241,53,.025) 1px,transparent 1px);background-size:64px 64px;pointer-events:none;z-index:0}
 #c{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none;opacity:.4}
 .prog{position:fixed;top:0;left:0;height:2px;background:var(--lime);z-index:9999;width:0%;box-shadow:0 0 8px var(--lime)}
@@ -40,9 +40,9 @@ nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:18px 56px;display:f
 .nlogo-dot{width:6px;height:6px;background:var(--lime);border-radius:50%;animation:pulse 2s infinite}
 @keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(198,241,53,.4)}70%{box-shadow:0 0 0 6px transparent}}
 .nlinks{display:flex;gap:40px;list-style:none}
-.nlinks a{font-family:var(--mono);font-size:10px;color:var(--text2);text-decoration:none;letter-spacing:2px;text-transform:uppercase;transition:color .2s}
+.nlinks a{font-family:var(--mono);font-size:10px;color:var(--text2);text-decoration:none;letter-spacing:2px;text-transform:uppercase;transition:color .2s;cursor:pointer}
 .nlinks a:hover,.nlinks a.active{color:var(--lime)}
-.ngithub{font-family:var(--mono);font-size:10px;padding:9px 20px;border:1px solid var(--lime);color:var(--lime);background:transparent;letter-spacing:2px;text-transform:uppercase;text-decoration:none;transition:all .25s;display:flex;align-items:center;gap:8px}
+.ngithub{font-family:var(--mono);font-size:10px;padding:9px 20px;border:1px solid var(--lime);color:var(--lime);background:transparent;letter-spacing:2px;text-transform:uppercase;text-decoration:none;transition:all .25s;display:flex;align-items:center;gap:8px;cursor:pointer}
 .ngithub:hover{background:var(--lime);color:var(--bg)}
 
 /* HERO */
@@ -128,7 +128,7 @@ section{position:relative;z-index:1;padding:110px 56px}
 #experience{background:var(--bg)}
 .exp-grid{display:grid;grid-template-columns:260px 1fr;gap:60px}
 .exp-nav{position:sticky;top:100px;align-self:start}
-.exp-tab{padding:14px 20px;font-family:var(--mono);font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--text2);border-left:2px solid var(--border);margin-bottom:4px;cursor:none;transition:all .2s;background:transparent;display:block;width:100%;text-align:left}
+.exp-tab{padding:14px 20px;font-family:var(--mono);font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--text2);border-left:2px solid var(--border);margin-bottom:4px;cursor:pointer;transition:all .2s;background:transparent;display:block;width:100%;text-align:left}
 .exp-tab:hover{color:var(--text);border-color:var(--border2)}
 .exp-tab.active{color:var(--lime);border-color:var(--lime);background:rgba(198,241,53,.04)}
 .exp-panel{display:none;animation:fadeIn .3s ease}
@@ -148,7 +148,7 @@ section{position:relative;z-index:1;padding:110px 56px}
 /* PROJECTS */
 #projects{background:var(--bg2)}
 .proj-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border)}
-.pcard{background:var(--bg2);padding:32px;position:relative;overflow:hidden;cursor:none;transition:background .25s}
+.pcard{background:var(--bg2);padding:32px;position:relative;overflow:hidden;cursor:default;transition:background .25s}
 .pcard::after{content:'';position:absolute;bottom:0;left:0;right:0;height:0;background:linear-gradient(0deg,rgba(198,241,53,.06),transparent);transition:height .3s}
 .pcard:hover{background:var(--bg3)}.pcard:hover::after{height:100%}.pcard:hover .parr{transform:translate(4px,-4px);color:var(--lime)}.pcard:hover .pnum{color:var(--lime)}
 .pfeat{grid-column:span 2}
@@ -212,8 +212,8 @@ section{position:relative;z-index:1;padding:110px 56px}
 .ff input,.ff textarea{width:100%;background:transparent;border:none;outline:none;padding:28px 20px 12px;color:var(--text);font-family:var(--display);font-size:14px;resize:none}
 .ff label{position:absolute;top:18px;left:20px;font-family:var(--mono);font-size:9px;color:var(--text2);letter-spacing:1.5px;text-transform:uppercase;transition:all .2s;pointer-events:none}
 .ff input:focus~label,.ff input:not(:placeholder-shown)~label,.ff textarea:focus~label,.ff textarea:not(:placeholder-shown)~label{top:9px;font-size:7.5px;color:var(--lime)}
-.ff-submit{display:flex;align-items:center;justify-content:space-between;background:var(--bg3);padding:18px 20px;cursor:none}
-.ff-btn{font-family:var(--mono);font-size:10px;color:var(--lime);letter-spacing:2px;text-transform:uppercase;background:none;border:none;cursor:none;display:flex;align-items:center;gap:10px;transition:gap .2s}.ff-btn:hover{gap:18px}
+.ff-submit{display:flex;align-items:center;justify-content:space-between;background:var(--bg3);padding:18px 20px;}
+.ff-btn{font-family:var(--mono);font-size:10px;color:var(--lime);letter-spacing:2px;text-transform:uppercase;background:none;border:none;cursor:pointer;display:flex;align-items:center;gap:10px;transition:gap .2s}.ff-btn:hover{gap:18px}
 footer{background:var(--bg3);border-top:1px solid var(--border);padding:28px 56px;display:flex;align-items:center;justify-content:space-between;position:relative;z-index:1}
 .fc{font-family:var(--mono);font-size:10px;color:var(--text2);letter-spacing:1px}.fc span{color:var(--lime)}
 .flinks{display:flex;gap:20px}.flinks a{font-family:var(--mono);font-size:9px;color:var(--text2);text-decoration:none;letter-spacing:1px;text-transform:uppercase;transition:color .2s}.flinks a:hover{color:var(--lime)}
