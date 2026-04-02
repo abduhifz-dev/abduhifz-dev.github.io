@@ -1,1 +1,943 @@
-https://github.com/abduhifz-dev/abduhifz-dev.github.io/edit/main/index.html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Abdul Rehman — Android & Java Developer | abduhifz-dev</title>
+<meta name="description" content="Senior Android & Java Developer at ProIT since 2015. 10+ years · 30+ projects · 99.9% crash-free · Fiverr Top Rated Seller · Upwork Top Rated · Java · Android · C++ Qt · MVVM · Clean Architecture."/>
+<meta name="author" content="Abdul Rehman"/>
+<meta name="keywords" content="Android Developer, Java Developer, C++ Qt, Java Swing, MVVM, Clean Architecture, Hilt, Coroutines, Islamabad, Pakistan, ProIT, SKYNEX, Fiverr Top Rated, Upwork Top Rated"/>
+<meta property="og:title" content="Abdul Rehman — Senior Android & Java Developer"/>
+<meta property="og:description" content="10+ years · ProIT + SKYNEX · Fiverr/Upwork Top Rated · 30+ Projects · 99.9% Crash-Free"/>
+<meta property="og:type" content="website"/>
+<meta property="og:url" content="https://abduhifz-dev.github.io/"/>
+<meta name="theme-color" content="#c6f135"/>
+<link rel="canonical" href="https://abduhifz-dev.github.io/"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --bg:#05070a;--bg2:#080c12;--bg3:#0d1219;--surface:#111820;
+  --border:#1a2332;--border2:#243040;
+  --lime:#c6f135;--blue:#4da6ff;--orange:#ff7c35;
+  --violet:#9b7fff;--red:#ff4d6d;--teal:#2dd4bf;
+  --text:#dde6f0;--text2:#8899aa;
+  --mono:'Space Mono',monospace;--display:'Plus Jakarta Sans',sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box} a,button{cursor:pointer}
+html{scroll-behavior:smooth}
+.cdot{width:6px;height:6px;background:var(--lime);border-radius:50%;position:fixed;pointer-events:none;z-index:99999;transform:translate(-50%,-50%)}
+.cring{width:32px;height:32px;border:1px solid rgba(198,241,53,.5);border-radius:50%;position:fixed;pointer-events:none;z-index:99998;transform:translate(-50%,-50%);transition:all .14s ease}
+.cring.big{width:56px;height:56px;background:rgba(198,241,53,.05);border-color:var(--lime)}
+body{background:var(--bg);color:var(--text);font-family:var(--display);overflow-x:hidden;font-size:16px;line-height:1.65}
+body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(198,241,53,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(198,241,53,.025) 1px,transparent 1px);background-size:64px 64px;pointer-events:none;z-index:0}
+#c{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none;opacity:.4}
+.prog{position:fixed;top:0;left:0;height:2px;background:var(--lime);z-index:9999;width:0%;box-shadow:0 0 8px var(--lime)}
+nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:18px 56px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(255,255,255,.04);backdrop-filter:blur(20px);background:rgba(5,7,10,.7)}
+.nlogo{font-family:var(--mono);font-size:12px;color:var(--lime);letter-spacing:3px;text-transform:uppercase;display:flex;align-items:center;gap:8px}
+.nlogo-dot{width:6px;height:6px;background:var(--lime);border-radius:50%;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(198,241,53,.4)}70%{box-shadow:0 0 0 6px transparent}}
+.nlinks{display:flex;gap:40px;list-style:none}
+.nlinks a{font-family:var(--mono);font-size:10px;color:var(--text2);text-decoration:none;letter-spacing:2px;text-transform:uppercase;transition:color .2s}
+.nlinks a:hover,.nlinks a.active{color:var(--lime)}
+.ngithub{font-family:var(--mono);font-size:10px;padding:9px 20px;border:1px solid var(--lime);color:var(--lime);background:transparent;letter-spacing:2px;text-transform:uppercase;text-decoration:none;transition:all .25s;display:flex;align-items:center;gap:8px}
+.ngithub:hover{background:var(--lime);color:var(--bg)}
+#hero{min-height:100vh;display:flex;align-items:center;padding:100px 56px 60px;position:relative;z-index:1}
+.hero-wrap{max-width:1200px;margin:0 auto;width:100%;display:grid;grid-template-columns:1fr 420px;gap:80px;align-items:center}
+.htag{display:inline-flex;align-items:center;gap:10px;font-family:var(--mono);font-size:10px;color:var(--lime);letter-spacing:2.5px;text-transform:uppercase;margin-bottom:32px;padding:8px 16px;border:1px solid rgba(198,241,53,.2);background:rgba(198,241,53,.04)}
+.hblink{animation:blink 1.2s infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
+.hname{font-family:var(--display);font-size:clamp(48px,7vw,84px);font-weight:800;line-height:1;letter-spacing:-2px;margin-bottom:16px}
+.hname .first{color:var(--text)}
+.hname .last{color:transparent;-webkit-text-stroke:1.5px var(--lime);position:relative;display:inline-block}
+.hname .last::after{content:attr(data-text);position:absolute;left:0;top:0;color:var(--lime);clip-path:inset(0 100% 0 0);-webkit-text-stroke:0;animation:reveal 3s ease-in-out infinite alternate}
+@keyframes reveal{0%{clip-path:inset(0 80% 0 0)}100%{clip-path:inset(0 0% 0 0)}}
+.hrole{font-family:var(--mono);font-size:13px;color:var(--text2);margin-bottom:10px;display:flex;align-items:center;gap:12px}
+.hrole-text{color:var(--blue)}
+.hrole::before{content:'→';color:var(--lime)}
+.hbadges{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:28px}
+.hbadge{font-family:var(--mono);font-size:8.5px;padding:4px 10px;letter-spacing:1.5px;text-transform:uppercase;border:1px solid}
+.hbadge-green{border-color:rgba(198,241,53,.35);color:var(--lime);background:rgba(198,241,53,.06)}
+.hbadge-blue{border-color:rgba(77,166,255,.35);color:var(--blue);background:rgba(77,166,255,.06)}
+.hbadge-orange{border-color:rgba(255,124,53,.35);color:var(--orange);background:rgba(255,124,53,.06)}
+.hdesc{font-size:17px;color:rgba(221,230,240,.6);max-width:500px;line-height:1.85;margin-bottom:44px;font-weight:300}
+.hdesc strong{color:var(--text);font-weight:600}
+.hbtns{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:56px}
+.btn-l{display:inline-flex;align-items:center;gap:10px;padding:14px 32px;background:var(--lime);color:var(--bg);font-family:var(--mono);font-size:11px;letter-spacing:2px;text-transform:uppercase;text-decoration:none;font-weight:700;transition:all .3s;clip-path:polygon(0 0,calc(100% - 10px) 0,100% 10px,100% 100%,10px 100%,0 calc(100% - 10px))}
+.btn-l:hover{background:#d4ff40;transform:translateY(-2px);box-shadow:0 10px 30px rgba(198,241,53,.2)}
+.btn-o{display:inline-flex;align-items:center;gap:10px;padding:13px 30px;border:1px solid var(--border2);color:var(--text2);font-family:var(--mono);font-size:11px;letter-spacing:2px;text-transform:uppercase;text-decoration:none;transition:all .3s}
+.btn-o:hover{border-color:var(--lime);color:var(--lime)}
+.hstats{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);border:1px solid var(--border)}
+.hstat{background:var(--bg2);padding:18px 10px;text-align:center}
+.hstat-n{font-family:var(--display);font-size:30px;font-weight:800;color:var(--lime);line-height:1}
+.hstat-l{font-family:var(--mono);font-size:7px;color:var(--text2);letter-spacing:1.5px;text-transform:uppercase;margin-top:4px}
+.terminal{background:var(--bg3);border:1px solid var(--border2);overflow:hidden;box-shadow:0 0 60px rgba(198,241,53,.04)}
+.terminal-bar{background:var(--surface);padding:12px 16px;display:flex;align-items:center;gap:8px;border-bottom:1px solid var(--border)}
+.tbar-dot{width:10px;height:10px;border-radius:50%}
+.tbar-dot:nth-child(1){background:#ff5f57}.tbar-dot:nth-child(2){background:#febc2e}.tbar-dot:nth-child(3){background:#28c840}
+.tbar-title{font-family:var(--mono);font-size:10px;color:var(--text2);margin-left:8px}
+.terminal-body{padding:22px;font-family:var(--mono);font-size:11px;line-height:1.9}
+.tline{display:flex;gap:8px;margin-bottom:1px}
+.tprompt{color:var(--lime);flex-shrink:0}.tcmd{color:var(--text)}.tvalue{color:var(--blue)}.tstring{color:var(--orange)}.tskill{color:var(--violet)}
+.tcursor-term{display:inline-block;width:7px;height:13px;background:var(--lime);animation:blink 1s infinite;vertical-align:bottom}
+.mq{background:var(--lime);padding:13px 0;overflow:hidden;white-space:nowrap;position:relative;z-index:1}
+.mq-track{display:inline-flex;animation:mq 35s linear infinite}
+.mq-item{font-family:var(--mono);font-size:10px;letter-spacing:2.5px;text-transform:uppercase;color:var(--bg);padding:0 32px;border-right:1px solid rgba(0,0,0,.15);font-weight:700}
+@keyframes mq{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+section{position:relative;z-index:1;padding:110px 56px}
+.sinner{max-width:1200px;margin:0 auto}
+.stag{font-family:var(--mono);font-size:9px;color:var(--lime);letter-spacing:3px;text-transform:uppercase;margin-bottom:14px;display:flex;align-items:center;gap:10px}
+.stag::before{content:'';width:20px;height:1px;background:var(--lime)}
+.stag::after{content:'';flex:1;height:1px;background:var(--border)}
+.stitle{font-family:var(--display);font-size:clamp(30px,4vw,50px);font-weight:800;line-height:1.08;letter-spacing:-1px;margin-bottom:52px}
+.stitle em{font-style:normal;color:var(--lime)}
+#about{background:var(--bg2)}
+.about-grid{display:grid;grid-template-columns:1.1fr 1fr;gap:72px;align-items:start}
+.about-p{color:rgba(221,230,240,.65);font-size:16px;line-height:1.9;margin-bottom:16px;font-weight:300}
+.about-p strong{color:var(--text);font-weight:600}
+.badge-row{display:flex;flex-wrap:wrap;gap:8px;margin:22px 0}
+.badge{font-family:var(--mono);font-size:9px;padding:5px 12px;border:1px solid var(--border2);color:var(--text2);letter-spacing:1px;text-transform:uppercase;transition:all .2s}
+.badge:hover{border-color:var(--lime);color:var(--lime)}
+.badge.lime{border-color:rgba(198,241,53,.3);color:var(--lime);background:rgba(198,241,53,.04)}
+.badge.blue{border-color:rgba(77,166,255,.3);color:var(--blue);background:rgba(77,166,255,.04)}
+.badge.orange{border-color:rgba(255,124,53,.3);color:var(--orange);background:rgba(255,124,53,.04)}
+.info-card{background:var(--bg3);border:1px solid var(--border2);overflow:hidden}
+.info-card-header{padding:16px 20px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px}
+.info-card-dot{width:8px;height:8px;border-radius:50%}
+.info-card-title{font-family:var(--mono);font-size:9px;color:var(--text2);letter-spacing:2px;text-transform:uppercase;margin-left:4px}
+.skill-rows{padding:20px}
+.skill-row{margin-bottom:14px}
+.skill-top{display:flex;justify-content:space-between;margin-bottom:6px}
+.skill-nm{font-family:var(--mono);font-size:10px;color:var(--text2)}
+.skill-pc{font-family:var(--mono);font-size:10px;color:var(--lime)}
+.skill-track{height:2px;background:var(--border);overflow:hidden}
+.skill-fill{height:2px;background:var(--lime);width:0%;transition:width 1.3s cubic-bezier(.4,0,.2,1);position:relative}
+.skill-fill::after{content:'';position:absolute;right:-3px;top:-3px;width:7px;height:7px;background:var(--lime);border-radius:50%;box-shadow:0 0 6px var(--lime)}
+.skill-row:nth-child(2) .skill-fill{background:var(--blue)}.skill-row:nth-child(2) .skill-fill::after{background:var(--blue);box-shadow:0 0 6px var(--blue)}.skill-row:nth-child(2) .skill-pc{color:var(--blue)}
+.skill-row:nth-child(3) .skill-fill{background:var(--orange)}.skill-row:nth-child(3) .skill-fill::after{background:var(--orange);box-shadow:0 0 6px var(--orange)}.skill-row:nth-child(3) .skill-pc{color:var(--orange)}
+.skill-row:nth-child(4) .skill-fill{background:var(--violet)}.skill-row:nth-child(4) .skill-fill::after{background:var(--violet);box-shadow:0 0 6px var(--violet)}.skill-row:nth-child(4) .skill-pc{color:var(--violet)}
+.skill-row:nth-child(5) .skill-fill{background:var(--teal)}.skill-row:nth-child(5) .skill-fill::after{background:var(--teal);box-shadow:0 0 6px var(--teal)}.skill-row:nth-child(5) .skill-pc{color:var(--teal)}
+.skill-row:nth-child(6) .skill-fill{background:var(--red)}.skill-row:nth-child(6) .skill-fill::after{background:var(--red);box-shadow:0 0 6px var(--red)}.skill-row:nth-child(6) .skill-pc{color:var(--red)}
+#experience{background:var(--bg)}
+.exp-grid{display:grid;grid-template-columns:230px 1fr;gap:60px}
+.exp-nav{position:sticky;top:100px;align-self:start}
+.exp-tab{padding:14px 18px;font-family:var(--mono);font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--text2);border-left:2px solid var(--border);margin-bottom:4px;transition:all .2s;background:transparent;display:block;width:100%;text-align:left;line-height:1.5}
+.exp-tab:hover{color:var(--text);border-color:var(--border2)}
+.exp-tab.active{color:var(--lime);border-color:var(--lime);background:rgba(198,241,53,.04)}
+.exp-panel{display:none;animation:fadeIn .3s ease}
+.exp-panel.active{display:block}
+@keyframes fadeIn{from{opacity:0;transform:translateX(10px)}to{opacity:1;transform:translateX(0)}}
+.ep-date{font-family:var(--mono);font-size:10px;color:var(--lime);letter-spacing:1.5px;margin-bottom:8px;display:flex;align-items:center;gap:8px}
+.ep-date::before{content:'▶';font-size:7px}
+.ep-role{font-family:var(--display);font-size:24px;font-weight:800;color:var(--text);margin-bottom:4px;letter-spacing:-.5px}
+.ep-company{font-family:var(--mono);font-size:12px;color:var(--blue);margin-bottom:14px;display:flex;align-items:center;gap:8px}
+.ep-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0;animation:pulse 2s infinite}
+.ep-desc{font-size:15px;color:rgba(221,230,240,.65);line-height:1.85;margin-bottom:18px;font-weight:300}
+.ep-achiev-item{display:flex;gap:10px;font-size:14px;color:rgba(221,230,240,.6);margin-bottom:10px;line-height:1.7}
+.ep-achiev-item::before{content:'→';color:var(--lime);flex-shrink:0;font-family:var(--mono);font-size:11px;margin-top:2px}
+.ep-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+.ep-tag{font-family:var(--mono);font-size:9px;padding:4px 10px;border:1px solid var(--border2);color:var(--text2);letter-spacing:1px}
+#projects{background:var(--bg2)}
+.proj-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border)}
+.pcard{background:var(--bg2);padding:30px;position:relative;overflow:hidden;transition:background .25s}
+.pcard::after{content:'';position:absolute;bottom:0;left:0;right:0;height:0;background:linear-gradient(0deg,rgba(198,241,53,.05),transparent);transition:height .3s}
+.pcard:hover{background:var(--bg3)}.pcard:hover::after{height:100%}.pcard:hover .parr{transform:translate(4px,-4px);color:var(--lime)}.pcard:hover .pnum{color:var(--lime)}
+.pfeat{grid-column:span 2}
+.pnum{font-family:var(--mono);font-size:9px;color:var(--border2);letter-spacing:2px;margin-bottom:14px;transition:color .2s}
+.picon{font-size:24px;margin-bottom:12px}
+.ptitle{font-family:var(--display);font-size:18px;font-weight:700;color:var(--text);margin-bottom:8px;line-height:1.25}
+.pdesc{font-size:13px;color:var(--text2);line-height:1.8;margin-bottom:14px;font-weight:300}
+.pmet{display:flex;gap:12px;margin-bottom:12px;flex-wrap:wrap}
+.pm{font-family:var(--mono);font-size:9px;color:var(--text2)}.pm span{color:var(--lime)}
+.pstack{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:14px}
+.ptag{font-family:var(--mono);font-size:8px;padding:3px 8px;background:rgba(77,166,255,.07);border:1px solid rgba(77,166,255,.15);color:var(--blue);letter-spacing:.5px}
+.pfooter{display:flex;justify-content:space-between;align-items:center;padding-top:14px;border-top:1px solid var(--border);position:relative;z-index:1}
+.plinks{display:flex;gap:14px}
+.plink{font-family:var(--mono);font-size:9px;color:var(--text2);text-decoration:none;letter-spacing:1px;transition:color .2s}.plink:hover{color:var(--lime)}
+.parr{font-size:16px;color:var(--border2);transition:all .25s}
+#skills{background:var(--bg)}
+.sk-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border)}
+.skcard{background:var(--bg);padding:28px;transition:background .2s}.skcard:hover{background:var(--bg2)}
+.skicon{font-size:22px;margin-bottom:12px;display:block}
+.skname{font-family:var(--display);font-size:14px;font-weight:700;color:var(--text);margin-bottom:8px}
+.skitems{font-family:var(--mono);font-size:9px;color:var(--text2);line-height:2}
+.sklevel{display:inline-block;font-family:var(--mono);font-size:7.5px;padding:3px 9px;margin-top:12px;letter-spacing:1.5px;text-transform:uppercase}
+.lv-exp{background:rgba(198,241,53,.08);color:var(--lime);border:1px solid rgba(198,241,53,.2)}
+.lv-adv{background:rgba(77,166,255,.08);color:var(--blue);border:1px solid rgba(77,166,255,.2)}
+.arch-section{background:var(--bg2);padding:80px 56px;position:relative;z-index:1}
+.arch-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);max-width:1200px;margin:0 auto}
+.acard{background:var(--bg2);padding:30px;transition:background .2s}.acard:hover{background:var(--bg3)}
+.acard-num{font-family:var(--mono);font-size:26px;font-weight:700;color:var(--border2);margin-bottom:14px}
+.acard-title{font-family:var(--display);font-size:15px;font-weight:700;color:var(--text);margin-bottom:8px}
+.acard-desc{font-size:13px;color:var(--text2);line-height:1.75;font-weight:300}
+.acard-badge{display:inline-block;font-family:var(--mono);font-size:8px;padding:3px 9px;margin-top:14px;border:1px solid rgba(198,241,53,.25);color:var(--lime);letter-spacing:1.5px;text-transform:uppercase}
+.stats-section{background:var(--bg);padding:80px 56px;position:relative;z-index:1}
+.stat-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:1px;background:var(--border);max-width:1200px;margin:0 auto}
+.stcard{background:var(--bg);padding:32px 12px;text-align:center;position:relative;transition:background .2s}.stcard:hover{background:var(--bg2)}
+.stcard::before{content:'';position:absolute;bottom:0;left:0;right:0;height:2px}
+.stcard:nth-child(1)::before{background:var(--lime)}.stcard:nth-child(2)::before{background:var(--blue)}.stcard:nth-child(3)::before{background:var(--orange)}.stcard:nth-child(4)::before{background:var(--violet)}.stcard:nth-child(5)::before{background:var(--teal)}.stcard:nth-child(6)::before{background:var(--red)}
+.stnum{font-family:var(--display);font-size:40px;font-weight:800;line-height:1}
+.stcard:nth-child(1) .stnum{color:var(--lime)}.stcard:nth-child(2) .stnum{color:var(--blue)}.stcard:nth-child(3) .stnum{color:var(--orange)}.stcard:nth-child(4) .stnum{color:var(--violet)}.stcard:nth-child(5) .stnum{color:var(--teal)}.stcard:nth-child(6) .stnum{color:var(--red)}
+.stlabel{font-family:var(--mono);font-size:7.5px;color:var(--text2);letter-spacing:1.2px;text-transform:uppercase;margin-top:6px;line-height:1.6}
+#contact{background:var(--bg2);padding:110px 56px}
+.ct-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start;max-width:1200px;margin:0 auto}
+.ct-head{font-family:var(--display);font-size:clamp(32px,4vw,54px);font-weight:800;line-height:1.05;letter-spacing:-1.5px;margin-bottom:18px}
+.ct-sub{font-size:15px;color:var(--text2);line-height:1.85;margin-bottom:32px;font-weight:300;max-width:420px}
+.ct-links{display:flex;flex-direction:column;gap:10px}
+.ct-link{display:flex;align-items:center;gap:16px;padding:15px 18px;border:1px solid var(--border2);text-decoration:none;transition:all .25s}
+.ct-link:hover{border-color:var(--lime);background:rgba(198,241,53,.03)}.ct-link:hover .cla{transform:translate(4px,-4px)}.ct-link:hover .cli{color:var(--lime)}
+.cli{font-size:15px;color:var(--text2);transition:color .2s;width:20px;flex-shrink:0;text-align:center}
+.clt{flex:1}.clb{font-family:var(--mono);font-size:8px;color:var(--text2);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:2px}.clv{font-size:14px;color:var(--text);font-weight:500}
+.cla{font-size:14px;color:var(--text2);transition:transform .2s}
+.ct-form{display:flex;flex-direction:column;gap:1px;background:var(--border)}
+.ff{background:var(--bg3);position:relative}
+.ff input,.ff textarea{width:100%;background:transparent;border:none;outline:none;padding:28px 20px 12px;color:var(--text);font-family:var(--display);font-size:14px;resize:none}
+.ff label{position:absolute;top:18px;left:20px;font-family:var(--mono);font-size:9px;color:var(--text2);letter-spacing:1.5px;text-transform:uppercase;transition:all .2s;pointer-events:none}
+.ff input:focus~label,.ff input:not(:placeholder-shown)~label,.ff textarea:focus~label,.ff textarea:not(:placeholder-shown)~label{top:9px;font-size:7.5px;color:var(--lime)}
+.ff-submit{display:flex;align-items:center;justify-content:space-between;background:var(--bg3);padding:18px 20px}
+.ff-btn{font-family:var(--mono);font-size:10px;color:var(--lime);letter-spacing:2px;text-transform:uppercase;background:none;border:none;display:flex;align-items:center;gap:10px;transition:gap .2s}.ff-btn:hover{gap:18px}
+footer{background:var(--bg3);border-top:1px solid var(--border);padding:24px 56px;display:flex;align-items:center;justify-content:space-between;position:relative;z-index:1;flex-wrap:wrap;gap:12px}
+.fc{font-family:var(--mono);font-size:10px;color:var(--text2);letter-spacing:1px}.fc span{color:var(--lime)}
+.flinks{display:flex;gap:20px;flex-wrap:wrap}.flinks a{font-family:var(--mono);font-size:9px;color:var(--text2);text-decoration:none;letter-spacing:1px;text-transform:uppercase;transition:color .2s}.flinks a:hover{color:var(--lime)}
+.fu{opacity:0;transform:translateY(24px);transition:opacity .65s ease,transform .65s ease}.fu.v{opacity:1;transform:translateY(0)}
+.fu2{opacity:0;transform:translateY(24px);transition:opacity .65s .15s ease,transform .65s .15s ease}.fu2.v{opacity:1;transform:translateY(0)}
+
+
+/* Force project cards visible */
+.proj-section .pcard,.proj-section .ptitle,.proj-section .pdesc,.proj-section .pstack{opacity:1!important;transform:none!important}
+
+/* PROJECT CATEGORY TABS */
+.proj-tabs{display:flex;gap:1px;background:var(--border);margin-bottom:1px}
+.proj-tab{flex:1;padding:14px;font-family:var(--mono);font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--text2);background:var(--bg2);border:none;transition:all .2s;cursor:pointer;text-align:center}
+.proj-tab:hover{color:var(--text);background:var(--bg3)}
+.proj-tab.active{color:var(--lime);background:var(--bg3);box-shadow:inset 0 -2px 0 var(--lime)}
+.proj-section{display:none!important}.proj-section.active{display:block!important}
+.proj-section-title{font-family:var(--mono);font-size:9px;color:var(--text2);letter-spacing:3px;text-transform:uppercase;padding:16px 0 12px;display:flex;align-items:center;gap:10px}
+.proj-section-title::after{content:'';flex:1;height:1px;background:var(--border)}
+/* GAME card accent */
+.pcard.game-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--violet),var(--orange))}
+.pcard.android-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--lime),var(--teal))}
+.pcard.desktop-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--blue),var(--violet))}
+.ptag-game{background:rgba(155,127,255,.08);border:1px solid rgba(155,127,255,.2);color:var(--violet)}
+.ptag-desktop{background:rgba(77,166,255,.08);border:1px solid rgba(77,166,255,.2);color:var(--blue)}
+.pbadge{display:inline-block;font-family:var(--mono);font-size:8px;padding:2px 8px;margin-bottom:10px;letter-spacing:1px;text-transform:uppercase}
+.pbadge-android{background:rgba(198,241,53,.08);color:var(--lime);border:1px solid rgba(198,241,53,.2)}
+.pbadge-desktop{background:rgba(77,166,255,.08);color:var(--blue);border:1px solid rgba(77,166,255,.2)}
+.pbadge-game{background:rgba(155,127,255,.08);color:var(--violet);border:1px solid rgba(155,127,255,.2)}
+
+@media(max-width:900px){
+  nav{padding:16px 24px}.nlinks{display:none}
+  section,#hero,#contact,.arch-section,.stats-section{padding:80px 24px}
+  .hero-wrap{grid-template-columns:1fr}.hero-right{display:none}
+  .hstats{grid-template-columns:repeat(2,1fr)}
+  .about-grid,.ct-grid,.exp-grid{grid-template-columns:1fr}
+  .exp-nav{position:static}
+  .proj-grid,.sk-grid{grid-template-columns:1fr 1fr}
+  .pfeat{grid-column:span 1}
+  .stat-grid{grid-template-columns:repeat(3,1fr)}
+  .arch-grid{grid-template-columns:1fr 1fr}
+  footer{padding:20px 24px}
+}
+</style>
+</head>
+<body>
+<div class="prog" id="prog"></div>
+<div class="cdot" id="cdot"></div>
+<div class="cring" id="cring"></div>
+<canvas id="c"></canvas>
+
+<!-- NAV -->
+<nav>
+  <div class="nlogo"><div class="nlogo-dot"></div>AR.dev</div>
+  <ul class="nlinks">
+    <li><a href="#about" class="nav-a">About</a></li>
+    <li><a href="#experience" class="nav-a">Experience</a></li>
+    <li><a href="#projects" class="nav-a">Projects</a></li>
+    <li><a href="#skills" class="nav-a">Skills</a></li>
+    <li><a href="#contact" class="nav-a">Contact</a></li>
+  </ul>
+  <a href="https://github.com/abduhifz-dev" target="_blank" class="ngithub">GitHub ↗</a>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-wrap">
+    <div class="hero-left">
+      <div class="htag"><span class="hblink">▮</span> Open to Opportunities · Islamabad, PK</div>
+      <h1 class="hname">
+        <div class="first">Abdul</div>
+        <div class="last" data-text="Rehman.">Rehman.</div>
+      </h1>
+      <div class="hrole"><span class="hrole-text">Senior Android & Java / Desktop Developer</span></div>
+      <div class="hbadges">
+        <span class="hbadge hbadge-green">⭐ ProIT · Since 2015</span>
+        <span class="hbadge hbadge-blue">🏢 SKYNEX</span>
+        <span class="hbadge hbadge-orange">🏅 Fiverr Top Rated Seller</span>
+        <span class="hbadge hbadge-orange">💼 Upwork Top Rated</span>
+      </div>
+      <p class="hdesc">Building <strong>99.9% crash-free Android & Desktop apps</strong> for 10+ years across ProIT, SKYNEX, and international freelance clients. Expert in <strong>Java, C++ Qt, Java Swing, MVVM, Clean Architecture</strong> — 30+ projects delivered.</p>
+      <div class="hbtns">
+        <a href="#projects" class="btn-l">View Projects ↓</a>
+        <a href="#contact" class="btn-o">Hire Me →</a>
+      </div>
+      <div class="hstats">
+        <div class="hstat"><div class="hstat-n" data-count="10">0</div><div class="hstat-l">Years Exp</div></div>
+        <div class="hstat"><div class="hstat-n" data-count="30">0</div><div class="hstat-l">Projects Done</div></div>
+        <div class="hstat"><div class="hstat-n" data-count="99">0</div><div class="hstat-l">% Crash-Free</div></div>
+        <div class="hstat"><div class="hstat-n" data-count="3">0</div><div class="hstat-l">Companies</div></div>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="terminal">
+        <div class="terminal-bar">
+          <div class="tbar-dot"></div><div class="tbar-dot"></div><div class="tbar-dot"></div>
+          <div class="tbar-title">~/abdulrehman — developer.json</div>
+        </div>
+        <div class="terminal-body">
+          <div class="tline"><span class="tprompt">❯</span><span class="tcmd"> cat developer.json</span></div>
+          <div class="tline"><span class="tcmd">{</span></div>
+          <div class="tline" style="padding-left:14px"><span class="tstring">"name"</span><span class="tcmd">: </span><span class="tvalue">"Abdul Rehman"</span><span class="tcmd">,</span></div>
+          <div class="tline" style="padding-left:14px"><span class="tstring">"github"</span><span class="tcmd">: </span><span class="tvalue">"abduhifz-dev"</span><span class="tcmd">,</span></div>
+          <div class="tline" style="padding-left:14px"><span class="tstring">"experience"</span><span class="tcmd">: </span><span class="tvalue">"10+ years"</span><span class="tcmd">,</span></div>
+          <div class="tline" style="padding-left:14px"><span class="tstring">"companies"</span><span class="tcmd">: [</span><span class="tvalue">"ProIT"</span><span class="tcmd">,</span><span class="tvalue">"SKYNEX"</span><span class="tcmd">],</span></div>
+          <div class="tline" style="padding-left:14px"><span class="tstring">"freelance"</span><span class="tcmd">: {</span></div>
+          <div class="tline" style="padding-left:28px"><span class="tstring">"fiverr"</span><span class="tcmd">: </span><span class="tvalue">"Top Rated Seller"</span><span class="tcmd">,</span></div>
+          <div class="tline" style="padding-left:28px"><span class="tstring">"upwork"</span><span class="tcmd">: </span><span class="tvalue">"Top Rated"</span></div>
+          <div class="tline" style="padding-left:14px"><span class="tcmd">},</span></div>
+          <div class="tline" style="padding-left:14px"><span class="tstring">"stack"</span><span class="tcmd">:[</span><span class="tskill">"Java"</span><span class="tcmd">,</span><span class="tskill">"Android"</span><span class="tcmd">,</span><span class="tskill">"C++ Qt"</span><span class="tcmd">,</span><span class="tskill">"Swing"</span><span class="tcmd">],</span></div>
+          <div class="tline" style="padding-left:14px"><span class="tstring">"projects"</span><span class="tcmd">: </span><span class="tvalue">"30+"</span><span class="tcmd">,</span></div>
+          <div class="tline" style="padding-left:14px"><span class="tstring">"crashFree"</span><span class="tcmd">: </span><span class="tvalue">"99.9%"</span></div>
+          <div class="tline"><span class="tcmd">}</span></div>
+          <div class="tline"><span class="tprompt">❯</span> <span class="tcursor-term"></span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="mq">
+  <div class="mq-track">
+    <span class="mq-item">Java</span><span class="mq-item">Android SDK</span><span class="mq-item">C++ Qt</span><span class="mq-item">Java Swing</span><span class="mq-item">MVVM</span><span class="mq-item">Clean Architecture</span><span class="mq-item">Hilt DI</span><span class="mq-item">Coroutines</span><span class="mq-item">Room DB</span><span class="mq-item">Retrofit</span><span class="mq-item">ProIT</span><span class="mq-item">SKYNEX</span><span class="mq-item">Fiverr Top Rated</span><span class="mq-item">Upwork Top Rated</span><span class="mq-item">10 Years</span><span class="mq-item">30+ Projects</span><span class="mq-item">99.9% Crash-Free</span>
+    <span class="mq-item">Java</span><span class="mq-item">Android SDK</span><span class="mq-item">C++ Qt</span><span class="mq-item">Java Swing</span><span class="mq-item">MVVM</span><span class="mq-item">Clean Architecture</span><span class="mq-item">Hilt DI</span><span class="mq-item">Coroutines</span><span class="mq-item">Room DB</span><span class="mq-item">Retrofit</span><span class="mq-item">ProIT</span><span class="mq-item">SKYNEX</span><span class="mq-item">Fiverr Top Rated</span><span class="mq-item">Upwork Top Rated</span><span class="mq-item">10 Years</span><span class="mq-item">30+ Projects</span><span class="mq-item">99.9% Crash-Free</span>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="sinner">
+    <div class="stag">01 — About Me</div>
+    <div class="about-grid">
+      <div class="fu">
+        <h2 class="stitle">10 years. 30+ apps. <em>Zero</em> compromise.</h2>
+        <p class="about-p">I'm <strong>Abdul Rehman</strong>, a Senior Android & Java Developer with <strong>10+ years of professional experience since 2015</strong> at <strong>ProIT, Islamabad</strong> and <strong>SKYNEX</strong> — building enterprise-grade mobile and desktop applications.</p>
+        <p class="about-p">My core expertise covers the full Android lifecycle — <strong>Clean Architecture, MVVM/MVC, Hilt DI, Kotlin Coroutines & Flow</strong> — consistently delivering apps with a <strong>99.9% crash-free rate</strong>. For desktop, I build powerful cross-platform applications using <strong>C++ Qt</strong> and rich UI tools with <strong>Java Swing</strong>.</p>
+        <p class="about-p">As a <strong>Fiverr Top Rated Seller and Upwork Top Rated freelancer</strong>, I've delivered 30+ projects for global clients — always on time, always production-quality. Android + Desktop: I handle both.</p>
+        <div class="badge-row">
+          <span class="badge lime">ProIT · 2015–Present</span>
+          <span class="badge lime">SKYNEX</span>
+          <span class="badge orange">⭐ Fiverr Top Rated</span>
+          <span class="badge blue">💼 Upwork Top Rated</span>
+          <span class="badge">Android</span><span class="badge">Java</span><span class="badge">C++ Qt</span>
+          <span class="badge">Java Swing</span><span class="badge">MVVM</span><span class="badge">Clean Arch</span>
+          <span class="badge">Islamabad, PK</span>
+        </div>
+        <div style="margin-top:28px;display:flex;gap:14px;flex-wrap:wrap">
+          <a href="#contact" class="btn-l" style="display:inline-flex">Get In Touch ↗</a>
+          <a href="https://www.linkedin.com/in/abdul-rehman-01b588256/" target="_blank" class="btn-o" style="display:inline-flex">LinkedIn ↗</a>
+        </div>
+      </div>
+      <div class="fu2">
+        <div class="info-card">
+          <div class="info-card-header">
+            <div class="info-card-dot" style="background:var(--lime)"></div>
+            <div class="info-card-dot" style="background:var(--orange)"></div>
+            <div class="info-card-dot" style="background:var(--blue)"></div>
+            <div class="info-card-title">// skill_proficiency.json</div>
+          </div>
+          <div class="skill-rows" id="skillbars">
+            <div class="skill-row"><div class="skill-top"><span class="skill-nm">Android / Java</span><span class="skill-pc">98%</span></div><div class="skill-track"><div class="skill-fill" data-w="98"></div></div></div>
+            <div class="skill-row"><div class="skill-top"><span class="skill-nm">MVVM · MVC · Clean Arch</span><span class="skill-pc">96%</span></div><div class="skill-track"><div class="skill-fill" data-w="96"></div></div></div>
+            <div class="skill-row"><div class="skill-top"><span class="skill-nm">C++ · Qt Framework</span><span class="skill-pc">90%</span></div><div class="skill-track"><div class="skill-fill" data-w="90"></div></div></div>
+            <div class="skill-row"><div class="skill-top"><span class="skill-nm">Hilt · Coroutines · Flow</span><span class="skill-pc">93%</span></div><div class="skill-track"><div class="skill-fill" data-w="93"></div></div></div>
+            <div class="skill-row"><div class="skill-top"><span class="skill-nm">Java Swing · Desktop UI</span><span class="skill-pc">88%</span></div><div class="skill-track"><div class="skill-fill" data-w="88"></div></div></div>
+            <div class="skill-row"><div class="skill-top"><span class="skill-nm">REST · Retrofit · Firebase</span><span class="skill-pc">92%</span></div><div class="skill-track"><div class="skill-fill" data-w="92"></div></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="sinner">
+    <div class="stag">02 — Experience</div>
+    <h2 class="stitle">Where I've <em>worked</em></h2>
+    <div class="exp-grid">
+      <div class="exp-nav">
+        <button class="exp-tab active" onclick="showTab(this,'proit')">ProIT<br>2015 – Present</button>
+        <button class="exp-tab" onclick="showTab(this,'skynex')">SKYNEX</button>
+        <button class="exp-tab" onclick="showTab(this,'freelance')">Fiverr & Upwork<br>Top Rated</button>
+      </div>
+      <div>
+        <div class="exp-panel active" id="tab-proit">
+          <div class="ep-date">2015 — Present · 10 Years</div>
+          <div class="ep-role">Senior Android & Desktop Developer</div>
+          <div class="ep-company"><div class="ep-dot" style="background:var(--lime)"></div>ProIT · Islamabad, Pakistan</div>
+          <div class="ep-desc">Core senior engineer at ProIT for a decade — leading end-to-end development of Android mobile apps and Java/C++ desktop applications. Trusted with the most critical production systems, architecture decisions, and mentoring junior developers.</div>
+          <div class="ep-achiev-item">Designed and delivered 15+ production Android apps using Clean Architecture + MVVM, all maintaining 99.9% crash-free rate across years of active use.</div>
+          <div class="ep-achiev-item">Built cross-platform desktop tools using Java Swing and C++ Qt for internal enterprise operations, serving hundreds of daily users.</div>
+          <div class="ep-achiev-item">Led migration of legacy MVC codebases to MVVM with Hilt DI — bug count dropped by 40%, feature delivery speed increased significantly.</div>
+          <div class="ep-achiev-item">Introduced Kotlin Coroutines + Flow for async operations across all apps — completely eliminated ANR (App Not Responding) errors in production.</div>
+          <div class="ep-achiev-item">Mentored junior developers on architecture patterns, Android best practices, and production-quality code standards.</div>
+          <div class="ep-tags"><span class="ep-tag">Java</span><span class="ep-tag">Android</span><span class="ep-tag">MVVM</span><span class="ep-tag">Hilt</span><span class="ep-tag">Coroutines</span><span class="ep-tag">Room DB</span><span class="ep-tag">Retrofit</span><span class="ep-tag">C++ Qt</span><span class="ep-tag">Java Swing</span><span class="ep-tag">Firebase</span></div>
+        </div>
+        <div class="exp-panel" id="tab-skynex">
+          <div class="ep-date">Concurrent with Freelance Period</div>
+          <div class="ep-role">Android & Desktop Developer</div>
+          <div class="ep-company"><div class="ep-dot" style="background:var(--violet)"></div>SKYNEX · Pakistan</div>
+          <div class="ep-desc">Delivered Android mobile applications and C++ Qt desktop software for SKYNEX. Handled full development cycle — from requirements to deployment — specializing in solutions that combined Android mobile with desktop companion apps.</div>
+          <div class="ep-achiev-item">Built and deployed Android apps with clean API integrations, secure biometric authentication, and offline-first data handling.</div>
+          <div class="ep-achiev-item">Developed C++ Qt desktop tools for data management, report generation, and business process automation.</div>
+          <div class="ep-achiev-item">Delivered all projects on tight deadlines while maintaining thorough documentation and high code quality standards.</div>
+          <div class="ep-tags"><span class="ep-tag">Android</span><span class="ep-tag">Java</span><span class="ep-tag">C++ Qt</span><span class="ep-tag">MVC / MVVM</span><span class="ep-tag">SQLite</span><span class="ep-tag">REST APIs</span></div>
+        </div>
+        <div class="exp-panel" id="tab-freelance">
+          <div class="ep-date">Ongoing · Top Rated on Both Platforms</div>
+          <div class="ep-role">Top Rated Freelance Developer</div>
+          <div class="ep-company"><div class="ep-dot" style="background:var(--orange)"></div>Fiverr · Upwork · Remote / International Clients</div>
+          <div class="ep-desc">Serving international clients as a <strong>Top Rated Seller on Fiverr</strong> and <strong>Top Rated on Upwork</strong> — the highest badges awarded for consistent 5-star delivery, zero cancellations, and repeat client satisfaction. Serving clients from USA, UK, UAE, and Europe in Android app development and C++ Qt / Java Swing desktop projects.</div>
+          <div class="ep-achiev-item">Fiverr Top Rated Seller — awarded to the top 10% of sellers with consistent 5-star reviews and perfect order completion rate.</div>
+          <div class="ep-achiev-item">Upwork Top Rated — 100% Job Success Score across all completed contracts in Android and Desktop development.</div>
+          <div class="ep-achiev-item">Delivered 15+ freelance Android apps and C++ Qt / Java Swing desktop tools for international clients across logistics, healthcare, retail, and IoT industries.</div>
+          <div class="ep-achiev-item">60%+ client repeat rate — clients return because quality, communication, and deadlines are always met.</div>
+          <div class="ep-tags"><span class="ep-tag">⭐ Fiverr Top Rated</span><span class="ep-tag">💼 Upwork Top Rated</span><span class="ep-tag">Android</span><span class="ep-tag">C++ Qt</span><span class="ep-tag">Java Swing</span><span class="ep-tag">International Clients</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="sinner">
+    <div class="stag">03 — Projects</div>
+    <h2 class="stitle">30+ delivered. <em>Here's a taste.</em></h2>
+
+    <!-- CATEGORY TABS -->
+    <div class="proj-tabs">
+      <button class="proj-tab active" onclick="switchProj(this,'android')">📱 Android</button>
+      <button class="proj-tab" onclick="switchProj(this,'desktop')">🖥️ Desktop</button>
+      <button class="proj-tab" onclick="switchProj(this,'games')">🎮 Games</button>
+    </div>
+
+    <!-- ═══════════ ANDROID PROJECTS ═══════════ -->
+    <div class="proj-section active" id="proj-android" style="display:block">
+      <div class="proj-grid">
+
+        <div class="pcard android-card pfeat">
+          <span class="pbadge pbadge-android">📱 Android · Featured · ProIT</span>
+          <div class="ptitle">Enterprise Field Service Management App</div>
+          <div class="pdesc">Production Android app for ProIT field technicians — real-time job assignment, offline-first data sync with zero data loss, GPS route mapping, digital e-signatures, photo attachments, and encrypted team communication. Architected with full Clean Architecture + MVVM serving 1,000+ daily active users for 3+ years without a single critical crash.</div>
+          <div class="pmet"><div class="pm">DAU: <span>1K+</span></div><div class="pm">Uptime: <span>99.9%</span></div><div class="pm">Experience: <span>3+ yrs live</span></div></div>
+          <div class="pstack"><span class="ptag">Java</span><span class="ptag">Clean Arch</span><span class="ptag">MVVM</span><span class="ptag">Hilt</span><span class="ptag">Room DB</span><span class="ptag">WorkManager</span><span class="ptag">Google Maps SDK</span><span class="ptag">Retrofit + OkHttp</span><span class="ptag">Firebase FCM</span><span class="ptag">CameraX</span></div>
+          <div class="pfooter"><div class="plinks"><a href="https://github.com/abduhifz-dev" target="_blank" class="plink">GitHub ↗</a></div><div class="parr">→</div></div>
+        </div>
+
+        <div class="pcard android-card">
+          <span class="pbadge pbadge-android">📱 Android · SKYNEX</span>
+          <div class="ptitle">GPS Fleet Tracking & Driver Management</div>
+          <div class="pdesc">Real-time fleet management for 50+ vehicles — live GPS WebSocket tracking, Google Directions route optimization, geofencing alerts, trip history timeline, driver scoring, and fuel reports. Full offline mode with WorkManager sync.</div>
+          <div class="pmet"><div class="pm">Vehicles: <span>50+</span></div><div class="pm">Update: <span>Real-time</span></div><div class="pm">Offline: <span>Full</span></div></div>
+          <div class="pstack"><span class="ptag">Java</span><span class="ptag">MVVM</span><span class="ptag">Maps SDK</span><span class="ptag">Geofencing</span><span class="ptag">WebSocket</span><span class="ptag">Room DB</span><span class="ptag">WorkManager</span></div>
+          <div class="pfooter"><div class="plinks"><a href="https://github.com/abduhifz-dev" target="_blank" class="plink">GitHub ↗</a></div><div class="parr">→</div></div>
+        </div>
+
+        <div class="pcard android-card">
+          <span class="pbadge pbadge-android">📱 Android · Fiverr Client</span>
+          <div class="ptitle">E-Commerce Android App (Full Stack)</div>
+          <div class="pdesc">Complete shopping app — product catalog with search & filters, multi-image cart, Stripe payment gateway, real-time order tracking, seller admin panel, push notifications, and full offline product browsing via Room DB cache.</div>
+          <div class="pstack"><span class="ptag">Java</span><span class="ptag">MVVM</span><span class="ptag">Hilt</span><span class="ptag">Stripe SDK</span><span class="ptag">Firebase</span><span class="ptag">Room DB</span><span class="ptag">Retrofit</span><span class="ptag">Glide</span></div>
+          <div class="pfooter"><div class="plinks"><a href="https://github.com/abduhifz-dev" target="_blank" class="plink">GitHub ↗</a></div><div class="parr">→</div></div>
+        </div>
+
+        <div class="pcard android-card pfeat">
+          <span class="pbadge pbadge-android">📱 Android · Featured · Upwork Client</span>
+          <div class="ptitle">Multi-Tenant POS & Inventory Android System</div>
+          <div class="pdesc">Enterprise Point-of-Sale Android app for retail chains — multi-branch inventory sync, barcode/QR scanning, receipt printing via Bluetooth thermal printer, offline transaction queue (syncs when online), role-based access for cashiers/managers, and real-time cloud dashboard. Built for a client managing 12 store branches across multiple cities.</div>
+          <div class="pmet"><div class="pm">Branches: <span>12</span></div><div class="pm">Transactions: <span>500+/day</span></div><div class="pm">Printer: <span>BT Thermal</span></div></div>
+          <div class="pstack"><span class="ptag">Java</span><span class="ptag">Clean Arch</span><span class="ptag">MVVM</span><span class="ptag">Hilt</span><span class="ptag">Room DB</span><span class="ptag">Bluetooth SDK</span><span class="ptag">ZXing Barcode</span><span class="ptag">Firebase RT DB</span><span class="ptag">WorkManager</span></div>
+          <div class="pfooter"><div class="plinks"><a href="https://github.com/abduhifz-dev" target="_blank" class="plink">GitHub ↗</a></div><div class="parr">→</div></div>
+        </div>
+
+        <div class="pcard android-card">
+          <span class="pbadge pbadge-android">📱 Android · Upwork Client</span>
+          <div class="ptitle">Healthcare Appointment & Telemedicine App</div>
+          <div class="pdesc">Patient-facing Android app — doctor search by specialty, slot scheduling, live video consultation via WebRTC, in-app chat, prescription PDF viewer, lab report storage, and encrypted local health data with AES-256.</div>
+          <div class="pstack"><span class="ptag">Java</span><span class="ptag">Clean Arch</span><span class="ptag">WebRTC</span><span class="ptag">Firebase</span><span class="ptag">AES-256</span><span class="ptag">PDF Viewer</span><span class="ptag">Retrofit</span></div>
+          <div class="pfooter"><div class="plinks"><a href="https://github.com/abduhifz-dev" target="_blank" class="plink">GitHub ↗</a></div><div class="parr">→</div></div>
+        </div>
+
+        <div class="pcard android-card">
+          <span class="pbadge pbadge-android">📱 Android · Library · Fiverr</span>
+          <div class="ptitle">Android Clean Architecture Boilerplate SDK</div>
+          <div class="pdesc">Production-ready Android template — Clean Architecture, MVVM, Hilt DI, Coroutines + Flow, Room, Retrofit, JUnit tests, GitHub Actions CI/CD, ProGuard rules. Used as kickstarter for 5+ client projects. Cuts project setup from days to minutes.</div>
+          <div class="pmet"><div class="pm">Test Coverage: <span>80%+</span></div><div class="pm">Used in: <span>5+ projects</span></div></div>
+          <div class="pstack"><span class="ptag">Java</span><span class="ptag">Clean Arch</span><span class="ptag">MVVM</span><span class="ptag">Hilt</span><span class="ptag">Coroutines</span><span class="ptag">JUnit</span><span class="ptag">GitHub Actions</span></div>
+          <div class="pfooter"><div class="plinks"><a href="https://github.com/abduhifz-dev" target="_blank" class="plink">GitHub ↗</a></div><div class="parr">→</div></div>
+        </div>
+
+        <div class="pcard android-card">
+          <span class="pbadge pbadge-android">📱 Android · ProIT</span>
+          <div class="ptitle">Real-Time Business Analytics Dashboard App</div>
+          <div class="pdesc">Live KPI dashboard Android app — WebSocket streaming data, custom MPAndroidChart visualizations (line, bar, pie, candlestick), WorkManager background sync, FCM alerts for threshold breaches, and role-based data views.</div>
+          <div class="pstack"><span class="ptag">Java</span><span class="ptag">WebSocket</span><span class="ptag">MPAndroidChart</span><span class="ptag">FCM</span><span class="ptag">WorkManager</span><span class="ptag">MVVM</span></div>
+          <div class="pfooter"><div class="plinks"><a href="https://github.com/abduhifz-dev" target="_blank" class="plink">GitHub ↗</a></div><div class="parr">→</div></div>
+        </div>
+
+        <div class="pcard android-card">
+          <span class="pbadge pbadge-android">📱 Android · Fiverr</span>
+          <div class="ptitle">Biometric Auth & Security SDK</div>
+          <div class="pdesc">Reusable plug-and-play Android security library — fingerprint/face biometric auth, JWT token lifecycle management, EncryptedSharedPreferences, auto-logout on inactivity, session refresh, and SSL certificate pinning. Integrated in 5+ production apps.</div>
+          <div class="pstack"><span class="ptag">Java</span><span class="ptag">Biometric API</span><span class="ptag">EncryptedPrefs</span><span class="ptag">JWT</span><span class="ptag">SSL Pinning</span><span class="ptag">Hilt</span></div>
+          <div class="pfooter"><div class="plinks"><a href="https://github.com/abduhifz-dev" target="_blank" class="plink">GitHub ↗</a></div><div class="parr">→</div></div>
+        </div>
+
+        <div class="pcard android-card">
+          <span class="pbadge pbadge-android">📱 Android · Upwork</span>
+          <div class="ptitle">Food Delivery Android App</div>
+          <div class="pdesc">Full food delivery app — restaurant listing with live menu, cart with customization, Google Maps live rider tracking, Stripe/PayPal payments, order status push notifications, rating system, and loyalty points. Similar to Foodpanda architecture.</div>
+          <div class="pstack"><span class="ptag">Java</span><span class="ptag">MVVM</span><span class="ptag">Google Maps</span><span class="ptag">Stripe</span><span class="ptag">Firebase RT</span><span class="ptag">FCM</span><span class="ptag">Hilt</span><span class="ptag">Room DB</span></div>
+          <div class="pfooter"><div class="plinks"><a href="https://github.com/abduhifz-dev" target="_blank" class="plink">GitHub ↗</a></div><div class="parr">→</div></div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ═══════════ DESKTOP PROJECTS ═══════════ -->
+    <div class="proj-section" id="proj-desktop">
+      <div class="proj-grid">
+
+        <div class="pcard desktop-card pfeat">
+          <span class="pbadge pbadge-desktop">🖥️ Desktop · Featured · ProIT</span>
+          <div class="ptitle">Java Swing ERP — Enterprise Resource Planning Suite</div>
+          <div class="pdesc">Full enterprise ERP desktop application — HR module (payroll, attendance, leaves), Inventory module (stock, orders, suppliers), Finance module (invoices, accounts, P&L reports), and Sales module. JFreeChart real-time dashboards, PostgreSQL multi-table joins, role-based access (Admin/Manager/Staff), automated scheduled PDF/Excel exports, and email notifications via JavaMail.</div>
+          <div class="pmet"><div class="pm">Modules: <span>4</span></div><div class="pm">Users: <span>Multi-role</span></div><div class="pm">DB: <span>PostgreSQL</span></div></div>
+          <div class="pstack"><span class="ptag">Java Swing</span><span class="ptag">JFreeChart</span><span class="ptag">PostgreSQL</span><span class="ptag">JDBC</span><span class="ptag">iText PDF</span><span class="ptag">Apache POI</span><span class="ptag">JavaMail</span><span class="ptag">FlatLaf UI</span></div>
+          <div class="pfooter"><div class="plinks"><a href="https://github.com/abduhifz-dev" target="_blank" class="plink">GitHub ↗</a></div><div class="parr">→</div></div>
+        </div>
+
+        <div class="pcard desktop-card">
+          <span class="pbadge pbadge-desktop">🖥️ Desktop · C++ Qt · ProIT</span>
+          <div class="ptitle">C++ Qt Inventory & Stock Management System</div>
+          <div class="pdesc">Cross-platform desktop inventory app — real-time stock tracking, barcode/QR scanner via USB, automated reorder alerts, multi-warehouse support, PDF/Excel reporting, and multi-user SQLite with concurrent access. Deployed at 3 ProIT client business sites.</div>
+          <div class="pstack"><span class="ptag">C++17</span><span class="ptag">Qt Widgets</span><span class="ptag">Qt SQL</span><span class="ptag">SQLite</span><span class="ptag">iText PDF</span><span class="ptag">QZXing Barcode</span><span class="ptag">Qt Network</span></div>
+          <div class="pfooter"><div class="plinks"><a href="https://github.com/abduhifz-dev" target="_blank" class="plink">GitHub ↗</a></div><div class="parr">→</div></div>
+        </div>
+
+        <div class="pcard desktop-card">
+          <span class="pbadge pbadge-desktop">🖥️ Desktop · C++ Qt · Upwork</span>
+          <div class="ptitle">Qt Serial Port Industrial Hardware Controller</div>
+          <div class="pdesc">Industrial desktop tool for hardware communication via RS-232/USB serial — custom binary packet parser, real-time data plotting with Qwt Charts, oscilloscope-style waveform display, command terminal, device firmware updater, and session logging to CSV. Used for IoT sensor calibration.</div>
+          <div class="pstack"><span class="ptag">C++17</span><span class="ptag">Qt</span><span class="ptag">QSerialPort</span><span class="ptag">Qwt Charts</span><span class="ptag">Custom Protocol</span><span class="ptag">CSV Logger</span></div>
+          <div class="pfooter"><div class="plinks"><a href="https://github.com/abduhifz-dev" target="_blank" class="plink">GitHub ↗</a></div><div class="parr">→</div></div>
+        </div>
+
+        <div class="pcard desktop-card pfeat">
+          <span class="pbadge pbadge-desktop">🖥️ Desktop · Featured · C++ Qt · SKYNEX</span>
+          <div class="ptitle">Qt Multi-Camera CCTV Surveillance Desktop App</div>
+          <div class="pdesc">Professional CCTV monitoring desktop application — simultaneous live feed from 16 IP cameras via RTSP/RTMP, motion detection alerts, AI-based face detection using OpenCV, scheduled recording with storage management, PTZ camera control, playback with timeline scrubbing, and export to MP4. Built for a security company managing large premises.</div>
+          <div class="pmet"><div class="pm">Cameras: <span>16 live</span></div><div class="pm">Detection: <span>AI Motion</span></div><div class="pm">Recording: <span>Scheduled</span></div></div>
+          <div class="pstack"><span class="ptag">C++17</span><span class="ptag">Qt Multimedia</span><span class="ptag">RTSP/RTMP</span><span class="ptag">OpenCV</span><span class="ptag">FFmpeg</span><span class="ptag">Qt Charts</span><span class="ptag">SQLite</span></div>
+          <div class="pfooter"><div class="plinks"><a href="https://github.com/abduhifz-dev" target="_blank" class="plink">GitHub ↗</a></div><div class="parr">→</div></div>
+        </div>
+
+        <div class="pcard desktop-card">
+          <span class="pbadge pbadge-desktop">🖥️ Desktop · Java Swing · Fiverr</span>
+          <div class="ptitle">Hospital Management System (HMS)</div>
+          <div class="pdesc">Complete hospital desktop software — patient registration & history, OPD/IPD management, doctor scheduling, pharmacy module, lab reports, billing & insurance, and bed management. Multi-role login (Doctor/Nurse/Admin/Receptionist). PostgreSQL backend with daily automated backup.</div>
+          <div class="pstack"><span class="ptag">Java Swing</span><span class="ptag">PostgreSQL</span><span class="ptag">JDBC</span><span class="ptag">iText PDF</span><span class="ptag">JCalendar</span><span class="ptag">JavaMail</span><span class="ptag">FlatLaf UI</span></div>
+          <div class="pfooter"><div class="plinks"><a href="https://github.com/abduhifz-dev" target="_blank" class="plink">GitHub ↗</a></div><div class="parr">→</div></div>
+        </div>
+
+        <div class="pcard desktop-card">
+          <span class="pbadge pbadge-desktop">🖥️ Desktop · C++ Qt · Upwork</span>
+          <div class="ptitle">Network Packet Analyzer & Protocol Debugger</div>
+          <div class="pdesc">Advanced network debugging tool — live packet capture via libpcap, protocol dissection (TCP/UDP/HTTP/MQTT), hex dump viewer, packet filter engine, statistics dashboard with Qwt Charts, and session export to PCAP. Used by embedded developers for IoT protocol debugging.</div>
+          <div class="pstack"><span class="ptag">C++17</span><span class="ptag">Qt</span><span class="ptag">libpcap</span><span class="ptag">Qwt Charts</span><span class="ptag">MQTT</span><span class="ptag">Hex Parser</span><span class="ptag">Qt Network</span></div>
+          <div class="pfooter"><div class="plinks"><a href="https://github.com/abduhifz-dev" target="_blank" class="plink">GitHub ↗</a></div><div class="parr">→</div></div>
+        </div>
+
+        <div class="pcard desktop-card">
+          <span class="pbadge pbadge-desktop">🖥️ Desktop · Java Swing · ProIT</span>
+          <div class="ptitle">School Management System</div>
+          <div class="pdesc">Complete school desktop ERP — student enrollment, class & section management, attendance (manual + RFID), fee collection with receipts, exam results & report cards, teacher portal, parent SMS/email notifications, and annual transcript generation with custom branding.</div>
+          <div class="pstack"><span class="ptag">Java Swing</span><span class="ptag">MySQL</span><span class="ptag">JDBC</span><span class="ptag">iText PDF</span><span class="ptag">Twilio SMS</span><span class="ptag">JavaMail</span><span class="ptag">Apache POI</span></div>
+          <div class="pfooter"><div class="plinks"><a href="https://github.com/abduhifz-dev" target="_blank" class="plink">GitHub ↗</a></div><div class="parr">→</div></div>
+        </div>
+
+        <div class="pcard desktop-card">
+          <span class="pbadge pbadge-desktop">🖥️ Desktop · C++ Qt · Fiverr</span>
+          <div class="ptitle">Cross-Platform File Encryption Tool</div>
+          <div class="pdesc">Secure file encryption desktop app — AES-256-GCM encryption, password + key file dual authentication, batch file processing, secure file shredder (DoD 5220.22-M standard), drag-and-drop UI, and encrypted vault container format. Works on Windows, Linux, and macOS.</div>
+          <div class="pstack"><span class="ptag">C++17</span><span class="ptag">Qt</span><span class="ptag">OpenSSL AES-256</span><span class="ptag">Qt Crypto</span><span class="ptag">Cross-platform</span><span class="ptag">Custom File Format</span></div>
+          <div class="pfooter"><div class="plinks"><a href="https://github.com/abduhifz-dev" target="_blank" class="plink">GitHub ↗</a></div><div class="parr">→</div></div>
+        </div>
+
+        <div class="pcard desktop-card">
+          <span class="pbadge pbadge-desktop">🖥️ Desktop · C++ Qt · Upwork</span>
+          <div class="ptitle">Automated Trading Signals Dashboard</div>
+          <div class="pdesc">Financial trading signals desktop app — live market data via WebSocket (Binance/Forex APIs), candlestick charts with Qwt, technical indicator engine (RSI, MACD, Bollinger Bands), custom signal alerts, backtesting module, and trade log export to Excel. Built for a UK-based trading firm.</div>
+          <div class="pstack"><span class="ptag">C++17</span><span class="ptag">Qt</span><span class="ptag">WebSocket</span><span class="ptag">Qwt Charts</span><span class="ptag">OpenSSL</span><span class="ptag">Binance API</span><span class="ptag">Apache POI-port</span></div>
+          <div class="pfooter"><div class="plinks"><a href="https://github.com/abduhifz-dev" target="_blank" class="plink">GitHub ↗</a></div><div class="parr">→</div></div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ═══════════ GAMES PROJECTS ═══════════ -->
+    <div class="proj-section" id="proj-games">
+      <div class="proj-grid">
+
+        <div class="pcard game-card pfeat">
+          <span class="pbadge pbadge-game">🎮 Game · Featured · Android · Java</span>
+          <div class="ptitle">2D Action RPG — Android Game (LibGDX)</div>
+          <div class="pdesc">Full 2D Action RPG Android game — tile-based world exploration, real-time combat system with combos, inventory & equipment system, NPC dialogues with branching story, 5 enemy AI types with pathfinding (A* algorithm), save/load system via SQLite, particle effects, and original sprite animations. Optimized for 60 FPS on mid-range Android devices.</div>
+          <div class="pmet"><div class="pm">FPS: <span>60 stable</span></div><div class="pm">Enemies: <span>5 AI types</span></div><div class="pm">Maps: <span>10 levels</span></div></div>
+          <div class="pstack"><span class="ptag">Java</span><span class="ptag">LibGDX</span><span class="ptag">Box2D Physics</span><span class="ptag">A* Pathfinding</span><span class="ptag">Tiled Maps</span><span class="ptag">SQLite</span><span class="ptag">SpriteBatch</span><span class="ptag">Ashley ECS</span></div>
+          <div class="pfooter"><div class="plinks"><a href="https://github.com/abduhifz-dev" target="_blank" class="plink">GitHub ↗</a></div><div class="parr">→</div></div>
+        </div>
+
+        <div class="pcard game-card">
+          <span class="pbadge pbadge-game">🎮 Game · Android · Java</span>
+          <div class="ptitle">Multiplayer Card Game — Android (Real-time)</div>
+          <div class="pdesc">Online multiplayer card game — real-time WebSocket matchmaking, room creation & joining, 4-player simultaneous gameplay, game state sync engine, animated card dealing, chat, spectator mode, and leaderboard. Anti-cheat validation on server side. Similar to Rummy/UNO architecture.</div>
+          <div class="pstack"><span class="ptag">Java</span><span class="ptag">Android</span><span class="ptag">WebSocket</span><span class="ptag">MVVM</span><span class="ptag">Firebase RT</span><span class="ptag">Custom Animation</span><span class="ptag">Retrofit</span></div>
+          <div class="pfooter"><div class="plinks"><a href="https://github.com/abduhifz-dev" target="_blank" class="plink">GitHub ↗</a></div><div class="parr">→</div></div>
+        </div>
+
+        <div class="pcard game-card">
+          <span class="pbadge pbadge-game">🎮 Game · Android · Java</span>
+          <div class="ptitle">Endless Runner Game with Procedural Generation</div>
+          <div class="pdesc">High-speed endless runner Android game — procedural level generation algorithm, dynamic difficulty scaling, power-up system, combo multiplier, Google Play Games leaderboard & achievements, AdMob rewarded ads, and cloud save via Google Play. Smooth 60 FPS with object pooling optimization.</div>
+          <div class="pstack"><span class="ptag">Java</span><span class="ptag">LibGDX</span><span class="ptag">Procedural Gen</span><span class="ptag">Object Pooling</span><span class="ptag">Google Play Games</span><span class="ptag">AdMob</span><span class="ptag">Box2D</span></div>
+          <div class="pfooter"><div class="plinks"><a href="https://github.com/abduhifz-dev" target="_blank" class="plink">GitHub ↗</a></div><div class="parr">→</div></div>
+        </div>
+
+        <div class="pcard game-card pfeat">
+          <span class="pbadge pbadge-game">🎮 Game · Featured · Desktop · C++ Qt</span>
+          <div class="ptitle">Strategy Tower Defense Game — C++ Qt Desktop</div>
+          <div class="pdesc">Full tower defense desktop game built entirely in C++ Qt — 15 unique tower types with upgrade trees, 30 enemy variants with different behaviors and resistances, wave management engine, in-game shop economy, 8 maps with different terrains, save/load with serialization, highscore system, and custom sprite rendering engine built on QPainter without any external game engine.</div>
+          <div class="pmet"><div class="pm">Towers: <span>15 types</span></div><div class="pm">Enemies: <span>30 variants</span></div><div class="pm">Maps: <span>8 levels</span></div></div>
+          <div class="pstack"><span class="ptag">C++17</span><span class="ptag">Qt Widgets</span><span class="ptag">QPainter</span><span class="ptag">QTimer</span><span class="ptag">Custom Renderer</span><span class="ptag">Pathfinding</span><span class="ptag">JSON Save</span><span class="ptag">SQLite</span></div>
+          <div class="pfooter"><div class="plinks"><a href="https://github.com/abduhifz-dev" target="_blank" class="plink">GitHub ↗</a></div><div class="parr">→</div></div>
+        </div>
+
+        <div class="pcard game-card">
+          <span class="pbadge pbadge-game">🎮 Game · Android · Java</span>
+          <div class="ptitle">Puzzle Game — Match 3 with Level Editor</div>
+          <div class="pdesc">Advanced match-3 puzzle game — 100 hand-crafted levels, in-game level editor (export/share levels via QR code), special gem types (bomb, rainbow, row-clear), undo system, hints engine, daily challenge mode, IAP for hints, and Google Play leaderboard. Optimized for battery efficiency.</div>
+          <div class="pstack"><span class="ptag">Java</span><span class="ptag">Android</span><span class="ptag">LibGDX</span><span class="ptag">Level Editor</span><span class="ptag">IAP</span><span class="ptag">Google Play</span><span class="ptag">QR Share</span><span class="ptag">Animation</span></div>
+          <div class="pfooter"><div class="plinks"><a href="https://github.com/abduhifz-dev" target="_blank" class="plink">GitHub ↗</a></div><div class="parr">→</div></div>
+        </div>
+
+        <div class="pcard game-card">
+          <span class="pbadge pbadge-game">🎮 Game · Desktop · C++ Qt</span>
+          <div class="ptitle">Chess Engine with AI — C++ Qt Desktop</div>
+          <div class="pdesc">Full chess game with custom AI engine — Minimax algorithm with Alpha-Beta pruning (depth 6), opening book database, endgame tablebase, move history with PGN export, undo/redo, game timer (blitz/rapid/classical), board themes, and analysis mode with best move suggestions. Beats average club players.</div>
+          <div class="pstack"><span class="ptag">C++17</span><span class="ptag">Qt</span><span class="ptag">Minimax AI</span><span class="ptag">Alpha-Beta Pruning</span><span class="ptag">PGN Format</span><span class="ptag">SQLite Opening DB</span><span class="ptag">Custom Renderer</span></div>
+          <div class="pfooter"><div class="plinks"><a href="https://github.com/abduhifz-dev" target="_blank" class="plink">GitHub ↗</a></div><div class="parr">→</div></div>
+        </div>
+
+        <div class="pcard game-card">
+          <span class="pbadge pbadge-game">🎮 Game · Android · Java</span>
+          <div class="ptitle">Quiz Battle — Real-time PvP Android Game</div>
+          <div class="pdesc">Real-time 1v1 quiz battle game — matchmaking queue, 10-second answer timer with pressure animations, 20+ topic categories, streak bonuses, power-ups (50/50, extra time, skip), ELO-based ranking system, and daily tournament mode with cash prize leaderboard via Firebase.</div>
+          <div class="pstack"><span class="ptag">Java</span><span class="ptag">Firebase RT DB</span><span class="ptag">FCM</span><span class="ptag">MVVM</span><span class="ptag">ELO Algorithm</span><span class="ptag">Custom Animation</span><span class="ptag">Retrofit</span></div>
+          <div class="pfooter"><div class="plinks"><a href="https://github.com/abduhifz-dev" target="_blank" class="plink">GitHub ↗</a></div><div class="parr">→</div></div>
+        </div>
+
+        <div class="pcard game-card">
+          <span class="pbadge pbadge-game">🎮 Game · Desktop · C++ Qt</span>
+          <div class="ptitle">Space Shooter — C++ Qt Arcade Game</div>
+          <div class="pdesc">Retro-style space shooter desktop game — scrolling parallax background, 8-directional player movement, 12 enemy types with unique attack patterns, boss fights with multi-phase health bars, power-up drops, high-score system, and complete particle effects system. Custom game loop at 60 FPS using QTimer + QPainter.</div>
+          <div class="pstack"><span class="ptag">C++17</span><span class="ptag">Qt</span><span class="ptag">QPainter</span><span class="ptag">Custom Game Loop</span><span class="ptag">Particle System</span><span class="ptag">Sprite Animation</span><span class="ptag">SQLite</span></div>
+          <div class="pfooter"><div class="plinks"><a href="https://github.com/abduhifz-dev" target="_blank" class="plink">GitHub ↗</a></div><div class="parr">→</div></div>
+        </div>
+
+        <div class="pcard game-card">
+          <span class="pbadge pbadge-game">🎮 Game · Android · Java</span>
+          <div class="ptitle">Ludo King Clone — Android Multiplayer</div>
+          <div class="pdesc">Complete Ludo board game — 2/3/4 player local & online multiplayer via Firebase, animated dice rolling with physics, piece selection AI for single player, safe zone logic, token home animation, game replay system, and custom board themes. Full turn validation engine prevents illegal moves.</div>
+          <div class="pstack"><span class="ptag">Java</span><span class="ptag">Android</span><span class="ptag">Firebase RT</span><span class="ptag">Custom Animation</span><span class="ptag">Game Logic Engine</span><span class="ptag">Minimax AI</span><span class="ptag">Room DB</span></div>
+          <div class="pfooter"><div class="plinks"><a href="https://github.com/abduhifz-dev" target="_blank" class="plink">GitHub ↗</a></div><div class="parr">→</div></div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="sinner">
+    <div class="stag">04 — Technical Skills</div>
+    <h2 class="stitle">My complete <em>toolkit</em></h2>
+    <div class="sk-grid fu">
+      <div class="skcard"><span class="skicon">📱</span><div class="skname">Android Development</div><div class="skitems">Android SDK · Jetpack Components<br>Activities · Fragments · Services<br>BroadcastReceivers · FCM<br>Google Maps · CameraX · Biometric</div><span class="sklevel lv-exp">Expert · 10+ yrs</span></div>
+      <div class="skcard"><span class="skicon">☕</span><div class="skname">Java & Java Swing</div><div class="skitems">Java 8/11/17 · OOP · Design Patterns<br>Java Swing · JPanel · JTable<br>JFreeChart · Multithreading<br>Streams · Lambda · Collections</div><span class="sklevel lv-exp">Expert · 10+ yrs</span></div>
+      <div class="skcard"><span class="skicon">🏛️</span><div class="skname">Architecture & Patterns</div><div class="skitems">MVVM · MVC · Clean Architecture<br>Repository · Use Cases<br>SOLID · GoF Design Patterns<br>Domain Driven Design · TDD</div><span class="sklevel lv-exp">Expert</span></div>
+      <div class="skcard"><span class="skicon">💉</span><div class="skname">Dependency Injection</div><div class="skitems">Hilt · Dagger 2 · Koin<br>Module / Component Design<br>Activity · ViewModel · Fragment Scope<br>Mock DI for Testing</div><span class="sklevel lv-exp">Expert</span></div>
+      <div class="skcard"><span class="skicon">⚡</span><div class="skname">Async & Concurrency</div><div class="skitems">Kotlin Coroutines · Flow<br>StateFlow · SharedFlow · LiveData<br>WorkManager · RxJava<br>Structured Concurrency · Channels</div><span class="sklevel lv-exp">Expert</span></div>
+      <div class="skcard"><span class="skicon">🗃️</span><div class="skname">Data & Storage</div><div class="skitems">Room Database · SQLite · DataStore<br>EncryptedSharedPreferences<br>Firebase Firestore / Realtime DB<br>ContentResolver · File I/O</div><span class="sklevel lv-adv">Advanced</span></div>
+      <div class="skcard"><span class="skicon">🌐</span><div class="skname">Networking & APIs</div><div class="skitems">Retrofit · OkHttp · Gson · Moshi<br>REST APIs · WebSocket<br>JWT Auth · SSL Pinning<br>Interceptors · Response Caching</div><span class="sklevel lv-adv">Advanced</span></div>
+      <div class="skcard"><span class="skicon">⚙️</span><div class="skname">C++ & Qt Framework</div><div class="skitems">C++14/17 · Qt Widgets · Qt Quick<br>Signals & Slots · Qt SQL<br>QSerialPort · Qwt Charts · QML<br>Cross-platform Win / Linux</div><span class="sklevel lv-adv">Advanced · 10+ yrs</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ARCHITECTURE -->
+<div class="arch-section">
+  <div style="max-width:1200px;margin:0 auto">
+    <div class="stag">05 — Architecture Expertise</div>
+    <h2 class="stitle" style="margin-bottom:40px">Building apps that <em>last a decade</em></h2>
+    <div class="arch-grid fu">
+      <div class="acard"><div class="acard-num">01</div><div class="acard-title">Clean Architecture</div><div class="acard-desc">Presentation → Domain → Data. Use Cases as business logic hub. Fully testable, framework-independent domain layer. Proven across 10+ years and 15+ production apps at ProIT.</div><span class="acard-badge">Core Approach</span></div>
+      <div class="acard"><div class="acard-num">02</div><div class="acard-title">MVVM + LiveData / Flow</div><div class="acard-desc">ViewModel survives config changes. Reactive UI with LiveData or Kotlin Flow. Unidirectional data flow. StateFlow for UI state, SharedFlow for one-time events — no leaks, no crashes.</div><span class="acard-badge">UI Pattern</span></div>
+      <div class="acard"><div class="acard-num">03</div><div class="acard-title">Hilt Dependency Injection</div><div class="acard-desc">Compile-time verified DI across Singleton, Activity, Fragment, ViewModel scopes. Makes unit testing effortless with fake/mock injection swapped at test time.</div><span class="acard-badge">DI Framework</span></div>
+      <div class="acard"><div class="acard-num">04</div><div class="acard-title">Offline-First Architecture</div><div class="acard-desc">Room as single source of truth. Network-bound resource pattern. WorkManager for background sync. Users get seamless experience without internet — critical for field service apps.</div><span class="acard-badge">Data Strategy</span></div>
+      <div class="acard"><div class="acard-num">05</div><div class="acard-title">Coroutines & Flow</div><div class="acard-desc">Structured concurrency with viewModelScope. Cold flows for requests, StateFlow for continuous state, SharedFlow for events. Zero ANR errors across all 30+ projects delivered.</div><span class="acard-badge">Async Pattern</span></div>
+      <div class="acard"><div class="acard-num">06</div><div class="acard-title">99.9% Crash-Free Standard</div><div class="acard-desc">Firebase Crashlytics on every single app. Proactive exception handling throughout. Unit + integration tests before release. Staged Play Console rollouts. This is the standard, not the exception.</div><span class="acard-badge">Quality Bar</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- STATS -->
+<div class="stats-section">
+  <div class="stat-grid">
+    <div class="stcard"><div class="stnum" data-count="10">0</div><div class="stlabel">Years of<br>Experience</div></div>
+    <div class="stcard"><div class="stnum" data-count="30">0</div><div class="stlabel">Projects<br>Delivered</div></div>
+    <div class="stcard"><div class="stnum" data-count="99">0</div><div class="stlabel">% Crash-Free<br>Rate</div></div>
+    <div class="stcard"><div class="stnum" data-count="3">0</div><div class="stlabel">Companies<br>ProIT · SKYNEX · Freelance</div></div>
+    <div class="stcard"><div class="stnum" data-count="2">0</div><div class="stlabel">Top Rated<br>Fiverr + Upwork</div></div>
+    <div class="stcard"><div class="stnum" data-count="40">0</div><div class="stlabel">% Bug Reduction<br>After MVVM Migration</div></div>
+  </div>
+</div>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="ct-grid">
+    <div class="fu">
+      <div class="stag">06 — Get In Touch</div>
+      <h2 class="ct-head">Let's build something <em>great.</em></h2>
+      <p class="ct-sub">Available for full-time Android/Desktop roles, freelance contracts via Fiverr & Upwork, and direct project partnerships. Based in Islamabad — delivering globally for 10 years.</p>
+      <div class="ct-links">
+        <a href="https://mail.google.com/mail/?view=cm&to=abduhifz@gmail.com" target="_blank" class="ct-link">
+          <div class="cli">✉</div><div class="clt"><div class="clb">Email</div><div class="clv"><span class="__cf_email__" data-cfemail="c0a1a2a4b5a8a9a6ba80a7ada1a9aceea3afad">[email&#160;protected]</span></div></div><div class="cla">↗</div>
+        </a>
+        <a href="https://github.com/abduhifz-dev" target="_blank" class="ct-link">
+          <div class="cli">⌥</div><div class="clt"><div class="clb">GitHub</div><div class="clv">github.com/abduhifz-dev</div></div><div class="cla">↗</div>
+        </a>
+        <a href="https://www.linkedin.com/in/abdul-rehman-01b588256/" target="_blank" class="ct-link">
+          <div class="cli">◈</div><div class="clt"><div class="clb">LinkedIn</div><div class="clv">linkedin.com/in/abdul-rehman-01b588256</div></div><div class="cla">↗</div>
+        </a>
+        <a href="https://www.fiverr.com" target="_blank" class="ct-link">
+          <div class="cli">⭐</div><div class="clt"><div class="clb">Fiverr</div><div class="clv">Top Rated Seller · Android & Desktop Dev</div></div><div class="cla">↗</div>
+        </a>
+        <a class="ct-link" style="cursor:default">
+          <div class="cli">📍</div><div class="clt"><div class="clb">Location</div><div class="clv">Islamabad, Pakistan · Remote Worldwide</div></div><div class="cla">✓</div>
+        </a>
+      </div>
+    </div>
+    <div class="fu2">
+      <div class="ct-form" id="contact-form-wrap">
+        <div class="ff"><input type="text" placeholder=" " id="fn" name="name"/><label for="fn">Your Name</label></div>
+        <div class="ff"><input type="email" placeholder=" " id="fe" name="email"/><label for="fe">Email Address</label></div>
+        <div class="ff"><input type="text" placeholder=" " id="fs" name="subject"/><label for="fs">Project Type (Android / Desktop / Both)</label></div>
+        <div class="ff"><textarea rows="5" placeholder=" " id="fm" name="message"></textarea><label for="fm">Tell me about your project</label></div>
+        <div class="ff-submit">
+          <button class="ff-btn" id="send-btn" type="button" onclick="submitForm()">Send Message <span id="btn-arrow">&#x2192;</span></button>
+          <span style="font-family:var(--mono);font-size:8px;color:var(--text2);letter-spacing:1px">ISLAMABAD &middot; PK</span>
+        </div>
+      </div>
+      <div id="form-success" style="display:none;background:var(--bg3);border:1px solid rgba(198,241,53,.3);padding:40px 32px;text-align:center">
+        <div style="font-size:36px;margin-bottom:14px">&#x2705;</div>
+        <div style="font-family:var(--display);font-size:20px;font-weight:700;color:var(--lime);margin-bottom:8px">Message Sent!</div>
+        <div style="font-family:var(--mono);font-size:10px;color:var(--text2);letter-spacing:1px">Aapka message mil gaya. Main jald jawab dunga.</div>
+      </div>
+      <div id="form-error" style="display:none;background:var(--bg3);border:1px solid rgba(255,77,109,.3);padding:16px 20px;margin-top:1px">
+        <div style="font-family:var(--mono);font-size:10px;color:#ff4d6d;letter-spacing:1px">Send fail hua. Email karein: <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="ea8b888e9f82838c90aa8d878b8386c4898587">[email&#160;protected]</a></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="fc">© 2025 <span>Abdul Rehman</span> · ProIT · SKYNEX · Fiverr Top Rated · Upwork Top Rated · Islamabad, PK</div>
+  <div class="flinks">
+    <a href="https://github.com/abduhifz-dev" target="_blank">GitHub</a>
+    <a href="https://www.linkedin.com/in/abdul-rehman-01b588256/" target="_blank">LinkedIn</a>
+    <a href="https://mail.google.com/mail/?view=cm&to=abduhifz@gmail.com" target="_blank">Email</a>
+    <a href="#hero">Top ↑</a>
+  </div>
+</footer>
+
+<script>
+// ── Canvas Particles ──────────────────────────────────────────────────
+const cv=document.getElementById('c'),cx=cv.getContext('2d');
+let W,H,pts=[];
+function rsz(){W=cv.width=innerWidth;H=cv.height=innerHeight}
+rsz();addEventListener('resize',rsz);
+class Pt{
+  constructor(){this.reset()}
+  reset(){this.x=Math.random()*W;this.y=Math.random()*H;this.vx=(Math.random()-.5)*.25;this.vy=(Math.random()-.5)*.25;this.r=Math.random()*1.2+.3;this.life=0;this.ml=150+Math.random()*150;this.hue=Math.random()>.6?'198,241,53':Math.random()>.5?'77,166,255':'155,127,255'}
+  upd(){this.x+=this.vx;this.y+=this.vy;this.life++;if(this.life>this.ml||this.x<0||this.x>W||this.y<0||this.y>H)this.reset()}
+  drw(){const a=this.life<30?this.life/30:this.life>this.ml-30?(this.ml-this.life)/30:1;cx.fillStyle=`rgba(${this.hue},${a*.55})`;cx.beginPath();cx.arc(this.x,this.y,this.r,0,Math.PI*2);cx.fill()}
+}
+for(let i=0;i<60;i++)pts.push(new Pt());
+let mx=W/2,my=H/2;
+addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY});
+function frame(){
+  cx.clearRect(0,0,W,H);
+  pts.forEach(p=>{p.upd();p.drw()});
+  cx.lineWidth=.35;
+  for(let i=0;i<pts.length;i++){
+    for(let j=i+1;j<pts.length;j++){
+      const dx=pts[i].x-pts[j].x,dy=pts[i].y-pts[j].y,d=Math.sqrt(dx*dx+dy*dy);
+      if(d<90){cx.strokeStyle=`rgba(198,241,53,${(1-d/90)*.12})`;cx.beginPath();cx.moveTo(pts[i].x,pts[i].y);cx.lineTo(pts[j].x,pts[j].y);cx.stroke()}
+    }
+    const dx2=pts[i].x-mx,dy2=pts[i].y-my,d2=Math.sqrt(dx2*dx2+dy2*dy2);
+    if(d2<130){cx.strokeStyle=`rgba(198,241,53,${(1-d2/130)*.35})`;cx.beginPath();cx.moveTo(pts[i].x,pts[i].y);cx.lineTo(mx,my);cx.stroke()}
+  }
+  requestAnimationFrame(frame)
+}
+frame();
+
+// ── Custom Cursor ─────────────────────────────────────────────────────
+const dot=document.getElementById('cdot'),ring=document.getElementById('cring');
+let rx=0,ry=0;
+addEventListener('mousemove',e=>{dot.style.left=e.clientX+'px';dot.style.top=e.clientY+'px'});
+function animRing(){rx+=(mx-rx)*.13;ry+=(my-ry)*.13;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(animRing)}
+animRing();
+document.querySelectorAll('a,button,.pcard,.skcard,.acard,.exp-tab,.ct-link,.stcard').forEach(el=>{
+  el.addEventListener('mouseenter',()=>ring.classList.add('big'));
+  el.addEventListener('mouseleave',()=>ring.classList.remove('big'));
+});
+
+// ── Scroll Progress Bar ───────────────────────────────────────────────
+const prog=document.getElementById('prog');
+addEventListener('scroll',()=>{
+  const pct=scrollY/(document.documentElement.scrollHeight-innerHeight)*100;
+  prog.style.width=pct+'%';
+});
+
+// ── Counter Animation ─────────────────────────────────────────────────
+function animateCount(el){
+  const target=+el.dataset.count;
+  if(!target||el.dataset.done)return;
+  el.dataset.done='1';
+  let c=0;
+  const step=Math.max(target/60,0.5);
+  const iv=setInterval(()=>{
+    c=Math.min(c+step,target);
+    el.textContent=Math.floor(c);
+    if(c>=target){el.textContent=target;clearInterval(iv)}
+  },16);
+}
+
+// ── Skill Bar Animation ───────────────────────────────────────────────
+function animateSkills(){
+  const sb=document.getElementById('skillbars');
+  if(sb&&!sb.dataset.done){
+    sb.dataset.done='1';
+    sb.querySelectorAll('.skill-fill').forEach(b=>{
+      b.style.width=b.dataset.w+'%';
+    });
+  }
+}
+
+// ── Make Everything Visible ───────────────────────────────────────────
+function showAll(){
+  // Show all fade elements
+  document.querySelectorAll('.fu,.fu2').forEach(el=>el.classList.add('v'));
+  // Animate all counters
+  document.querySelectorAll('[data-count]').forEach(el=>animateCount(el));
+  // Animate skill bars
+  animateSkills();
+}
+
+// Run immediately + on scroll (for first-time scroll)
+window.addEventListener('load', function(){
+  setTimeout(showAll, 100);
+});
+// Also run on DOMContentLoaded as backup
+document.addEventListener('DOMContentLoaded', function(){
+  setTimeout(showAll, 200);
+});
+// Also trigger on any scroll
+let scrollDone=false;
+addEventListener('scroll',function(){
+  if(!scrollDone){scrollDone=true;showAll()}
+});
+// Final fallback
+setTimeout(showAll, 500);
+
+// ── Experience Tabs ───────────────────────────────────────────────────
+function showTab(btn,id){
+  document.querySelectorAll('.exp-panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.exp-tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById('tab-'+id).classList.add('active');
+  btn.classList.add('active');
+}
+
+// ── Project Category Tabs ─────────────────────────────────────────────
+function switchProj(btn,id){
+  document.querySelectorAll('.proj-tab').forEach(t=>t.classList.remove('active'));
+  document.querySelectorAll('.proj-section').forEach(s=>s.classList.remove('active'));
+  btn.classList.add('active');
+  const sec=document.getElementById('proj-'+id);
+  sec.classList.add('active');
+}
+
+// ── Active Nav Highlight ──────────────────────────────────────────────
+const navSecs=document.querySelectorAll('section[id]');
+const navAs=document.querySelectorAll('.nav-a');
+addEventListener('scroll',()=>{
+  let cur='';
+  navSecs.forEach(s=>{if(scrollY>=s.offsetTop-200)cur=s.id});
+  navAs.forEach(a=>{a.classList.toggle('active',a.getAttribute('href')==='#'+cur)});
+});
+
+// ── Formspree Contact Form ────────────────────────────────────────────
+async function submitForm(){
+  const btn=document.getElementById('send-btn');
+  const name=document.getElementById('fn').value.trim();
+  const email=document.getElementById('fe').value.trim();
+  const subj=document.getElementById('fs').value.trim();
+  const msg=document.getElementById('fm').value.trim();
+  if(!name){alert('Apna naam likhein!');return;}
+  if(!email||!email.includes('@')){alert('Sahi email likhein!');return;}
+  if(!msg){alert('Message likhein!');return;}
+  btn.innerHTML='Sending... &#x23F3;';
+  btn.disabled=true;btn.style.opacity='0.6';
+  try{
+    const res=await fetch('https://formspree.io/f/xpqojrgy',{
+      method:'POST',
+      headers:{'Content-Type':'application/json','Accept':'application/json'},
+      body:JSON.stringify({name,email,subject:subj||'Portfolio Contact',message:msg,_replyto:email})
+    });
+    if(res.ok){
+      document.getElementById('contact-form-wrap').style.display='none';
+      document.getElementById('form-success').style.display='block';
+    }else{throw new Error('fail')}
+  }catch(e){
+    document.getElementById('form-error').style.display='block';
+    btn.innerHTML='Send Message &#x2192;';
+    btn.disabled=false;btn.style.opacity='1';
+  }
+}
+</script>
+</body>
+</html>
