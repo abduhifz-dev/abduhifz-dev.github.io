@@ -1,25 +1,3 @@
-/* =====================================================================
-   PORTFOLIO DATA: edit this file to add or change projects.
-
-   Copy any object in `projects`. Fields:
-     id          unique, lowercase, used in links: ?p=<id>
-     title       project name
-     tagline     one line, shown in the lists
-     domain      ai | drone | apps
-     status      live | build | dev | planned   (statusText overrides the label)
-                 "planned" projects show in All projects with the label "Planned".
-                 When you start building one, change its status to dev, then build or live.
-     stack       technologies (the first 3 show in the list)
-     platforms   optional
-     summary     2-3 sentences, shown in the project details
-     highlights  bullet points
-     metrics     optional [["value", "label"], ...]
-     images      optional [{ src, w, h, alt, phone? }], files go in assets/img/
-     featured    optional true: shows in "Featured projects" (keep it to 6)
-     link        optional { href, label }
-     hidden      optional true: kept in this file but not shown on the site
-   ===================================================================== */
-
 window.PORTFOLIO = {
   profile: {
     name: "Abdul Rehman",
@@ -28,10 +6,6 @@ window.PORTFOLIO = {
     linkedin: "https://www.linkedin.com/in/abdul-rehman-01b588256/",
     location: "Islamabad, Pakistan",
     timezone: "Asia/Karachi",
-    // Background music (see js/music.js). Current track: Max Concors - Reassemble.
-    // To change it, copy another file into assets/music/ and change file.
-    // With file: null, soft ambient music is generated in the browser.
-    // autoStart: true starts it on the visitor's first click (browsers block sound before that).
     music: { file: "assets/music/max-concors-reassemble.mp3", volume: 0.45, autoStart: true }
   },
 
@@ -44,7 +18,6 @@ window.PORTFOLIO = {
   statuses: { live: "Released", build: "Working build", dev: "In development", planned: "Planned" },
 
   projects: [
-    /* ------ Your projects ------ */
     {
       id: "coder",
       title: "CorePilot Coder",
@@ -138,7 +111,6 @@ window.PORTFOLIO = {
       link: { href: "https://github.com/abduhifz-dev/zikrify-privacy-policy", label: "Privacy policy on GitHub" }
     },
 
-    /* ------ Planned (shown in All projects with the label "Planned") ------ */
     {
       id: "vault",
       title: "CorePilot Vault: Private Knowledge Assistant",
@@ -281,38 +253,6 @@ window.PORTFOLIO = {
         "Natural Urdu text-to-speech",
         "Runs fully offline on phones and PCs",
         "C API with Kotlin and C# bindings"
-      ]
-    },
-    {
-      id: "nastaliq-ocr",
-      title: "CorePilot Nastaliq OCR",
-      tagline: "OCR engine for Urdu Nastaliq script, turning scanned books, newspapers and records into searchable text.",
-      domain: "ai",
-      status: "planned",
-      stack: ["Python", "PyTorch", "OpenCV", "ONNX Runtime"],
-      platforms: ["Windows", "Linux", "REST API"],
-      summary: "A recognition engine trained for Nastaliq, the script most Urdu print uses and most OCR tools handle poorly. It will process whole archives and produce searchable PDFs for libraries, publishers and government records.",
-      highlights: [
-        "Line and ligature recognition for Nastaliq and Naskh",
-        "Batch processing of scanned PDFs and images",
-        "Searchable PDF, Word and plain-text output",
-        "Desktop app and REST API"
-      ]
-    },
-    {
-      id: "translate",
-      title: "CorePilot Translate: Urdu Language API",
-      tagline: "Translation between Urdu and English and conversion between Roman Urdu and Urdu script, as a fast API.",
-      domain: "ai",
-      status: "planned",
-      stack: ["Python", "Transformers", "CTranslate2", "FastAPI"],
-      platforms: ["Cloud API", "On-premise"],
-      summary: "Language models tuned for Pakistani text that will translate Urdu and English and convert the many spellings of Roman Urdu into correct Urdu script, for apps, keyboards and customer-support tools.",
-      highlights: [
-        "Urdu ↔ English translation",
-        "Roman Urdu ↔ Urdu script conversion that handles spelling variants",
-        "Glossaries for brand and domain terms",
-        "Low-latency API with batch mode"
       ]
     },
     {
@@ -492,22 +432,6 @@ window.PORTFOLIO = {
       ]
     },
     {
-      id: "edu",
-      title: "CorePilot Edu: Urdu AI Tutor",
-      tagline: "A curriculum-aligned AI tutor that explains maths and science step by step in Urdu, with a teacher dashboard.",
-      domain: "ai",
-      status: "planned",
-      stack: ["Flutter", "LLM", "OCR", "PostgreSQL"],
-      platforms: ["Android", "Web"],
-      summary: "Students will photograph a question and get a step-by-step explanation in simple Urdu, aligned to Pakistani boards, while teachers see progress and weak topics for each class.",
-      highlights: [
-        "Photo of a question as input",
-        "Step-by-step explanations in Urdu and English",
-        "Teacher dashboard with class progress",
-        "Practice sets for each weak topic"
-      ]
-    },
-    {
       id: "market-sentiment",
       title: "CorePilot Market Sentiment",
       tagline: "Real-time news sentiment for each currency, delivered as a signal API for trading systems.",
@@ -537,22 +461,6 @@ window.PORTFOLIO = {
         "Runs on the phone, offline",
         "Refuses questions outside its sources",
         "Urdu, English and Arabic"
-      ]
-    },
-    {
-      id: "tajweed",
-      title: "Tajweed Coach",
-      tagline: "A tajweed assessment engine that gives rule-by-rule feedback on Quran recitation, with a teacher mode.",
-      domain: "ai",
-      status: "planned",
-      stack: ["PyTorch", "Audio models", "Flutter"],
-      platforms: ["Android", "iOS"],
-      summary: "Extends my Quran recitation checker with feedback on tajweed rules such as madd, ghunnah and qalqalah, and a mode for teachers to follow their students' practice.",
-      highlights: [
-        "Feedback on common tajweed rules",
-        "Highlights the exact word and rule",
-        "Teacher mode with student progress",
-        "Practice drills per rule"
       ]
     },
     {
@@ -716,24 +624,6 @@ window.PORTFOLIO = {
       ]
     },
     {
-      id: "gcs-copilot",
-      title: "CorePilot GCS Copilot",
-      tagline: "An assistant inside the ground station that explains warnings and failsafes from live telemetry.",
-      domain: "drone",
-      status: "planned",
-      stack: ["LLM", "Qt 6", "MAVLink"],
-      platforms: ["Windows", "Linux"],
-      summary: "Answers questions such as \"why did it switch to RTL?\" from live telemetry and logs, and explains pre-arm errors in plain language, so operators fix problems faster.",
-      highlights: [
-        "Explains warnings, pre-arm errors and failsafes",
-        "Answers from live telemetry and logs",
-        "Voice input during flight",
-        "Built into CorePilot GCS"
-      ]
-    },
-
-    /* ------ Hidden: real projects kept here but not shown on the site. Delete the hidden line to show one again ------ */
-    {
       id: "omni",
       images: [
         {
@@ -761,38 +651,6 @@ window.PORTFOLIO = {
       hidden: true
     },
     {
-      id: "agentic-course",
-      title: "CorePilot Agentic AI Course",
-      tagline: "A 181-page course in Roman Urdu that explains step by step how CorePilot-Omni was designed, trained and tested.",
-      domain: "ai",
-      status: "live",
-      stack: ["Python", "PyTorch", "ReportLab", "Matplotlib"],
-      summary: "Written alongside the CorePilot-Omni model. It walks through the whole build (data, architecture, training stages, the agent harness and the evaluation) using the real loss curves and results from the training runs. Roman Urdu with English technical terms.",
-      highlights: [
-        "181 pages, generated as a PDF from source",
-        "Figures made from the real training runs: loss curves, data mix and learning-rate schedule",
-        "Also covers what didn't work, such as speech recognition and counting"
-      ],
-      hidden: true
-    },
-    {
-      id: "intelligence",
-      title: "AbduIntelligence Systems",
-      tagline: "Multi-client LLM inference platform: a Qt server, a FastAPI model host and concurrent chat slots that share one copy of the weights.",
-      domain: "ai",
-      status: "dev",
-      stack: ["C++ / Qt", "FastAPI", "llama.cpp", "QML", "WebSockets", "SSE"],
-      platforms: ["Windows"],
-      summary: "A streaming inference stack. A Qt server owns every WebSocket client plus authentication, the database and plans. A FastAPI backend owns the model and streams each chat. The weights load once and are shared across N independent slots through llama.cpp's memory-mapped pages.",
-      highlights: [
-        "N chats stream at the same time from one copy of the weights",
-        "Runs GGUF models through llama.cpp, or Hugging Face safetensors with LoRA / PEFT adapters from training runs",
-        "Qt / QML desktop client connects to the server over WebSockets",
-        "Includes its own 10,000-example fine-tuning dataset"
-      ],
-      hidden: true
-    },
-    {
       id: "imager",
       title: "CorePilot AI Imager",
       tagline: "Offline image, video and video-with-sound generation in a native C++20 / Qt 6 app.",
@@ -807,23 +665,6 @@ window.PORTFOLIO = {
         "Live denoising preview, a queue, ETA and cancel",
         "Model manager detects the hardware, recommends variants, checks SHA-256 and resumes broken downloads",
         "Searchable gallery, full metadata embedded in every PNG, and a headless CLI for scripting"
-      ],
-      hidden: true
-    },
-    {
-      id: "ayah",
-      title: "Ayah AI",
-      tagline: "Quran recitation checker that listens and colours every word: correct, wrong or missed, or a harakat mistake.",
-      domain: "ai",
-      status: "dev",
-      stack: ["Flutter", "Dart", "On-device Arabic STT"],
-      platforms: ["Android", "iOS"],
-      summary: "The user recites a surah and the app follows word by word. A word turns green when it is read correctly, red when it is wrong or skipped, and blue when the word is right but a zabar, zer or pesh is wrong. Speech recognition runs on the device.",
-      highlights: [
-        "Live, word-level feedback during recitation",
-        "Separate detection for harakat (vowel-mark) errors",
-        "Demo mode that simulates a recitation with injected mistakes",
-        "Starts with Surah Al-Fatiha"
       ],
       hidden: true
     },
@@ -902,25 +743,6 @@ window.PORTFOLIO = {
         "Wake-word detection",
         "Voice commands recognised offline",
         "Speaker check so other voices don't trigger it"
-      ],
-      hidden: true
-    },
-    {
-      id: "abdustation",
-      title: "AbduStation GCS",
-      tagline: "Ground station for the AbduSky drone: live telemetry, offline maps, mission planning and video with an AI detection overlay.",
-      domain: "drone",
-      status: "dev",
-      stack: ["C++17", "Qt 6 / QML", "OpenSSL 3", "SQLite"],
-      platforms: ["Windows"],
-      summary: "The ground side of the AbduSky system. It shows 40+ live values, plans missions on a map that also works offline, streams video with AI detections drawn on top, and talks to the drone over the encrypted AbduLink v2 protocol.",
-      highlights: [
-        "Telemetry dashboard with 40+ live values",
-        "2D map with flight path, waypoints and geofence; offline tile caching and area download",
-        "Live video with an AI detection overlay",
-        "AbduLink v2: AES-256-GCM, Curve25519 key exchange and anti-replay nonces",
-        "PID tuning, motor output and RC views, a 10-phase flight simulator and a SITL connection",
-        "Encrypted SQLite settings database"
       ],
       hidden: true
     },
@@ -1030,99 +852,6 @@ window.PORTFOLIO = {
         "Fuses IMU, GPS, barometer, optical flow and SLAM pose",
         "Noise parameters set in a YAML file",
         "Odometry output for the navigation nodes"
-      ],
-      hidden: true
-    },
-    {
-      id: "antidrone",
-      title: "AntiDroneSystem",
-      tagline: "Secure drone command and control: an encrypted, forward-secret radio link, GPS-spoofing resilience and GPS-denied navigation.",
-      domain: "drone",
-      status: "dev",
-      stack: ["C++ / Qt 6", "QML", "Python", "OpenCV", "PlatformIO", "Kotlin", "MAVLink"],
-      platforms: ["Windows", "Linux", "Jetson", "Arduino Portenta", "Android"],
-      summary: "A defensive stack that makes a friendly drone resistant to spoofing and jamming, and lets it fly home when GPS is lost. It has five parts: a Qt 6 ground station, an encryption gateway between the radio and the ground software, a Jetson companion computer running sensor fusion, Portenta firmware, and an Android key app. A written wire protocol defines how they talk.",
-      highlights: [
-        "AH-COMMAND: a Qt 6 / QML ground station built to replace Mission Planner",
-        "gcs-gateway: AES-256-GCM with ephemeral ECDH keys between the RFD900x radio and the ground station",
-        "Hybrid multi-sensor fusion EKF for GPS-denied navigation, day and night, on a Jetson companion",
-        "Portenta firmware (PlatformIO) and an Android hardware-key app",
-        "Written wire-protocol specification and CI workflows"
-      ],
-      metrics: [["AES-256", "GCM with ECDH forward secrecy"], ["EKF", "for GPS-denied navigation"], ["5", "components working together"]],
-      hidden: true
-    },
-    {
-      id: "dronecontroller",
-      title: "DroneController",
-      tagline: "One server for controlling Pixhawk and DJI drones from desktop and Android, with telemetry fan-out over MQTT.",
-      domain: "drone",
-      status: "dev",
-      stack: ["Python", "MAVSDK", "MQTT", "FastAPI", "React", "Electron", "Capacitor"],
-      summary: "A three-tier, multi-vehicle control system. Agents on the drone side talk to the hardware (Pixhawk over MAVLink, DJI through Android). An MQTT broker with a FastAPI service relays telemetry and commands. A single React control app runs on desktop (Electron) and Android (Capacitor).",
-      highlights: [
-        "Pixhawk and DJI drones behind one protocol",
-        "Each drone's data fans out to many control apps at once",
-        "Missions, parameters and full control from a desktop or a phone, on Leaflet maps",
-        "One-click launcher for the server"
-      ],
-      hidden: true
-    },
-    {
-      id: "stream-analyzer",
-      title: "CorePilot Stream Analyzer",
-      tagline: "Desktop ArduPilot log analyzer with GPU plotting, a 3D globe replay and live telemetry.",
-      domain: "drone",
-      status: "live",
-      stack: ["Electron", "Python", "pymavlink", "Plotly", "CesiumJS", "Leaflet"],
-      platforms: ["Windows"],
-      summary: "Opens DataFlash .bin and .log files and MAVLink .tlog files. You can plot any field, browse every message, replay the flight on a 3D globe with a live HUD, and read parameters with full descriptions, all offline. It can also connect to a live vehicle.",
-      highlights: [
-        "GPU-accelerated plots with many traces and split Y-axes",
-        "3D flight replay on a CesiumJS globe with bundled offline imagery, plus optional satellite imagery",
-        "Parameter view in the style of Mission Planner, with units, ranges and descriptions from ArduPilot metadata",
-        "Flight-mode timeline, messages by severity and an overview of the flight",
-        "Live telemetry, MAVFTP and a SITL manager. The backend is compiled to native modules to protect the code"
-      ],
-      hidden: true
-    },
-    {
-      id: "chess",
-      title: "CP Chess",
-      tagline: "Chess app with a live offline coach that rates every move and explains why, plus Lichess and chess.com integration.",
-      domain: "apps",
-      status: "build",
-      stack: ["Flutter", "Dart", "C++ engine", "OAuth + PKCE"],
-      platforms: ["Android"],
-      summary: "Play a native chess engine at six levels while a coach rates each move from Best to Blunder, explains mistakes, draws the better move and warns about threats. Review games from chess.com and Lichess, practise your own mistakes, solve puzzles and learn openings.",
-      highlights: [
-        "Coach that gives a reason for every suggestion, names the opening and allows take-backs",
-        "Game review with accuracy for both sides",
-        "3,660 rated puzzles, 19 interactive lessons and 3,865 named opening positions",
-        "Lichess login (OAuth + PKCE) and play; chess.com profile and games",
-        "Real-board mode: enter moves by tapping or with the camera"
-      ],
-      metrics: [["6", "bot levels with a live coach"], ["3,660", "rated puzzles"], ["19", "interactive lessons"]],
-      images: [
-        { src: "assets/img/chess-home.webp", w: 540, h: 1080, alt: "CP Chess home screen", phone: true },
-        { src: "assets/img/chess-coach.webp", w: 540, h: 1080, alt: "CP Chess coach rating a move", phone: true }
-      ],
-      hidden: true
-    },
-    {
-      id: "madrasa",
-      title: "Madrasa Management System",
-      tagline: "Offline-first school management for Android and Windows, with on-device face attendance.",
-      domain: "apps",
-      status: "build",
-      stack: ["Flutter", "SQLite", "Provider", "Google ML Kit", "fl_chart"],
-      platforms: ["Android", "Windows"],
-      summary: "Students, fees, expenses, attendance and reports for a madrasa, from a single Flutter code base. Attendance can be marked by face: the camera detects the face on the device and matches it to an enrolled student.",
-      highlights: [
-        "Dashboard with the balance and an expense breakdown",
-        "Fee history per student, expense categories and monthly totals",
-        "AI face attendance on Android",
-        "Clean layering: models → repositories → providers → screens"
       ],
       hidden: true
     }
