@@ -3,31 +3,33 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Abdul Rehman | Software, Flight Systems &amp; AI · CorePilot</title>
-  <meta name="description" content="Abdul Rehman, founder of CorePilot (Islamabad): Android and desktop apps, ArduPilot firmware and flight hardware, and on-device AI. 50+ projects, from PCB to Play Store.">
+  <title>Abdul Rehman | AI, Desktop &amp; Drone Software Developer</title>
+  <meta name="description" content="Portfolio of Abdul Rehman, founder of CorePilot (Islamabad). AI agents and models, drone ground stations and onboard AI, and desktop and Android apps.">
   <meta name="author" content="Abdul Rehman">
-  <meta name="theme-color" content="#0b0c0e">
+  <meta name="theme-color" content="#0d0e10">
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
 
   <meta property="og:type" content="website">
-  <meta property="og:title" content="Abdul Rehman: software that flies, thinks & ships">
-  <meta property="og:description" content="Android and desktop apps, ArduPilot firmware and flight hardware, and on-device AI. 50+ projects, from PCB to Play Store.">
+  <meta property="og:title" content="Abdul Rehman | AI, Desktop & Drone Software Developer">
+  <meta property="og:description" content="AI agents and models, drone ground stations and onboard AI, and desktop and Android apps.">
   <meta property="og:image" content="assets/avatar.jpg">
   <meta name="twitter:card" content="summary">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter+Tight:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
 
   <script>
     (function () {
-      document.documentElement.classList.add("js");
       try {
         var t = localStorage.getItem("theme");
         if (!t) t = matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark";
         document.documentElement.setAttribute("data-theme", t);
       } catch (e) {}
+      // welcome screen once per visit (it starts the music when the visitor enters)
+      // (not for shared project links like ?p=coder, which open straight to the project)
+      try { if (!sessionStorage.getItem("entered") && !/[?&]p=/.test(location.search)) document.documentElement.classList.add("show-intro"); } catch (e) {}
     })();
   </script>
 
@@ -36,58 +38,70 @@
     "@context": "https://schema.org",
     "@type": "Person",
     "name": "Abdul Rehman",
-    "jobTitle": "Software & Systems Engineer",
+    "jobTitle": "Software Developer",
     "worksFor": { "@type": "Organization", "name": "CorePilot" },
     "address": { "@type": "PostalAddress", "addressLocality": "Islamabad", "addressCountry": "PK" },
     "email": "mailto:abduhifz@gmail.com",
-    "sameAs": ["https://github.com/abduhifz-dev", "https://www.linkedin.com/in/abdul-rehman-01b588256/"],
-    "knowsAbout": ["Android", "Java", "Kotlin", "C++", "Qt", "Flutter", "ArduPilot", "PCB design", "Machine learning"]
+    "sameAs": ["https://github.com/abduhifz-dev", "https://www.linkedin.com/in/abdul-rehman-01b588256/"]
   }
   </script>
 </head>
 <body>
+  <!-- Welcome page: entering is the click browsers need before they allow music -->
+  <div class="intro" id="intro" role="dialog" aria-modal="true" aria-labelledby="intro-title">
+    <div class="intro-inner">
+      <div class="intro-photo">
+        <img src="assets/avatar.jpg" alt="Photo of Abdul Rehman" width="460" height="460">
+        <svg class="intro-ring" viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="48" pathLength="100"/></svg>
+      </div>
+      <p class="intro-hello" id="intro-hello">Welcome to my portfolio</p>
+      <p class="intro-title" id="intro-title">Abdul Rehman</p>
+      <p class="intro-role">AI, desktop and drone software developer</p>
+      <p class="intro-place">Founder of CorePilot · Islamabad, Pakistan</p>
+      <button class="btn btn-accent intro-enter" type="button" id="intro-enter">Enter portfolio <span aria-hidden="true">→</span></button>
+      <p class="intro-music">
+        <svg viewBox="0 0 20 20" width="14" height="14" aria-hidden="true"><path d="M7.5 15.5V4.5l9-2v11" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><circle cx="5.5" cy="15.5" r="2" fill="none" stroke="currentColor" stroke-width="1.7"/><circle cx="14.5" cy="13.5" r="2" fill="none" stroke="currentColor" stroke-width="1.7"/></svg>
+        Max Concors – Reassemble
+      </p>
+    </div>
+  </div>
+
   <a class="skip" href="#main">Skip to content</a>
-  <div class="progress" aria-hidden="true"><span id="progress-bar"></span></div>
 
   <!-- ============================================================ NAV -->
   <header class="nav" id="nav">
     <div class="wrap nav-inner">
       <a class="brand" href="#top" aria-label="Abdul Rehman, back to top">
-        <span class="brand-mark" aria-hidden="true">
-          <svg viewBox="0 0 32 32" width="32" height="32"><rect x="1" y="1" width="30" height="30" rx="8" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M8 22 L13 10 L18 22 M10 18 H16 M20 22 V10 H23.5 a3.5 3.5 0 0 1 0 7 H20 M23 17 L26 22" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </span>
-        <span class="brand-text">Abdul Rehman<small>CorePilot</small></span>
+        <span class="brand-mark" aria-hidden="true">AR</span>
+        <span class="brand-name">Abdul Rehman</span>
       </a>
 
       <nav class="nav-links" aria-label="Primary">
-        <a href="#work" data-nav="work">Work</a>
-        <a href="#systems" data-nav="systems">Systems</a>
-        <a href="#index" data-nav="index">Index</a>
-        <a href="#toolbox" data-nav="toolbox">Toolbox</a>
+        <a href="#work" data-nav="work">Projects</a>
+        <a href="#all" data-nav="all">All projects</a>
+        <a href="#skills" data-nav="skills">Skills</a>
         <a href="#about" data-nav="about">About</a>
+        <a href="#contact" data-nav="contact">Contact</a>
       </nav>
 
       <div class="nav-actions">
-        <button class="search-btn" type="button" data-open-palette aria-label="Search projects and sections">
-          <svg viewBox="0 0 20 20" width="16" height="16" aria-hidden="true"><circle cx="8.5" cy="8.5" r="5.5" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M13 13l4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
-          <span class="search-label">Search</span>
-          <kbd>Ctrl K</kbd>
+        <button class="icon-btn music-btn" type="button" id="music-btn" aria-pressed="false" aria-label="Play background music" title="Background music">
+          <svg class="i-note" viewBox="0 0 20 20" width="18" height="18" aria-hidden="true"><path d="M7.5 15.5V4.5l9-2v11" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><circle cx="5.5" cy="15.5" r="2" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="14.5" cy="13.5" r="2" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>
+          <span class="eq" aria-hidden="true"><i></i><i></i><i></i></span>
         </button>
-        <button class="icon-btn" type="button" id="theme-toggle" aria-label="Switch to light theme">
+        <button class="icon-btn" type="button" id="theme-toggle" aria-label="Switch to light theme" title="Theme">
           <svg class="i-sun" viewBox="0 0 20 20" width="18" height="18" aria-hidden="true"><circle cx="10" cy="10" r="3.6" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M10 1.8v2.2M10 16v2.2M1.8 10h2.2M16 10h2.2M4.2 4.2l1.6 1.6M14.2 14.2l1.6 1.6M4.2 15.8l1.6-1.6M14.2 5.8l1.6-1.6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
           <svg class="i-moon" viewBox="0 0 20 20" width="18" height="18" aria-hidden="true"><path d="M16.5 12.6A7 7 0 0 1 7.4 3.5a7 7 0 1 0 9.1 9.1z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
         </button>
-        <a class="btn btn-accent btn-sm nav-cta" href="#contact">Hire me</a>
         <button class="icon-btn menu-btn" type="button" id="menu-btn" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
           <svg viewBox="0 0 20 20" width="20" height="20" aria-hidden="true"><path d="M3 6h14M3 14h14" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
         </button>
       </div>
     </div>
     <div class="mobile-menu" id="mobile-menu" hidden>
-      <a href="#work">Work</a>
-      <a href="#systems">Systems</a>
-      <a href="#index">Index</a>
-      <a href="#toolbox">Toolbox</a>
+      <a href="#work">Projects</a>
+      <a href="#all">All projects</a>
+      <a href="#skills">Skills</a>
       <a href="#about">About</a>
       <a href="#contact">Contact</a>
     </div>
@@ -96,225 +110,161 @@
   <main id="main">
 
     <!-- ========================================================== HERO -->
-    <section class="hero" id="top" data-wpt="Home">
-      <div class="hero-grid" aria-hidden="true"></div>
+    <section class="hero" id="top">
       <div class="wrap hero-inner">
         <div class="hero-copy">
-          <p class="eyebrow reveal"><span class="live-dot" aria-hidden="true"></span> Open to freelance &amp; contract work · Islamabad, PK</p>
-          <h1 class="hero-title reveal">
-            I build software that <em>flies</em>, <em>thinks</em> &amp;&nbsp;<em>ships</em>.
-          </h1>
-          <p class="lede reveal">
-            I'm Abdul Rehman, founder of <strong>CorePilot</strong>. I build Android and desktop apps,
-            ArduPilot firmware and flight hardware, and AI that runs on your own machine.
-            Java, C++/Qt, Flutter and Python, from PCB to Play Store.
+          <p class="hero-kicker">Founder of CorePilot · Islamabad, Pakistan</p>
+          <h1 class="hero-title">Abdul Rehman</h1>
+          <p class="hero-role">AI, desktop and drone software developer</p>
+          <p class="lede">
+            I build AI agents and models that run on your own hardware, drone ground stations and onboard AI,
+            and desktop and Android apps in C++/Qt, Java and Flutter. 5+ years of experience. Open to freelance and contract work.
           </p>
-          <div class="hero-cta reveal">
-            <a class="btn btn-accent" href="#work">See the work <span aria-hidden="true">→</span></a>
-            <a class="btn btn-ghost" href="#contact">Start a project</a>
+          <div class="hero-cta">
+            <a class="btn btn-accent" href="#work">View projects</a>
+            <a class="btn btn-ghost" href="#contact">Contact me</a>
           </div>
-          <ul class="hero-domains reveal" aria-label="Domains">
-            <li>Android</li><li>Desktop · C++/Qt</li><li>Flight firmware</li><li>PCB design</li><li>On-device AI</li><li>Trading systems</li>
+          <ul class="hero-links">
+            <li><a href="https://github.com/abduhifz-dev" target="_blank" rel="noopener">GitHub</a></li>
+            <li><a href="https://www.linkedin.com/in/abdul-rehman-01b588256/" target="_blank" rel="noopener">LinkedIn</a></li>
+            <li><a href="mailto:abduhifz@gmail.com">abduhifz@gmail.com</a></li>
           </ul>
         </div>
 
-        <div class="hero-instrument reveal" aria-hidden="true">
+        <div class="hero-instrument" aria-hidden="true">
           <div class="inst-frame">
             <canvas id="hud"></canvas>
-            <span class="corner c-tl"></span><span class="corner c-tr"></span><span class="corner c-bl"></span><span class="corner c-br"></span>
-            <div class="hud-read r-tl"><span>MODE</span><b>AUTO</b></div>
-            <div class="hud-read r-tr"><span>LINK</span><b>AES-256</b></div>
             <div class="hud-read r-bl"><span>ALT</span><b id="hud-alt">0120 m</b></div>
             <div class="hud-read r-br"><span>GS</span><b id="hud-gs">12.4 m/s</b></div>
           </div>
-          <p class="inst-caption"><span class="cap-fine">Move your pointer to fly it. </span>Scroll to climb.</p>
         </div>
       </div>
     </section>
 
-    <!-- ========================================================= STATS -->
-    <section class="stats" aria-label="At a glance">
-      <div class="wrap stats-grid">
-        <div class="stat reveal"><b data-count="projects">50</b><span>projects in the index</span></div>
-        <div class="stat reveal"><b><span data-count-to="5">5</span>+</b><span>years shipping software</span></div>
-        <div class="stat reveal"><b><span data-count-to="99.9" data-decimals="1">99.9</span>%</b><span>crash-free Android releases</span></div>
-        <div class="stat reveal"><b data-count="domains">7</b><span>domains, from boards to LLMs</span></div>
-        <div class="stat reveal"><b><span data-count-to="12">12</span></b><span>languages across the projects</span></div>
+    <!-- ===================================================== FEATURED -->
+    <section class="section" id="work">
+      <div class="wrap">
+        <header class="sec-head">
+          <h2 class="sec-title">Featured projects</h2>
+          <p class="sec-sub">The main projects I'm working on. Click any of them for the full details.</p>
+        </header>
+        <div class="features" id="features"></div>
       </div>
     </section>
 
-    <!-- ===================================================== SELECTED WORK -->
-    <section class="section" id="work" data-wpt="Work">
+    <!-- ===================================================== ALL PROJECTS -->
+    <section class="section section-alt" id="all">
       <div class="wrap">
-        <header class="sec-head reveal">
-          <p class="sec-label"><span>01</span>Selected work</p>
-          <h2 class="sec-title">Six systems I'd <em>put my name on</em>.</h2>
-          <p class="sec-sub">Flagship projects across AI, flight hardware, security and mobile. Open any card for the full case study.</p>
-        </header>
-        <div class="cases" id="cases"></div>
-      </div>
-    </section>
-
-    <!-- ========================================================= SYSTEMS -->
-    <section class="section section-alt" id="systems" data-wpt="Systems">
-      <div class="wrap">
-        <header class="sec-head reveal">
-          <p class="sec-label"><span>02</span>Systems</p>
-          <h2 class="sec-title">The whole drone stack, <em>end to end</em>.</h2>
-          <p class="sec-sub">From the copper on the flight controller to the report a client reads after landing, there's a project at every layer. Select one to open it.</p>
-        </header>
-        <ol class="stack-map" id="stack-map"></ol>
-      </div>
-    </section>
-
-    <!-- =========================================================== INDEX -->
-    <section class="section" id="index" data-wpt="Index">
-      <div class="wrap">
-        <header class="sec-head reveal">
-          <p class="sec-label"><span>03</span>Project index</p>
-          <h2 class="sec-title">Everything I've built, <em>in one list</em>.</h2>
-          <p class="sec-sub"><span data-count="projects">50</span> projects: apps, firmware, boards, models, bots and books. Most are in private repositories; walkthroughs and demos on request.</p>
+        <header class="sec-head">
+          <h2 class="sec-title">All projects</h2>
+          <p class="sec-sub"><span data-count="projects">39</span> projects: <span data-count="built">5</span> built or in progress and <span data-count="planned">34</span> planned, mostly AI. Projects marked "Planned" are on my roadmap and not built yet.</p>
         </header>
 
-        <div class="index-tools reveal">
+        <div class="index-tools">
           <label class="search-field">
             <svg viewBox="0 0 20 20" width="16" height="16" aria-hidden="true"><circle cx="8.5" cy="8.5" r="5.5" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M13 13l4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
-            <span class="sr-only">Filter projects</span>
-            <input type="search" id="index-search" placeholder="Filter by name, stack or keyword" autocomplete="off">
+            <span class="sr-only">Search projects</span>
+            <input type="search" id="index-search" placeholder="Search by name or technology" autocomplete="off">
           </label>
-          <div class="filters" id="filters" role="group" aria-label="Filter by domain"></div>
+          <div class="filters" id="filters" role="group" aria-label="Filter by category"></div>
         </div>
 
         <p class="index-count" id="index-count" aria-live="polite"></p>
         <div class="index-head" aria-hidden="true">
-          <span>No.</span><span>Project</span><span>Domain</span><span>Stack</span><span>Status</span><span></span>
+          <span>Project</span><span>Category</span><span>Built with</span><span>Status</span><span></span>
         </div>
         <ol class="index-list" id="index-list"></ol>
         <div class="index-more" id="index-more" hidden>
-          <button class="btn btn-ghost" type="button" id="index-more-btn">Show all projects <span aria-hidden="true">↓</span></button>
+          <button class="btn btn-ghost" type="button" id="index-more-btn">Show all projects</button>
         </div>
         <div class="index-empty" id="index-empty" hidden>
-          <p>No projects match that filter.</p>
-          <button class="btn btn-ghost btn-sm" type="button" id="index-reset">Clear filters</button>
+          <p>No projects match your search.</p>
+          <button class="btn btn-ghost btn-sm" type="button" id="index-reset">Clear search</button>
         </div>
-        <noscript><p class="index-empty">The project index needs JavaScript. Every project is listed in <code>js/data.js</code>.</p></noscript>
+        <noscript><p class="index-empty">This list needs JavaScript. All projects are in <code>js/data.js</code>.</p></noscript>
       </div>
     </section>
 
-    <!-- ========================================================= TOOLBOX -->
-    <section class="section section-alt" id="toolbox" data-wpt="Toolbox">
+    <!-- ========================================================= SKILLS -->
+    <section class="section" id="skills">
       <div class="wrap">
-        <header class="sec-head reveal">
-          <p class="sec-label"><span>04</span>Toolbox</p>
-          <h2 class="sec-title">The tools <em>behind the work</em>.</h2>
-          <p class="sec-sub">Grouped by where they're used, each with a link to the projects that use them.</p>
+        <header class="sec-head">
+          <h2 class="sec-title">Skills</h2>
+          <p class="sec-sub">Languages, frameworks and tools I use, grouped by area.</p>
         </header>
 
         <div class="tools">
-          <article class="tool reveal" data-domain="mobile">
-            <header><span class="tool-ic" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="6" y="2.5" width="12" height="19" rx="2.5"/><path d="M10.5 18.5h3"/></svg></span><h3>Mobile</h3></header>
-            <p>Java and Kotlin on Android since day one, then Flutter for cross-platform apps and ArkTS for HarmonyOS.</p>
-            <ul class="tool-list"><li>Java</li><li>Kotlin</li><li>Android SDK</li><li>Jetpack Compose</li><li>Flutter / Dart</li><li>HarmonyOS ArkTS</li><li>MVVM · Clean Arch</li><li>Hilt</li><li>Coroutines · Flow</li><li>Room · SQLite</li><li>Bloc · Provider</li><li>ML Kit</li></ul>
-            <button class="tool-link" type="button" data-filter="mobile"></button>
+          <article class="tool">
+            <h3>Mobile</h3>
+            <ul class="tool-list"><li>Java</li><li>Kotlin</li><li>Android SDK</li><li>Jetpack Compose</li><li>Flutter / Dart</li><li>HarmonyOS ArkTS</li><li>MVVM</li><li>Clean Architecture</li><li>Hilt</li><li>Coroutines / Flow</li><li>Room / SQLite</li><li>Bloc / Provider</li><li>ML Kit</li></ul>
+            <button class="tool-link" type="button" data-filter="apps"></button>
           </article>
-          <article class="tool reveal" data-domain="desktop">
-            <header><span class="tool-ic" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="2.5" y="4" width="19" height="13" rx="2"/><path d="M8 21h8M12 17v4"/></svg></span><h3>Desktop</h3></header>
-            <p>Native C++/Qt where performance and security matter; Electron and React where speed of delivery does.</p>
-            <ul class="tool-list"><li>C++17 / C++20</li><li>Qt 6 · QML</li><li>Qt WebEngine</li><li>Java Swing</li><li>Electron</li><li>React · TypeScript</li><li>PySide6</li><li>CMake · Ninja</li><li>WPF · PowerShell</li><li>Hardened builds</li></ul>
-            <button class="tool-link" type="button" data-filter="desktop"></button>
+          <article class="tool">
+            <h3>Desktop</h3>
+            <ul class="tool-list"><li>C++17 / C++20</li><li>Qt 6 / QML</li><li>Qt WebEngine</li><li>Java Swing</li><li>Electron</li><li>React</li><li>TypeScript</li><li>PySide6</li><li>CMake</li><li>WPF / PowerShell</li></ul>
+            <button class="tool-link" type="button" data-filter="apps"></button>
           </article>
-          <article class="tool reveal" data-domain="flight">
-            <header><span class="tool-ic" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="5.5" cy="5.5" r="2.5"/><circle cx="18.5" cy="5.5" r="2.5"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/><path d="M7.5 7.5l3 3M16.5 7.5l-3 3M7.5 16.5l3-3M16.5 16.5l-3-3"/><rect x="10" y="10" width="4" height="4" rx="1"/></svg></span><h3>Flight software &amp; embedded</h3></header>
-            <p>Custom autopilot builds, scripting, companion computers and the ground tools around them.</p>
-            <ul class="tool-list"><li>ArduPilot</li><li>MAVLink · MAVSDK</li><li>Lua scripting</li><li>SITL</li><li>STM32 · FreeRTOS</li><li>ChibiOS</li><li>ROS 2</li><li>Jetson</li><li>PlatformIO</li><li>pymavlink</li><li>CesiumJS</li></ul>
-            <button class="tool-link" type="button" data-filter="flight"></button>
+          <article class="tool">
+            <h3>Drones, GCS &amp; robotics</h3>
+            <ul class="tool-list"><li>ArduPilot</li><li>MAVLink / MAVSDK</li><li>Lua scripting</li><li>SITL</li><li>STM32</li><li>FreeRTOS</li><li>ChibiOS</li><li>ROS 2</li><li>Jetson</li><li>PlatformIO</li><li>pymavlink</li><li>OpenCV</li><li>TensorRT</li><li>ORB-SLAM3</li></ul>
+            <button class="tool-link" type="button" data-filter="drone"></button>
           </article>
-          <article class="tool reveal" data-domain="hardware">
-            <header><span class="tool-ic" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="7" y="7" width="10" height="10" rx="1.5"/><path d="M10 3v4M14 3v4M10 17v4M14 17v4M3 10h4M3 14h4M17 10h4M17 14h4"/></svg></span><h3>Hardware</h3></header>
-            <p>Schematics, layout and fab outputs, with Python generating and checking as much as possible.</p>
-            <ul class="tool-list"><li>KiCad 10</li><li>Schematic generation</li><li>6-layer layout</li><li>Custom autorouting</li><li>ERC / DRC</li><li>BOM sourcing</li><li>STEP · GLB</li><li>STM32H7</li><li>RK3588 SoM</li></ul>
-            <button class="tool-link" type="button" data-filter="hardware"></button>
+          <article class="tool">
+            <h3>Hardware</h3>
+            <ul class="tool-list"><li>KiCad</li><li>Schematic design</li><li>Multi-layer PCB layout</li><li>ERC / DRC</li><li>BOM sourcing</li><li>STM32H7</li><li>RK3588 SoM</li><li>STEP / 3D export</li></ul>
           </article>
-          <article class="tool reveal" data-domain="ai">
-            <header><span class="tool-ic" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="5" cy="7" r="2"/><circle cx="5" cy="17" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="19" cy="7" r="2"/><circle cx="19" cy="17" r="2"/><path d="M7 7.8l3.2 3M7 16.2l3.2-3M13.8 11l3.4-3M13.8 13l3.4 3"/></svg></span><h3>AI &amp; ML</h3></header>
-            <p>Training small models, serving them efficiently and building agents that use tools safely.</p>
-            <ul class="tool-list"><li>PyTorch</li><li>Transformers</li><li>PEFT · LoRA</li><li>llama.cpp · GGUF</li><li>LiteRT</li><li>stable-diffusion.cpp</li><li>FastAPI · SSE</li><li>Agent harnesses</li><li>MCP</li><li>Claude API</li></ul>
+          <article class="tool">
+            <h3>AI &amp; machine learning</h3>
+            <ul class="tool-list"><li>Python</li><li>PyTorch</li><li>Transformers</li><li>LoRA / PEFT</li><li>llama.cpp / GGUF</li><li>LiteRT</li><li>stable-diffusion.cpp</li><li>FastAPI</li><li>LLM agents</li><li>MCP</li></ul>
             <button class="tool-link" type="button" data-filter="ai"></button>
           </article>
-          <article class="tool reveal">
-            <header><span class="tool-ic" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 2.5l8 3.5v5.5c0 4.7-3.4 8.6-8 10-4.6-1.4-8-5.3-8-10V6z"/><path d="M8.5 12l2.5 2.5 4.5-5"/></svg></span><h3>Backend &amp; security</h3></header>
-            <p>The servers, relays and crypto that the apps lean on.</p>
-            <ul class="tool-list"><li>Node.js · Express</li><li>Prisma · Redis</li><li>MQTT</li><li>WebSockets</li><li>PHP · MySQL</li><li>AES-256-GCM</li><li>ECDH · Curve25519</li><li>libsodium</li><li>JWT · OAuth + PKCE</li></ul>
-          </article>
-          <article class="tool reveal" data-domain="trading">
-            <header><span class="tool-ic" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 20h18"/><path d="M6 16V9M6 9V6M11 15V5M16 17v-6M16 11V8M20 13V4"/><rect x="4.5" y="9" width="3" height="5" rx=".5"/><rect x="14.5" y="11" width="3" height="4" rx=".5"/></svg></span><h3>Trading systems</h3></header>
-            <p>Expert Advisors, indicators and bots with risk management written in first.</p>
-            <ul class="tool-list"><li>MQL5</li><li>Pine Script</li><li>MetaTrader5 Python</li><li>pandas</li><li>C++ DLLs</li><li>Lightweight Charts</li></ul>
-            <button class="tool-link" type="button" data-filter="trading"></button>
-          </article>
-          <article class="tool reveal" data-domain="docs">
-            <header><span class="tool-ic" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 4.5A1.5 1.5 0 0 1 5.5 3H11v17H5.5A1.5 1.5 0 0 1 4 18.5z"/><path d="M20 4.5A1.5 1.5 0 0 0 18.5 3H13v17h5.5a1.5 1.5 0 0 0 1.5-1.5z"/></svg></span><h3>Docs &amp; courses</h3></header>
-            <p>Manuals and courses generated from source, checked by code, in English and Urdu.</p>
-            <ul class="tool-list"><li>Markdown → PDF</li><li>ReportLab</li><li>PyMuPDF</li><li>SVG figures</li><li>Nastaliq · RTL</li><li>pytest</li></ul>
-            <button class="tool-link" type="button" data-filter="docs"></button>
+          <article class="tool">
+            <h3>Backend &amp; security</h3>
+            <ul class="tool-list"><li>Node.js / Express</li><li>Prisma</li><li>Redis</li><li>MQTT</li><li>WebSockets</li><li>PHP / MySQL</li><li>AES-256-GCM</li><li>ECDH</li><li>libsodium</li><li>JWT / OAuth</li></ul>
           </article>
         </div>
       </div>
     </section>
 
-    <!-- =========================================================== ABOUT -->
-    <section class="section" id="about" data-wpt="About">
+    <!-- ========================================================== ABOUT -->
+    <section class="section section-alt" id="about">
       <div class="wrap">
-        <header class="sec-head reveal">
-          <p class="sec-label"><span>05</span>About</p>
-          <h2 class="sec-title">One engineer, <em>the whole stack</em>.</h2>
+        <header class="sec-head">
+          <h2 class="sec-title">About me</h2>
         </header>
 
         <div class="about">
-          <figure class="portrait reveal">
-            <div class="portrait-frame">
-              <img src="assets/avatar.jpg" alt="Portrait of Abdul Rehman" width="460" height="460" loading="lazy">
-              <span class="corner c-tl"></span><span class="corner c-tr"></span><span class="corner c-bl"></span><span class="corner c-br"></span>
-              <span class="portrait-tag">ID · AR-01</span>
-            </div>
-            <figcaption>
-              <span><b>Abdul Rehman</b> · Founder, CorePilot</span>
-              <span class="mono">Islamabad · <span data-clock>--:--</span> PKT</span>
-            </figcaption>
+          <figure class="portrait">
+            <img src="assets/avatar.jpg" alt="Photo of Abdul Rehman" width="460" height="460" loading="lazy">
+            <figcaption>Abdul Rehman · Islamabad · <span data-clock>--:--</span> PKT</figcaption>
           </figure>
 
           <div class="about-body">
-            <div class="about-text reveal">
-              <p>I'm a software and systems engineer from Islamabad. I started out building Android apps in Java with MVVM, Clean Architecture, Hilt and Coroutines, and desktop software in Java Swing and C++/Qt, at ProIT and SKYNEX and for clients on Fiverr and Upwork.</p>
-              <p>Today I run <strong>CorePilot</strong>, where I bring that same discipline to everything a drone program needs: flight-controller boards, custom ArduPilot firmware, encrypted links, ground stations and log tools. I also build desktop apps, Flutter apps, and AI models that run on the user's own hardware.</p>
+            <div class="about-text">
+              <p>I'm a software developer from Islamabad with more than five years of experience. I started with Android apps in Java (MVVM, Clean Architecture, Hilt, Coroutines) and desktop software in Java Swing and C++/Qt, working at ProIT and SKYNEX and with clients on Fiverr and Upwork.</p>
+              <p>Now I run CorePilot. Most of my work there is for drones: flight-controller boards, custom ArduPilot firmware, ground-station software and log analysis tools. I also build desktop and Flutter apps, and AI tools that run on the user's own computer.</p>
             </div>
 
-            <ul class="principles">
-              <li class="reveal"><b>End to end</b><span>Hardware, firmware, apps and docs, with one person accountable for how they fit together.</span></li>
-              <li class="reveal"><b>Private by default</b><span>Offline-first apps, encrypted files and links, hardened release builds.</span></li>
-              <li class="reveal"><b>Measured, not claimed</b><span>Benchmarks that include the failures, ERC and DRC reports, SITL tests.</span></li>
-            </ul>
-
-            <h3 class="sub-title reveal">Journey</h3>
+            <h3 class="sub-title">Experience</h3>
             <ol class="journey">
-              <li class="reveal">
-                <span class="j-when">Now</span>
-                <div><b>CorePilot</b><em>Founder &amp; lead engineer</em>
-                  <p>Drone hardware and firmware, ground and analysis software, desktop tools and on-device AI.</p></div>
+              <li>
+                <span class="j-when">Current</span>
+                <div><b>CorePilot</b><em>Founder &amp; developer</em>
+                  <p>Drone hardware and firmware, ground and analysis software, desktop tools and offline AI.</p></div>
               </li>
-              <li class="reveal">
-                <span class="j-when">Previously</span>
-                <div><b>ProIT · Islamabad</b><em>Senior Android &amp; Java Developer</em>
-                  <p>Production Android apps on Clean Architecture and MVVM with Hilt, Coroutines and Room, plus desktop tools in Java Swing and C++/Qt. 99.9% crash-free.</p></div>
+              <li>
+                <span class="j-when">Previous</span>
+                <div><b>ProIT, Islamabad</b><em>Senior Android &amp; Java Developer</em>
+                  <p>Android apps built with Clean Architecture and MVVM using Hilt, Coroutines and Room, plus desktop tools in Java Swing and C++/Qt. 99.9% crash-free.</p></div>
               </li>
-              <li class="reveal">
-                <span class="j-when">Previously</span>
+              <li>
+                <span class="j-when">Previous</span>
                 <div><b>SKYNEX</b><em>Android &amp; Desktop Developer</em>
-                  <p>Android apps and C++/Qt desktop software, and the ChatOS messaging platform: Flutter app, encrypted relay and desktop archive.</p></div>
+                  <p>Android apps and C++/Qt desktop software, including the ChatOS messaging app with its server and desktop archive.</p></div>
               </li>
-              <li class="reveal">
+              <li>
                 <span class="j-when">Ongoing</span>
-                <div><b>Freelance</b><em>Fiverr &amp; Upwork · Top Rated</em>
+                <div><b>Freelance</b><em>Fiverr &amp; Upwork, Top Rated</em>
                   <p>Android, Qt and Java Swing projects for clients in the USA, UK, UAE and Europe.</p></div>
               </li>
             </ol>
@@ -323,50 +273,50 @@
       </div>
     </section>
 
-    <!-- ========================================================= CONTACT -->
-    <section class="section contact" id="contact" data-wpt="Contact">
+    <!-- ======================================================== CONTACT -->
+    <section class="section" id="contact">
       <div class="wrap">
-        <p class="sec-label reveal"><span>06</span>Contact</p>
-        <h2 class="contact-title reveal">Have something that needs to <em>fly, think or&nbsp;ship</em>?</h2>
+        <header class="sec-head">
+          <h2 class="sec-title">Contact</h2>
+          <p class="sec-sub">Email me about a freelance project, a job or anything on this page.</p>
+        </header>
 
         <div class="contact-grid">
-          <div class="contact-info reveal">
-            <p class="contact-lede">Tell me what you're building. Apps, firmware, boards and AI are all welcome, and so is a rescue of a project that's gone sideways.</p>
+          <div class="contact-info">
             <div class="email-row">
-              <a class="email-link" id="email-link" href="mailto:abduhifz@gmail.com">abduhifz@gmail.com</a>
-              <button class="icon-btn" type="button" id="copy-email" aria-label="Copy email address">
+              <a class="email-link" href="mailto:abduhifz@gmail.com">abduhifz@gmail.com</a>
+              <button class="icon-btn" type="button" id="copy-email" aria-label="Copy email address" title="Copy">
                 <svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true"><rect x="6.5" y="6.5" width="10" height="10" rx="2" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M13.5 6.5V5a1.5 1.5 0 0 0-1.5-1.5H5A1.5 1.5 0 0 0 3.5 5v7A1.5 1.5 0 0 0 5 13.5h1.5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>
               </button>
             </div>
             <dl class="contact-meta">
-              <div><dt>Based in</dt><dd>Islamabad, Pakistan</dd></div>
+              <div><dt>Location</dt><dd>Islamabad, Pakistan</dd></div>
               <div><dt>Local time</dt><dd><span data-clock>--:--</span> PKT (UTC+5)</dd></div>
-              <div><dt>Elsewhere</dt><dd class="links">
-                <a href="https://www.linkedin.com/in/abdul-rehman-01b588256/" target="_blank" rel="noopener">LinkedIn ↗</a>
-                <a href="https://github.com/abduhifz-dev" target="_blank" rel="noopener">GitHub ↗</a>
+              <div><dt>Profiles</dt><dd class="links">
+                <a href="https://www.linkedin.com/in/abdul-rehman-01b588256/" target="_blank" rel="noopener">LinkedIn</a>
+                <a href="https://github.com/abduhifz-dev" target="_blank" rel="noopener">GitHub</a>
               </dd></div>
             </dl>
           </div>
 
-          <form class="contact-form reveal" id="contact-form" novalidate>
+          <form class="contact-form" id="contact-form" novalidate>
             <div class="field-row">
-              <label class="field"><span>Your name</span><input name="name" type="text" autocomplete="name" required></label>
-              <label class="field"><span>Your email</span><input name="email" type="email" autocomplete="email" required></label>
+              <label class="field"><span>Name</span><input name="name" type="text" autocomplete="name" required></label>
+              <label class="field"><span>Email</span><input name="email" type="email" autocomplete="email" required></label>
             </div>
-            <fieldset class="field">
-              <legend>What do you need?</legend>
-              <div class="choice-row">
-                <label class="choice"><input type="radio" name="type" value="Android / mobile app" checked><span>Mobile app</span></label>
-                <label class="choice"><input type="radio" name="type" value="Desktop app"><span>Desktop app</span></label>
-                <label class="choice"><input type="radio" name="type" value="Drone firmware / hardware"><span>Drone / firmware</span></label>
-                <label class="choice"><input type="radio" name="type" value="AI / ML"><span>AI / ML</span></label>
-                <label class="choice"><input type="radio" name="type" value="Something else"><span>Other</span></label>
-              </div>
-            </fieldset>
-            <label class="field"><span>Project details</span><textarea name="message" rows="5" required placeholder="What it should do, who it's for, and when you need it."></textarea></label>
+            <label class="field"><span>Project type</span>
+              <select name="type">
+                <option>Android / mobile app</option>
+                <option>Desktop app</option>
+                <option>Drone firmware / hardware</option>
+                <option>AI / ML</option>
+                <option>Something else</option>
+              </select>
+            </label>
+            <label class="field"><span>Message</span><textarea name="message" rows="5" required></textarea></label>
             <div class="form-foot">
               <p class="form-note">This opens your email app with the message filled in.</p>
-              <button class="btn btn-accent" type="submit">Send message <span aria-hidden="true">→</span></button>
+              <button class="btn btn-accent" type="submit">Send</button>
             </div>
             <p class="form-error" id="form-error" role="alert" hidden></p>
           </form>
@@ -377,20 +327,17 @@
 
   <footer class="footer">
     <div class="wrap footer-inner">
-      <span>© <span id="year">2026</span> Abdul Rehman · CorePilot</span>
-      <span class="footer-mid">Hand-built in HTML, CSS and vanilla JavaScript. No frameworks.</span>
-      <a href="#top">Back to top ↑</a>
+      <span>© <span id="year">2026</span> Abdul Rehman</span>
+      <span class="footer-credit">Music: Max Concors – Reassemble</span>
+      <span class="footer-links">
+        <a href="https://github.com/abduhifz-dev" target="_blank" rel="noopener">GitHub</a>
+        <a href="https://www.linkedin.com/in/abdul-rehman-01b588256/" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="#top">Back to top</a>
+      </span>
     </div>
   </footer>
 
-  <!-- Flight-data readout (decorative) -->
-  <div class="fdr" id="fdr" aria-hidden="true">
-    <div><span>WPT</span><b id="fdr-wpt">01/07</b><i id="fdr-name">HOME</i></div>
-    <div><span>ALT</span><b id="fdr-alt">0000</b><i>m</i></div>
-    <div><span>HDG</span><b id="fdr-hdg">312</b><i>°</i></div>
-  </div>
-
-  <!-- Project case study -->
+  <!-- Project details -->
   <dialog class="modal" id="project-modal" aria-labelledby="pm-title">
     <div class="modal-inner">
       <header class="modal-head">
@@ -402,23 +349,9 @@
       <div class="modal-body" id="pm-body"></div>
       <footer class="modal-foot">
         <button class="btn btn-ghost btn-sm" type="button" id="pm-prev">← Previous</button>
-        <span class="pm-pos mono" id="pm-pos"></span>
+        <span class="pm-pos" id="pm-pos"></span>
         <button class="btn btn-ghost btn-sm" type="button" id="pm-next">Next →</button>
       </footer>
-    </div>
-  </dialog>
-
-  <!-- Command palette -->
-  <dialog class="palette" id="palette" aria-label="Search">
-    <div class="palette-inner">
-      <label class="palette-search">
-        <svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true"><circle cx="8.5" cy="8.5" r="5.5" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M13 13l4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
-        <span class="sr-only">Search projects, sections and actions</span>
-        <input type="text" id="palette-input" placeholder="Jump to a project, section or action…" autocomplete="off" role="combobox" aria-expanded="true" aria-controls="palette-list" aria-autocomplete="list">
-        <kbd>Esc</kbd>
-      </label>
-      <ul class="palette-list" id="palette-list" role="listbox" aria-label="Results"></ul>
-      <footer class="palette-foot mono"><span><kbd>↑</kbd><kbd>↓</kbd> move</span><span><kbd>Enter</kbd> open</span></footer>
     </div>
   </dialog>
 
@@ -426,6 +359,7 @@
 
   <script src="js/data.js"></script>
   <script src="js/hud.js"></script>
+  <script src="js/music.js"></script>
   <script src="js/main.js"></script>
 </body>
 </html>

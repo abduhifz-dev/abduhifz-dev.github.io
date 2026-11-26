@@ -1,21 +1,23 @@
 /* =====================================================================
-   PORTFOLIO DATA — the only file you need to edit to add a project.
+   PORTFOLIO DATA: edit this file to add or change projects.
 
-   Add an object to `projects` (copy an existing one). Fields:
+   Copy any object in `projects`. Fields:
      id          unique, lowercase, used in links: ?p=<id>
      title       project name
-     tagline     one line (shown in the index)
-     domain      ai | flight | hardware | desktop | mobile | trading | docs
-     status      live | build | dev | design   (statusText overrides the label)
-     stack       technologies (first 3 are shown in the index)
+     tagline     one line, shown in the lists
+     domain      ai | drone | apps
+     status      live | build | dev | planned   (statusText overrides the label)
+                 "planned" projects show in All projects with the label "Planned".
+                 When you start building one, change its status to dev, then build or live.
+     stack       technologies (the first 3 show in the list)
      platforms   optional
-     summary     2–3 sentences (shown in the case study)
+     summary     2-3 sentences, shown in the project details
      highlights  bullet points
-     metrics     optional [["value","label"], ...] — big numbers
-     featured    optional true  → appears in "Selected work" (keep it to 6)
-     motif       for featured cards: code | neural | pcb | radar | browser | geo
-     layers      optional, drone-stack rows: hw | fw | link | gcs | analysis | design
+     metrics     optional [["value", "label"], ...]
+     images      optional [{ src, w, h, alt, phone? }], files go in assets/img/
+     featured    optional true: shows in "Featured projects" (keep it to 6)
      link        optional { href, label }
+     hidden      optional true: kept in this file but not shown on the site
    ===================================================================== */
 
 window.PORTFOLIO = {
@@ -25,42 +27,30 @@ window.PORTFOLIO = {
     github: "https://github.com/abduhifz-dev",
     linkedin: "https://www.linkedin.com/in/abdul-rehman-01b588256/",
     location: "Islamabad, Pakistan",
-    timezone: "Asia/Karachi"
+    timezone: "Asia/Karachi",
+    // Background music (see js/music.js). Current track: Max Concors - Reassemble.
+    // To change it, copy another file into assets/music/ and change file.
+    // With file: null, soft ambient music is generated in the browser.
+    // autoStart: true starts it on the visitor's first click (browsers block sound before that).
+    music: { file: "assets/music/max-concors-reassemble.mp3", volume: 0.45, autoStart: true }
   },
 
   domains: {
-    ai:       { label: "AI & ML" },
-    flight:   { label: "Flight software" },
-    hardware: { label: "Hardware" },
-    desktop:  { label: "Desktop" },
-    mobile:   { label: "Mobile" },
-    trading:  { label: "Trading" },
-    docs:     { label: "Docs & courses" }
+    ai: { label: "AI & ML" },
+    drone: { label: "Drones & GCS" },
+    apps: { label: "Apps & tools" }
   },
 
-  statuses: {
-    live:   "Released",
-    build:  "Working build",
-    dev:    "In development",
-    design: "Hardware design"
-  },
-
-  layers: [
-    { id: "hw",       name: "Hardware",            desc: "Boards, power and RF ground equipment designed in KiCad." },
-    { id: "fw",       name: "Firmware & autopilot", desc: "Custom ArduPilot builds, flight firmware and Lua scripts." },
-    { id: "link",     name: "Link & security",     desc: "Encrypted, forward-secret radio links and tracking." },
-    { id: "gcs",      name: "Ground control",      desc: "Ground stations and multi-vehicle control." },
-    { id: "analysis", name: "Logs & analysis",     desc: "Turning flight logs into answers and reports." },
-    { id: "design",   name: "Design & knowledge",  desc: "Aircraft design tools, parts data and training material." }
-  ],
+  statuses: { live: "Released", build: "Working build", dev: "In development", planned: "Planned" },
 
   projects: [
-    /* ------------------------------------------------------------ AI */
+    /* ------ Your projects ------ */
     {
       id: "coder",
       title: "CorePilot Coder",
       tagline: "Desktop AI coding agent that reads, plans, edits and runs. One agent per project, and you approve every step.",
-      domain: "ai", status: "dev",
+      domain: "ai",
+      status: "dev",
       stack: ["C++20", "Qt 6 / QML", "MCP", "Flutter", "LLM APIs"],
       platforms: ["Windows", "Linux", "Android companion"],
       summary: "A cross-platform AI coding agent written in C++20 with a Qt Quick interface. It reads the codebase, plans the work, proposes edits as diffs, runs commands and calls MCP tools, and nothing lands without your approval. Each open project gets its own agent, so several codebases can move forward at the same time.",
@@ -73,351 +63,32 @@ window.PORTFOLIO = {
         "Companion Flutter app, CorePilot Messenger, sends agent reports, questions and urgent calls to your phone through a relay"
       ],
       metrics: [["1 : 1", "agent per open project"], ["C++20", "native core, Qt Quick UI"], ["MCP", "tool servers supported"]],
-      featured: true, motif: "code"
+      featured: true
     },
     {
-      id: "omni",
-      title: "CorePilot-Omni",
-      tagline: "A multimodal, tool-using model trained from scratch on a 6 GB laptop GPU, with a 181-page course on how it was built.",
-      domain: "ai", status: "build",
-      stack: ["PyTorch", "Transformers", "PEFT / LoRA", "SigLIP2", "Whisper"],
-      platforms: ["RTX 4050 Laptop (6 GB)"],
-      summary: "A small agentic model that sees images and video, hears audio, reasons in a short think block and acts through a real agent harness. Qwen3-0.6B (LoRA r=64) is connected to a frozen SigLIP2 vision tower and a frozen Whisper-small encoder through two trained projectors: about 0.93B parameters, of which 48.8M are trained.",
+      id: "custom-gcs",
+      title: "CorePilot GCS (AH-COMMAND)",
+      tagline: "Custom ground control station in Qt 6 / QML, built to replace Mission Planner, with an encrypted link to the drone.",
+      domain: "drone",
+      status: "dev",
+      stack: ["C++", "Qt 6", "QML", "MAVLink", "AES-256-GCM"],
+      platforms: ["Windows", "Linux"],
+      summary: "A desktop ground station for ArduPilot drones with its own screens for flight data, mission planning, setup and configuration. It connects through CorePilot's encryption gateway, so telemetry and commands travel over an AES-256-GCM link with new ECDH keys for every session.",
       highlights: [
-        "97.6% on 41 held-out text agent tasks with real tools. The base model scores 39.0% in the same harness",
-        "Agent harness: tool registry with automatic JSON schemas, sandboxed workspace, 11 built-in tools, JSON repair, a duplicate-call guard and human confirmation for dangerous tools",
-        "Held-out video tests: 79% on colour change, 77% on growth, 68% on ordering",
-        "Known weaknesses are published with the results: open speech recognition and counting",
-        "181-page course PDF in Roman Urdu with English technical terms"
+        "Screens for flight data, mission planning, vehicle setup, configuration and the encrypted link",
+        "MAVLink over UDP to the encryption gateway and the RFD900x radio",
+        "Part of the AntiDroneSystem secure command-and-control stack",
+        "Custom frameless window and dark theme"
       ],
-      metrics: [["97.6%", "agent tasks (base model: 39.0%)"], ["6 GB", "of GPU memory used to train it"], ["181", "page course written alongside"]],
-      featured: true, motif: "neural"
+      metrics: [["Qt 6", "C++ / QML desktop app"], ["AES-256", "encrypted link with ECDH keys"], ["6", "main screens"]],
+      featured: true
     },
-    {
-      id: "intelligence",
-      title: "AbduIntelligence Systems",
-      tagline: "Multi-client LLM inference platform: a Qt server, a FastAPI model host and concurrent chat slots that share one copy of the weights.",
-      domain: "ai", status: "dev",
-      stack: ["C++ / Qt", "FastAPI", "llama.cpp", "QML", "WebSockets", "SSE"],
-      platforms: ["Windows"],
-      summary: "A streaming inference stack. A Qt server owns every WebSocket client plus authentication, the database and plans. A FastAPI backend owns the model and streams each chat. The weights load once and are shared across N independent slots through llama.cpp's memory-mapped pages.",
-      highlights: [
-        "N chats stream at the same time from one copy of the weights",
-        "Runs GGUF models through llama.cpp, or Hugging Face safetensors with LoRA / PEFT adapters from training runs",
-        "Qt / QML desktop client connects to the server over WebSockets",
-        "Includes its own 10,000-example fine-tuning dataset"
-      ]
-    },
-    {
-      id: "imager",
-      title: "CorePilot AI Imager",
-      tagline: "Offline image, video and video-with-sound generation in a native C++20 / Qt 6 app.",
-      domain: "ai", status: "build",
-      stack: ["C++20", "Qt 6 / QML", "stable-diffusion.cpp", "CUDA", "Vulkan"],
-      platforms: ["Windows"],
-      summary: "A desktop studio that generates and edits images with Qwen-Image, makes short clips with Wan 2.2, and makes clips with a matching soundtrack with MiniMax-H3. It is built on stable-diffusion.cpp and runs on CUDA, Vulkan or the CPU. Nothing leaves the machine; the only network access is the optional model download.",
-      highlights: [
-        "Generate from text, edit with up to 10 reference images, and output transparent RGBA",
-        "Video clips of 1–5 s, saved as H.264 MP4 with the system encoder, so no ffmpeg install is needed",
-        "Live denoising preview, a queue, ETA and cancel",
-        "Model manager detects the hardware, recommends variants, checks SHA-256 and resumes broken downloads",
-        "Searchable gallery, full metadata embedded in every PNG, and a headless CLI for scripting"
-      ]
-    },
-    {
-      id: "ayah",
-      title: "Ayah AI",
-      tagline: "Quran recitation checker that listens and colours every word: correct, wrong or missed, or a harakat mistake.",
-      domain: "ai", status: "dev",
-      stack: ["Flutter", "Dart", "On-device Arabic STT"],
-      platforms: ["Android", "iOS"],
-      summary: "The user recites a surah and the app follows word by word. A word turns green when it is read correctly, red when it is wrong or skipped, and blue when the word is right but a zabar, zer or pesh is wrong. Speech recognition runs on the device.",
-      highlights: [
-        "Live, word-level feedback during recitation",
-        "Separate detection for harakat (vowel-mark) errors",
-        "Demo mode that simulates a recitation with injected mistakes",
-        "Starts with Surah Al-Fatiha"
-      ]
-    },
-    {
-      id: "social-agent",
-      title: "Agentic Social Inbox",
-      tagline: "AI agent that answers a business's Facebook and Instagram messages, with a live dashboard and a multilingual fine-tuning set.",
-      domain: "ai", status: "build",
-      stack: ["Node.js", "Claude API", "React", "Socket.IO", "FastAPI", "Transformers"],
-      summary: "An agentic messaging backend that replies to customers on Facebook and Instagram, queues and schedules follow-ups, and streams activity to a React dashboard. Built for an aviation-tourism client, together with a production fine-tuning dataset and a local model engine.",
-      highlights: [
-        "883-example dataset in English, Urdu, Roman Urdu and Arabic",
-        "The dataset teaches the model to stay on topic, never invent prices or dates, and resist prompt injection",
-        "Queued, cron-scheduled follow-ups and a real-time dashboard over Socket.IO",
-        "Local inference engine on FastAPI + Transformers as an alternative to the hosted model"
-      ]
-    },
-
-    /* ------------------------------------------------- Flight software */
-    {
-      id: "antidrone",
-      title: "AntiDroneSystem",
-      tagline: "Secure drone command and control: an encrypted, forward-secret radio link, GPS-spoofing resilience and GPS-denied navigation.",
-      domain: "flight", status: "dev",
-      stack: ["C++ / Qt 6", "QML", "Python", "OpenCV", "PlatformIO", "Kotlin", "MAVLink"],
-      platforms: ["Windows", "Linux", "Jetson", "Arduino Portenta", "Android"],
-      summary: "A defensive stack that makes a friendly drone resistant to spoofing and jamming, and lets it fly home when GPS is lost. It has five parts: a Qt 6 ground station, an encryption gateway between the radio and the ground software, a Jetson companion computer running sensor fusion, Portenta firmware, and an Android key app. A written wire protocol defines how they talk.",
-      highlights: [
-        "AH-COMMAND: a Qt 6 / QML ground station built to replace Mission Planner",
-        "gcs-gateway: AES-256-GCM with ephemeral ECDH keys between the RFD900x radio and the ground station",
-        "Hybrid multi-sensor fusion EKF for GPS-denied navigation, day and night, on a Jetson companion",
-        "Portenta firmware (PlatformIO) and an Android hardware-key app",
-        "Written wire-protocol specification and CI workflows"
-      ],
-      metrics: [["AES-256", "GCM with ECDH forward secrecy"], ["EKF", "for GPS-denied navigation"], ["5", "components working together"]],
-      featured: true, motif: "radar",
-      layers: ["link", "gcs"]
-    },
-    {
-      id: "abdusky", short: "AbduSky",
-      title: "AbduSky UAV Ecosystem",
-      tagline: "Drone, antenna tracker and ground station designed as one system: flight firmware, ROS 2 autonomy and an encrypted link.",
-      domain: "flight", status: "dev",
-      stack: ["C / C++17", "FreeRTOS", "ROS 2", "Python", "Qt 6 / QML", "STM32"],
-      platforms: ["STM32H743", "Jetson Orin Nano", "Raspberry Pi 5"],
-      summary: "Three connected projects: AbduAir (the drone), AbduTracker (an antenna-tracking hub) and AbduStation (the ground station). The drone runs its own flight firmware on an STM32H743, plus a Jetson companion running ROS 2 for detection, following, obstacle avoidance and precision landing.",
-      highlights: [
-        "AbduFlight firmware on FreeRTOS: IMU at 1 kHz, PID at 400 Hz, navigation at 50 Hz",
-        "10 sensor drivers, including ICM-42688, BMI088, MS5611, dual u-blox GPS, CRSF and DShot",
-        "12 ROS 2 packages: AI detection, follow, mission AI, obstacle avoidance, optical flow and precision landing",
-        "AbduLink v2 protocol: AES-256-GCM with Curve25519 ECDH and 52 message types",
-        "20 flight modes, SITL, a bootloader and 126 unit tests"
-      ],
-      layers: ["fw", "link"]
-    },
-    {
-      id: "freefall",
-      title: "CorePilot FreeFall",
-      tagline: "ArduCopter firmware that detects a fall, arms itself, levels the airframe and recovers. Made for drop launches and as a safety net.",
-      domain: "flight", status: "build",
-      stack: ["C++", "ArduPilot", "ChibiOS", "SITL"],
-      platforms: ["Cube Orange / Orange+ / Black", "Pixhawk 6C", "CUAV X25 EVO / MEGA"],
-      summary: "A custom ArduCopter 4.7.2 build that watches the descent rate in every mode, armed or not. When it detects a fall it can arm the vehicle, switch to a new FREEFALL flight mode, hold the airframe level, stop the descent after a set delay, and then rejoin the mission or switch to a mode you choose.",
-      highlights: [
-        "New flight mode (29) with its own CPFF_ parameter group and RC option",
-        "Drop launch from a carrier aircraft, a balloon or by hand",
-        "Optional flight back towards the mission before handing over to AUTO",
-        "Builds for 6 flight controllers and passes 6 automated SITL tests",
-        "14-page user manual with safety procedures"
-      ],
-      layers: ["fw"]
-    },
-    {
-      id: "switchblade",
-      title: "CorePilot SwitchBlade",
-      tagline: "ArduPlane firmware for folding-wing aircraft that deploys the wings automatically at launch or in flight.",
-      domain: "flight", status: "build",
-      stack: ["C++", "ArduPilot", "ArduPlane 4.7.2"],
-      platforms: ["CUAV X25-EVO"],
-      summary: "Firmware that controls wing deployment for folding-wing aircraft. Deployment runs as a state machine triggered by an RC switch, a catapult launch or measured velocity. It adds level assist while the wings unfold, plus throttle hold and auto takeoff.",
-      highlights: [
-        "CPSB_ parameter group, three new servo output functions and an RC option",
-        "Triggers: RC switch, catapult or bungee launch, and in-flight velocity",
-        "Level-assist control law with a tuning procedure",
-        "Full manual covering installation, bench tests and operating procedures"
-      ],
-      layers: ["fw"]
-    },
-    {
-      id: "efi-zk",
-      title: "EFI ZK Driver",
-      tagline: "ArduPilot Lua driver that brings telemetry from ZK-protocol engine ECUs into the autopilot, read-only by design.",
-      domain: "flight", status: "build",
-      stack: ["Lua", "ArduPilot scripting", "Python"],
-      summary: "A scripting EFI driver for engine control units that speak ZK protocol V1.2 over a UART. It parses the ECU's status packets and feeds them to ArduPilot's EFI library, so engine data shows up in the ground station and in the logs. It never sends throttle or start commands.",
-      highlights: [
-        "Telemetry only: the one thing it can transmit is the protocol's idle command, and only when that is enabled",
-        "Serial sniffer tool that finds the ECU's baud rate",
-        "Python unit tests for the packet parser"
-      ],
-      layers: ["fw"]
-    },
-    {
-      id: "dead-reckoning", short: "Dead Reckoning",
-      title: "Mission-aware Dead Reckoning",
-      tagline: "Lua script that keeps a multicopter flying its mission on an estimated position when GPS or the EKF fails.",
-      domain: "flight", status: "build",
-      stack: ["Lua", "ArduCopter 4.5+"],
-      summary: "Monitors GPS quality and the EKF failsafe. When either one degrades far from home in a protected mode, the script takes over in Guided_NoGPS and flies on an open-loop position estimate built from the last known velocity, heading and wind. It either returns home or continues through the remaining AUTO waypoints.",
-      highlights: [
-        "Two behaviours: fly straight home, or continue the mission on the estimate",
-        "Syncs the mission index back when GPS or the EKF recovers",
-        "Wind-aware estimate built from the last known state"
-      ],
-      layers: ["fw"]
-    },
-    {
-      id: "dronecontroller",
-      title: "DroneController",
-      tagline: "One server for controlling Pixhawk and DJI drones from desktop and Android, with telemetry fan-out over MQTT.",
-      domain: "flight", status: "dev",
-      stack: ["Python", "MAVSDK", "MQTT", "FastAPI", "React", "Electron", "Capacitor"],
-      summary: "A three-tier, multi-vehicle control system. Agents on the drone side talk to the hardware (Pixhawk over MAVLink, DJI through Android). An MQTT broker with a FastAPI service relays telemetry and commands. A single React control app runs on desktop (Electron) and Android (Capacitor).",
-      highlights: [
-        "Pixhawk and DJI drones behind one protocol",
-        "Each drone's data fans out to many control apps at once",
-        "Missions, parameters and full control from a desktop or a phone, on Leaflet maps",
-        "One-click launcher for the server"
-      ],
-      layers: ["gcs"]
-    },
-    {
-      id: "dronehud",
-      title: "Drone HUD",
-      tagline: "Glass-cockpit flight display in a single HTML file: attitude, tapes, compass and a mini-map.",
-      domain: "flight", status: "dev",
-      stack: ["HTML", "CSS", "JavaScript"],
-      summary: "A lightweight heads-up display for drone telemetry that runs in any browser: artificial horizon, speed and altitude tapes, heading, battery and a mini-map with a home marker.",
-      highlights: [
-        "No dependencies, just one file",
-        "Attitude, tapes, heading, battery and a mini-map with home position"
-      ],
-      layers: ["gcs"]
-    },
-    {
-      id: "stream-analyzer", short: "Stream Analyzer",
-      title: "CorePilot Stream Analyzer",
-      tagline: "Desktop ArduPilot log analyzer with GPU plotting, a 3D globe replay and live telemetry.",
-      domain: "flight", status: "live",
-      stack: ["Electron", "Python", "pymavlink", "Plotly", "CesiumJS", "Leaflet"],
-      platforms: ["Windows"],
-      summary: "Opens DataFlash .bin and .log files and MAVLink .tlog files. You can plot any field, browse every message, replay the flight on a 3D globe with a live HUD, and read parameters with full descriptions, all offline. It can also connect to a live vehicle.",
-      highlights: [
-        "GPU-accelerated plots with many traces and split Y-axes",
-        "3D flight replay on a CesiumJS globe with bundled offline imagery, plus optional satellite imagery",
-        "Parameter view in the style of Mission Planner, with units, ranges and descriptions from ArduPilot metadata",
-        "Flight-mode timeline, messages by severity and an overview of the flight",
-        "Live telemetry, MAVFTP and a SITL manager. The backend is compiled to native modules to protect the code"
-      ],
-      layers: ["analysis"]
-    },
-    {
-      id: "one-pager",
-      title: "CorePilot 1P Report",
-      tagline: "Turns an ArduPilot flight log into a one-page A4 report for every flight, as PDF or PNG at 300 DPI.",
-      domain: "flight", status: "live",
-      stack: ["C++", "Qt 6 / QML", "CMake"],
-      platforms: ["Windows"],
-      summary: "Import a DataFlash, telemetry or raw MAVLink log and get a print-ready one-page report for each flight. Works for multicopters, fixed wings and VTOL QuadPlanes.",
-      highlights: [
-        "Reads .bin, .log, .tlog and .rlog",
-        "One A4 page per flight, exported to PDF and PNG at 300 DPI",
-        "Hardened build: stack protector, FORTIFY_SOURCE, high-entropy ASLR, DEP, and a stripped, deterministic binary",
-        "Self-contained install that includes every Qt runtime piece it needs"
-      ],
-      layers: ["analysis"]
-    },
-    {
-      id: "aerorecords",
-      title: "AeroRecords",
-      tagline: "Encrypted build and flight records for a drone fleet. Attach a telemetry log and it fills itself in.",
-      domain: "flight", status: "live",
-      stack: ["Python", "PySide6", "pymavlink", "AES-256-GCM"],
-      platforms: ["Windows"],
-      summary: "Every drone, with its hardware, tests, photos, videos and logs, lives in one password-protected .aerodb file encrypted with AES-256-GCM. Add a .tlog and the app extracts the Pixhawk serial, firmware, GPS, frame type and flight statistics, without overwriting anything typed by hand.",
-      highlights: [
-        "Gallery of drones with cover photos and status badges",
-        "Without the right password there is no access, enforced by the encryption",
-        "Auto-fill from MAVLink logs: board, UID, firmware, GPS fix, maximum altitude and speed, and home location",
-        "Generated user-manual PDF"
-      ],
-      layers: ["analysis"]
-    },
-    {
-      id: "aerocalculator",
-      title: "AeroCalculator",
-      tagline: "Aircraft design studio on a phone: planes, multirotors and helicopters with 3D, polars and STL / DXF / GLB export.",
-      domain: "flight", status: "build",
-      stack: ["Flutter", "Dart", "3D rendering"],
-      platforms: ["Android"],
-      summary: "Design fixed-wing aircraft, multirotors and helicopters, see them in 3D, get aerodynamic estimates and export them for CAD or 3D printing. It also has a flight log analyzer and an offline encyclopedia of more than 1,200 articles. Everything works offline from one APK.",
-      highlights: [
-        "14 aircraft layouts, from trainer and glider to delta-canard, double-delta, forward-swept and joined-wing",
-        "12 multirotor frames and 5 helicopter types, with propulsion suggestions",
-        "Cl-α and Cd-Cl polars, V-n envelope and performance estimates",
-        "Exports PDF, STL, DXF and GLB, and compares two designs side by side",
-        "Flight log analyzer for .tlog and DataFlash .bin, with PDF export"
-      ],
-      layers: ["design"]
-    },
-    {
-      id: "aerodex",
-      title: "CorePilot Aerodex",
-      tagline: "Offline Android library of drone parts, with specs, photos, manuals and pinouts, built by a Python data pipeline.",
-      domain: "flight", status: "build",
-      stack: ["Kotlin", "Jetpack Compose", "Python"],
-      platforms: ["Android"],
-      summary: "Flight controllers, ESCs, motors, radios, VTX, cameras, batteries, engines, ECUs and complete drones, with photos, specifications, manuals and wiring diagrams stored on the phone. A pipeline collects data from manufacturer and retailer stores, cleans it and packages it into content packs.",
-      highlights: [
-        "Data from 18+ manufacturer stores and 8 retailer catalogues",
-        "Offline HTML spec pages and linked PDF manuals",
-        "Content ships as .adx packs; launcher icons and splash are generated from the source logos",
-        "Jetpack Compose interface"
-      ],
-      layers: ["design"]
-    },
-
-    /* --------------------------------------------------------- Hardware */
-    {
-      id: "fc",
-      title: "CorePilot FC",
-      tagline: "Flight-controller carrier board: an STM32H743 running ArduPilot next to a Radxa CM5 for video and AI.",
-      domain: "hardware", status: "design", statusText: "Ready for fab",
-      stack: ["KiCad 10", "Python", "ArduPilot", "STM32H743", "RK3588S2"],
-      summary: "One board, two processors. The STM32H743 runs ArduPilot, and the Radxa CM5 runs Linux for video encoding, object detection and tracking. They talk MAVLink2 over an on-board UART. Each side has its own 5 V regulator, so the flight controller keeps flying if the computer crashes or reboots.",
-      highlights: [
-        "Schematic: 6 sheets, 254 parts, 211 nets, with 0 KiCad ERC violations",
-        "150 × 80 mm board, 6 layers, all parts on the top side",
-        "Routed by the project's own autorouter: 404 nets, 5,432 track segments, 786 vias, with 0 DRC errors",
-        "ArduPilot board definition with 16 PWM outputs; the bootloader and ArduCopter build for it",
-        "Gerbers, drill files, pick-and-place, a STEP / GLB 3D model and a generated, printable enclosure"
-      ],
-      metrics: [["6-layer", "150 × 80 mm board"], ["404", "nets routed by its own autorouter"], ["0", "DRC errors"]],
-      featured: true, motif: "pcb",
-      layers: ["hw"]
-    },
-    {
-      id: "antenna-tracker", short: "AntennaTracker",
-      title: "CorePilot AntennaTracker",
-      tagline: "The ground end of the drone link on one board: tracks the aircraft, routes MAVLink and serves video over Wi-Fi.",
-      domain: "hardware", status: "design", statusText: "Schematic complete",
-      stack: ["KiCad 10", "STM32H743", "Radxa CM5", "Python"],
-      summary: "A ground-station app on a tablet runs everything over the tracker's Wi-Fi: video, drone and tracker settings, and flying with on-screen sticks. The board reads the drone's position out of the link, keeps a directional antenna pointed at it with pan and tilt steppers, and re-streams the data to Wi-Fi and Ethernet clients.",
-      highlights: [
-        "Radxa CM5: Wi-Fi access point, video server, MAVLink router and Gigabit Ethernet",
-        "STM32H743: position, heading, two stepper drivers, and RC (S.Bus / PPM) with fail-safe",
-        "Schematic: 7 sheets, 512 parts, 349 nets, with 0 ERC violations",
-        "Pin allocation checked against ArduPilot's alternate-function table; BOM with 52 verified part numbers"
-      ],
-      layers: ["hw", "link"]
-    },
-    {
-      id: "ubec",
-      title: "CorePilot UBEC",
-      tagline: "Dual-input 6S–18S power converter with seven 10 A outputs and hardware failover that never drops the outputs.",
-      domain: "hardware", status: "design", statusText: "Schematic stage",
-      stack: ["KiCad 10", "Python", "C11"],
-      summary: "A main and a backup battery input. The backup stays idle until the main fails, and the switch happens in hardware without interrupting the 5, 6, 7, 8, 12, 16 and 24 V outputs. The schematic is generated from Python and checked in KiCad.",
-      highlights: [
-        "A calculation script produces every component value",
-        "Python schematic generator with netlist comparison and ERC",
-        "Portable C11 supervisor firmware, with host tests against a model of the hardware"
-      ],
-      layers: ["hw"]
-    },
-
-    /* ---------------------------------------------------------- Desktop */
     {
       id: "browser",
       title: "CorePilot Browser",
-      tagline: "Private, all-in-one desktop browser in C++20 on Qt WebEngine, with a download manager that handles almost anything.",
-      domain: "desktop", status: "dev",
+      tagline: "Privacy-focused desktop browser in C++20 on Qt WebEngine, with a built-in download manager.",
+      domain: "apps",
+      status: "dev",
       stack: ["C++20", "Qt 6", "Qt WebEngine", "yt-dlp", "FFmpeg"],
       platforms: ["Windows", "Linux"],
       summary: "A Chromium-based browser written in C++20, with ad and tracker blocking, HTTPS-First, encrypted DNS and private windows. Its download manager handles files, video and audio from 1000+ sites, plus torrents and magnet links. When the engine can't play a video codec, CorePilot Player streams the video through a local media gateway instead.",
@@ -429,58 +100,14 @@ window.PORTFOLIO = {
         "Successor to the Electron-based Nova browser, with a roadmap tracking feature parity"
       ],
       metrics: [["C++20", "on Chromium through Qt"], ["1000+", "sites supported for media downloads"], ["Tor", "route per window"]],
-      featured: true, motif: "browser"
-    },
-    {
-      id: "secured-browser",
-      title: "CorePilot Secured Browser",
-      tagline: "One C++ / Qt 6 code base for a secured browser on Windows, Linux, macOS and Android, with a hand-drawn interface.",
-      domain: "desktop", status: "build",
-      stack: ["C++", "Qt 6", "QPainter", "CMake"],
-      platforms: ["Windows", "Linux", "macOS", "Android"],
-      summary: "Every pixel of the interface is drawn with QPainter, so the browser looks the same on every platform. Its design system is based on elevation, and the accent colour has one meaning only: this browser is protecting you.",
-      highlights: [
-        "Attached-card tab strip and a pill-shaped address bar with a fixed security slot",
-        "Shield icon with a live count of blocked items",
-        "Dark and light themes with a live preview",
-        "Self-test harness and an Android build"
-      ]
-    },
-    {
-      id: "nova",
-      title: "Nova Browser",
-      tagline: "Glassmorphism Electron browser with a built-in VPN, ad blocker, password manager and download manager.",
-      domain: "desktop", status: "live",
-      stack: ["Electron", "JavaScript", "Tor"],
-      platforms: ["Windows", "Android"],
-      summary: "A frameless, translucent browser with everything built in: a free proxy VPN you pick by country, network-level ad and tracker blocking, a password manager encrypted with the OS keychain, incognito windows and Safe Browsing.",
-      highlights: [
-        "Free VPN: pick a country and it finds a working server",
-        "Password manager encrypted with the OS keychain (safeStorage)",
-        "Reader mode, session restore and per-site permissions",
-        "Installs together with CorePilot Download Manager, with auto-updates"
-      ]
-    },
-    {
-      id: "download-manager",
-      title: "CorePilot Download Manager",
-      tagline: "Downloads almost anything from almost anywhere (1800+ sites, torrents and streams), with a browser extension.",
-      domain: "desktop", status: "build",
-      stack: ["Electron", "React", "TypeScript", "yt-dlp", "aria2", "FFmpeg"],
-      platforms: ["Windows", "Chrome / Edge / Firefox"],
-      summary: "A desktop download manager powered by yt-dlp, aria2 and ffmpeg, plus an MV3 extension for Chromium browsers and Firefox. Paste any link and it works out what kind of download it is.",
-      highlights: [
-        "Quality picker, audio extraction with cover art, and trimming to a time range",
-        "Playlists and channels expand into one task per item",
-        "Concurrent queue, speed limit, pause, resume and retry",
-        "Clipboard watch and automatic sorting into categories"
-      ]
+      featured: true
     },
     {
       id: "torrent",
       title: "CorePilot Torrent",
       tagline: "Fast BitTorrent client for Windows with a clean interface in the style of uTorrent.",
-      domain: "desktop", status: "live",
+      domain: "apps",
+      status: "live",
       stack: ["Electron", "React", "TypeScript", "WebTorrent"],
       platforms: ["Windows"],
       summary: "The torrent engine runs in the main process behind a single, swappable module. The React UI talks to it over typed IPC and receives a snapshot of the stats every second.",
@@ -491,126 +118,14 @@ window.PORTFOLIO = {
       ]
     },
     {
-      id: "player",
-      title: "CorePilot Media Player",
-      tagline: "Media player in the style of VLC, built on mpv with a modern React interface.",
-      domain: "desktop", status: "build",
-      stack: ["Electron", "React", "TypeScript", "mpv", "Tailwind"],
-      platforms: ["Windows"],
-      summary: "A full-featured media player that uses mpv for playback, with a React + Tailwind interface and an experimental native Qt / QML front end.",
-      highlights: [
-        "mpv playback engine for wide codec support",
-        "Zustand state and a Tailwind interface",
-        "Experimental Qt / QML front end"
-      ]
-    },
-    {
-      id: "news",
-      title: "CorePilot News",
-      tagline: "World news from 100+ sources in one desktop app, with an in-app reader and read-aloud in Urdu and English.",
-      domain: "desktop", status: "live",
-      stack: ["Electron", "Node.js", "Express", "Readability", "DOMPurify"],
-      platforms: ["Windows"],
-      summary: "Reads public RSS feeds, with no API key, across 18 categories and regions. Opening a story shows the full article inside the app, loaded through a hidden browser window and shown in a sanitised reader view.",
-      highlights: [
-        "100+ sources, including BBC, Al Jazeera, the Guardian, DW and Dawn",
-        "Dedicated Urdu news category",
-        "Text-to-speech that detects Urdu or English",
-        "Search across every source, and bookmarks"
-      ]
-    },
-    {
-      id: "tv",
-      title: "CorePilot TV",
-      tagline: "Watch 10,800+ free TV channels from 175 countries in a glassy HD desktop app.",
-      domain: "desktop", status: "live",
-      stack: ["Electron", "React", "Vite", "Tailwind", "hls.js"],
-      platforms: ["Windows"],
-      summary: "Merges the public IPTV-org catalogue with logos, flags and categories, and plays HLS streams with the right headers for each stream, so far more channels actually work.",
-      highlights: [
-        "Browse 175 countries and 29 categories",
-        "Falls back to other sources when one fails, and shows the stream quality",
-        "Import your own M3U / M3U8 playlists",
-        "Cached catalogue for browsing offline"
-      ]
-    },
-    {
-      id: "designsuite",
-      title: "DesignSuite",
-      tagline: "Creative-suite prototype: a vector editor, a keyframe motion editor and a video timeline on one shared core.",
-      domain: "desktop", status: "dev",
-      stack: ["React", "TypeScript", "Vite", "Electron"],
-      summary: "Three apps on one foundation: VectorStudio for shapes and layers with SVG and PNG export, MotionStudio with timeline keyframes and interpolation, and VideoStudio with clip import, trimming and scrubbing.",
-      highlights: [
-        "Shared model for types and keyframe sampling",
-        "Runs in the browser or as a desktop app",
-        "SVG and PNG export"
-      ]
-    },
-    {
-      id: "secchecker",
-      title: "SecChecker",
-      tagline: "Windows security scanner with a WPF dashboard: processes, persistence, network, accounts and remote-access tools.",
-      domain: "desktop", status: "live",
-      stack: ["PowerShell", "WPF", "C#"],
-      platforms: ["Windows"],
-      summary: "Audits a Windows machine in one pass: Defender and antivirus state, unsigned non-Microsoft processes, external connections and open ports, persistence entries, accounts and logons, firewall rules, remote-access tools and recently changed executables.",
-      highlights: [
-        "GUI dashboard or command line",
-        "Text and JSON reports for automation",
-        "Flags remote-access tools such as AnyDesk, TeamViewer and RustDesk"
-      ]
-    },
-    {
-      id: "presentation",
-      title: "Presentation Builder",
-      tagline: "Build a modern PowerPoint step by step, with text, images and video and a live preview, exported as .pptx.",
-      domain: "desktop", status: "build",
-      stack: ["Python", "python-pptx", "CustomTkinter", "Flask"],
-      platforms: ["Windows", "Web"],
-      summary: "A desktop app and a web app share one engine and one project file. Pick a theme, add slides, check the live preview and export a real .pptx.",
-      highlights: [
-        "Four themes: Minimal, Dark, Corporate and Vibrant",
-        "Drag-and-drop media, and slides you can reorder or duplicate",
-        "Desktop app and browser version"
-      ]
-    },
-    {
-      id: "abduos",
-      title: "AbduOS",
-      tagline: "Custom Linux distribution based on Ubuntu 24.04, with its own GNOME theme, login screen and boot animation.",
-      domain: "desktop", status: "dev",
-      stack: ["Linux", "Bash", "GNOME", "Plymouth"],
-      summary: "A branded amd64 distribution built from Ubuntu 24.04 LTS by a single build script. It has a dark purple and cyan GNOME theme, GDM3 login branding, a Plymouth boot splash and custom SVG artwork.",
-      highlights: [
-        "ISO built by one script",
-        "Branded GDM3 login and Plymouth boot splash",
-        "Curated default apps"
-      ]
-    },
-    {
-      id: "silsila",
-      title: "Silsila-e-Lakhvi",
-      tagline: "Family-tree (Shajra-e-Nasb) platform: a Qt desktop app, a C++ server and a Flutter mobile app.",
-      domain: "desktop", status: "dev",
-      stack: ["C++", "Qt / QML", "Flutter", "SQL"],
-      summary: "Records and displays a family's lineage across generations, with a desktop editor, a server and a mobile app for family members.",
-      highlights: [
-        "Desktop editor in Qt / QML",
-        "C++ server with SQL storage",
-        "Flutter mobile app"
-      ]
-    },
-
-    /* ----------------------------------------------------------- Mobile */
-    {
       id: "zikrify",
       title: "Zikrify: Azkar-ul-Muslim",
       tagline: "Azkar, the Quran with 7 offline tafsirs, prayer times, Qibla and 8,500+ books. Free, with no ads and no account.",
-      domain: "mobile", status: "live",
+      domain: "apps",
+      status: "live",
       stack: ["Flutter", "Dart", "Gemma (fine-tuned)", "llama.cpp", "LiteRT"],
       platforms: ["Android", "Windows", "Linux"],
-      summary: "A calm, complete Islamic app in English, Urdu and Arabic. It has daily azkar with reminders and streaks, the full Quran in Uthmani script with translations and seven built-in tafsirs, accurate prayer times with ten azan recordings, Qibla, tasbih and a large library. A fine-tuned Gemma model is being brought onto the device through LiteRT, with llama.cpp built for Android.",
+      summary: "An Islamic app in English, Urdu and Arabic. It has daily azkar with reminders and streaks, the full Quran in Uthmani script with translations and seven built-in tafsirs, accurate prayer times with ten azan recordings, Qibla, tasbih and a large library. A fine-tuned Gemma model is being brought onto the device through LiteRT, with llama.cpp built for Android.",
       highlights: [
         "87+ morning, evening and sleep azkar with Urdu and English translations, reminders, goals and streaks",
         "Full Quran styled like a printed mushaf, with Urdu and English under every ayah, 7 offline tafsirs and search in three languages",
@@ -619,14 +134,964 @@ window.PORTFOLIO = {
         "Google Play listing in English, Urdu and Arabic; 31 release builds so far"
       ],
       metrics: [["8,500+", "Islamic books in the library"], ["7", "tafsirs that work offline"], ["31", "release builds"]],
-      featured: true, motif: "geo",
+      featured: true,
       link: { href: "https://github.com/abduhifz-dev/zikrify-privacy-policy", label: "Privacy policy on GitHub" }
+    },
+
+    /* ------ Planned (shown in All projects with the label "Planned") ------ */
+    {
+      id: "vault",
+      title: "CorePilot Vault: Private Knowledge Assistant",
+      tagline: "Ask questions across a company's documents and get answers with citations, without data leaving the company network.",
+      domain: "ai",
+      status: "planned",
+      stack: ["Python", "FastAPI", "PostgreSQL + pgvector", "vLLM / llama.cpp", "React"],
+      platforms: ["On-premise", "Private cloud"],
+      summary: "A retrieval-augmented assistant for teams. It will index documents from file shares, SharePoint and Google Drive, respect each user's access rights, and answer with links to the exact source passages. It is designed to run on the customer's own servers with local models.",
+      highlights: [
+        "Connectors for file shares, SharePoint, Google Drive and Confluence",
+        "Permission-aware search: users only see answers from documents they can open",
+        "Every answer cites its sources at paragraph level",
+        "SSO (SAML / OIDC), role-based access and a full audit log"
+      ]
+    },
+    {
+      id: "gateway",
+      title: "CorePilot Gateway: LLM Gateway & Cost Control",
+      tagline: "One API in front of every AI model a company uses, with routing, budgets, caching and audit logs.",
+      domain: "ai",
+      status: "planned",
+      stack: ["Go", "Redis", "PostgreSQL", "OpenTelemetry"],
+      platforms: ["Docker", "Kubernetes"],
+      summary: "A self-hosted gateway that will sit between applications and model providers (OpenAI, Anthropic, Mistral and local models). Teams get one key and one API, while the company controls cost, access and data handling in one place.",
+      highlights: [
+        "OpenAI-compatible API with routing and automatic failover between providers",
+        "Budgets, quotas and rate limits per team and per key",
+        "Response caching and PII redaction before requests leave the network",
+        "Usage dashboards and an exportable audit trail"
+      ]
+    },
+    {
+      id: "observe",
+      title: "CorePilot Observe: LLM Observability & Evaluation",
+      tagline: "Tracing, cost tracking and automated quality checks for AI features in production.",
+      domain: "ai",
+      status: "planned",
+      stack: ["TypeScript", "ClickHouse", "OpenTelemetry", "React"],
+      platforms: ["Cloud", "Self-hosted"],
+      summary: "Developer tooling that will record every prompt, tool call and model response in an AI application, so teams can debug failures, track cost and latency, and catch quality regressions before release.",
+      highlights: [
+        "Step-by-step traces of agent runs and tool calls",
+        "Latency, token and cost dashboards per feature and per customer",
+        "Evaluation suites that run in CI and block releases that score worse",
+        "SDKs for Python, TypeScript and C++"
+      ]
+    },
+    {
+      id: "agents",
+      title: "CorePilot Agents: Enterprise Agent Platform",
+      tagline: "Build, run and supervise tool-using AI agents for business processes, with approvals at every risky step.",
+      domain: "ai",
+      status: "planned",
+      stack: ["Python", "MCP", "Docker", "PostgreSQL", "React"],
+      platforms: ["On-premise", "Cloud"],
+      summary: "Takes the agent harness behind CorePilot Coder to business workflows. Teams will define agents with tools and permissions, run them in sandboxes, and approve sensitive actions such as sending email or changing records.",
+      highlights: [
+        "Tool connectors through MCP: email, CRM, databases, file storage",
+        "Sandboxed execution with human approval for sensitive actions",
+        "Versioned agent definitions with test runs before deployment",
+        "Complete activity history for compliance"
+      ]
+    },
+    {
+      id: "forge",
+      title: "CorePilot Forge: Model Fine-tuning Studio",
+      tagline: "Prepare data, fine-tune, evaluate and ship small language models on your own GPUs, without writing training scripts.",
+      domain: "ai",
+      status: "planned",
+      stack: ["C++", "Qt 6 / QML", "PyTorch", "PEFT", "MLflow"],
+      platforms: ["Windows", "Linux"],
+      summary: "A desktop studio built on the training pipelines I use for my own models. It will guide a team from raw data to a deployable model, with every run tracked and comparable.",
+      highlights: [
+        "Dataset editor with validation, de-duplication and train/test splits",
+        "LoRA and QLoRA training with live loss and GPU memory charts",
+        "Side-by-side evaluation against the base model on held-out tests",
+        "Model registry with export to GGUF, ONNX and LiteRT"
+      ]
+    },
+    {
+      id: "docai",
+      title: "CorePilot DocAI: Intelligent Document Processing",
+      tagline: "Turns invoices, receipts, contracts and forms into structured data for ERP and accounting systems.",
+      domain: "ai",
+      status: "planned",
+      stack: ["Python", "OCR", "LayoutLM", "FastAPI", "React"],
+      platforms: ["Cloud API", "On-premise"],
+      summary: "A document pipeline that will classify incoming documents, extract the fields that matter and send clean data to systems such as SAP, Odoo or QuickBooks, with a review screen for low-confidence results.",
+      highlights: [
+        "Invoice, receipt, purchase order and ID card models, English and Urdu",
+        "Confidence scores with a human review queue",
+        "REST API, email inbox and folder-watch intake",
+        "Exports to ERP and accounting systems and to Excel"
+      ]
+    },
+    {
+      id: "review",
+      title: "CorePilot Review: AI Code Review",
+      tagline: "Automated pull-request reviews for GitHub and GitLab, focused on bugs, security and team rules.",
+      domain: "ai",
+      status: "planned",
+      stack: ["Go", "TypeScript", "GitHub Apps API", "LLM"],
+      platforms: ["GitHub", "GitLab", "Self-hosted"],
+      summary: "A review bot that will comment on pull requests with likely bugs, security issues and missing tests, following rules each team writes in plain language. It can run against local models for private code.",
+      highlights: [
+        "Inline comments with suggested fixes",
+        "Team rules in a simple config file in the repository",
+        "Secret and dependency vulnerability checks",
+        "Self-hosted mode for private code and local models"
+      ]
+    },
+    {
+      id: "meet",
+      title: "CorePilot Meet: Meeting Intelligence",
+      tagline: "Transcribes meetings in English and Urdu and turns them into decisions, action items and searchable notes.",
+      domain: "ai",
+      status: "planned",
+      stack: ["C++", "Qt 6", "whisper.cpp", "pyannote", "PostgreSQL"],
+      platforms: ["Windows", "macOS", "On-premise server"],
+      summary: "A desktop recorder and server that will transcribe meetings, separate speakers, write a short summary with decisions and owners, and push action items to Jira or Asana. Audio can stay on company hardware.",
+      highlights: [
+        "Transcription with speaker separation, English and Urdu",
+        "Summaries with decisions and action items",
+        "Jira, Asana and Microsoft Teams integration",
+        "Search across all past meetings"
+      ]
+    },
+    {
+      id: "speech-sdk",
+      title: "CorePilot Speech SDK for Urdu",
+      tagline: "Offline speech recognition and text-to-speech for Urdu and Roman Urdu, as an SDK for apps and devices.",
+      domain: "ai",
+      status: "planned",
+      stack: ["C++", "whisper.cpp", "ONNX Runtime", "Kotlin"],
+      platforms: ["Android", "Windows", "Linux"],
+      summary: "An SDK that will give developers accurate Urdu speech input and natural Urdu voice output without an internet connection, for call centres, kiosks, accessibility tools and in-car systems.",
+      highlights: [
+        "Speech recognition for Urdu, Roman Urdu and English",
+        "Natural Urdu text-to-speech",
+        "Runs fully offline on phones and PCs",
+        "C API with Kotlin and C# bindings"
+      ]
+    },
+    {
+      id: "nastaliq-ocr",
+      title: "CorePilot Nastaliq OCR",
+      tagline: "OCR engine for Urdu Nastaliq script, turning scanned books, newspapers and records into searchable text.",
+      domain: "ai",
+      status: "planned",
+      stack: ["Python", "PyTorch", "OpenCV", "ONNX Runtime"],
+      platforms: ["Windows", "Linux", "REST API"],
+      summary: "A recognition engine trained for Nastaliq, the script most Urdu print uses and most OCR tools handle poorly. It will process whole archives and produce searchable PDFs for libraries, publishers and government records.",
+      highlights: [
+        "Line and ligature recognition for Nastaliq and Naskh",
+        "Batch processing of scanned PDFs and images",
+        "Searchable PDF, Word and plain-text output",
+        "Desktop app and REST API"
+      ]
+    },
+    {
+      id: "translate",
+      title: "CorePilot Translate: Urdu Language API",
+      tagline: "Translation between Urdu and English and conversion between Roman Urdu and Urdu script, as a fast API.",
+      domain: "ai",
+      status: "planned",
+      stack: ["Python", "Transformers", "CTranslate2", "FastAPI"],
+      platforms: ["Cloud API", "On-premise"],
+      summary: "Language models tuned for Pakistani text that will translate Urdu and English and convert the many spellings of Roman Urdu into correct Urdu script, for apps, keyboards and customer-support tools.",
+      highlights: [
+        "Urdu ↔ English translation",
+        "Roman Urdu ↔ Urdu script conversion that handles spelling variants",
+        "Glossaries for brand and domain terms",
+        "Low-latency API with batch mode"
+      ]
+    },
+    {
+      id: "assist",
+      title: "CorePilot Assist: AI Customer Support",
+      tagline: "AI agents that answer customers on WhatsApp, Instagram, Messenger and web chat, and hand over to staff when needed.",
+      domain: "ai",
+      status: "planned",
+      stack: ["Node.js", "PostgreSQL", "Redis", "WhatsApp Cloud API", "React"],
+      platforms: ["Cloud", "On-premise"],
+      summary: "Builds on my agentic messaging work for Facebook and Instagram. It will answer common questions from the company's own knowledge, take orders and bookings, and pass conversations to agents with full context.",
+      highlights: [
+        "WhatsApp, Instagram, Messenger and website chat in one inbox",
+        "Answers in Urdu, Roman Urdu, English and Arabic from approved content",
+        "Human handover, assignment rules and response-time targets",
+        "CRM integration and conversation analytics"
+      ]
+    },
+    {
+      id: "vision",
+      title: "CorePilot Vision: AI Video Analytics",
+      tagline: "Real-time analytics for existing CCTV cameras: people, vehicles, intrusion zones and alerts.",
+      domain: "ai",
+      status: "planned",
+      stack: ["C++", "TensorRT", "DeepStream", "ONNX Runtime", "React"],
+      platforms: ["Jetson edge box", "Windows", "Linux"],
+      summary: "Software for security teams that will connect to existing NVRs and IP cameras (Hikvision, Dahua and others), detect events on an edge device and send alerts with video clips, without moving video to the cloud.",
+      highlights: [
+        "Person, vehicle, loitering and intrusion detection",
+        "Works with existing RTSP and ONVIF cameras and NVRs",
+        "Alerts on mobile and web with event clips",
+        "Runs on an on-site edge appliance"
+      ]
+    },
+    {
+      id: "anpr",
+      title: "CorePilot ANPR: Number Plate Recognition",
+      tagline: "Automatic number plate recognition for gates, parking, housing societies and toll plazas.",
+      domain: "ai",
+      status: "planned",
+      stack: ["C++", "YOLO", "TensorRT", "PostgreSQL"],
+      platforms: ["Edge device", "Windows", "Linux"],
+      summary: "A plate detection and reading system trained on Pakistani plate formats, including Urdu text, that will control barriers and keep an entry and exit record with photos.",
+      highlights: [
+        "Trained on Pakistani plate formats",
+        "Barrier and access-control integration",
+        "Allow and block lists with instant alerts",
+        "Entry and exit reports with photo evidence"
+      ]
+    },
+    {
+      id: "attend",
+      title: "CorePilot Attend: Face Attendance & Access Control",
+      tagline: "Face recognition attendance with liveness detection for offices, factories and schools.",
+      domain: "ai",
+      status: "planned",
+      stack: ["C++", "Qt 6", "ONNX Runtime", "PostgreSQL"],
+      platforms: ["Windows kiosk", "Android tablet", "Server"],
+      summary: "Builds on face attendance I have already shipped in a school app. It will add liveness checks, multiple sites, shift rules and payroll exports, with all face data kept on company servers.",
+      highlights: [
+        "Face recognition with anti-spoofing liveness checks",
+        "Multiple sites, shifts and departments",
+        "Payroll and HR exports",
+        "Face data stays on company servers"
+      ]
+    },
+    {
+      id: "shield",
+      title: "CorePilot Shield: Phishing Detection SDK",
+      tagline: "Machine-learning detection of phishing and malicious websites for browsers and email gateways.",
+      domain: "ai",
+      status: "planned",
+      stack: ["Python", "LightGBM", "ONNX Runtime", "C++"],
+      platforms: ["C++ SDK", "REST API"],
+      summary: "A small, fast model that will score URLs and pages for phishing risk inside CorePilot Browser and in other products through an SDK, with a clear reason for every warning.",
+      highlights: [
+        "Decisions in milliseconds, on the device",
+        "Explains why a page was flagged",
+        "SDK for browsers and email gateways",
+        "Regular model updates"
+      ]
+    },
+    {
+      id: "soc-copilot",
+      title: "CorePilot SOC Copilot: Security Log Triage",
+      tagline: "AI-assisted triage of Windows, Sysmon and firewall logs, mapped to MITRE ATT&CK.",
+      domain: "ai",
+      status: "planned",
+      stack: ["Python", "OpenSearch", "Sigma rules", "LLM"],
+      platforms: ["On-premise"],
+      summary: "A tool for small security teams that will collect logs, group related events into incidents, map them to MITRE ATT&CK techniques and explain each incident in plain language with suggested next steps.",
+      highlights: [
+        "Ingests Windows Event Log, Sysmon, syslog and firewall logs",
+        "Correlates events into incidents with risk scores",
+        "MITRE ATT&CK mapping and plain-language explanations",
+        "Reports for management and auditors"
+      ]
+    },
+    {
+      id: "media-ai",
+      title: "CorePilot Media AI: Subtitles & Video Summaries",
+      tagline: "Automatic subtitles, translation and chapter summaries for video libraries.",
+      domain: "ai",
+      status: "planned",
+      stack: ["whisper.cpp", "FFmpeg", "LLM", "Electron"],
+      platforms: ["Windows", "Linux", "REST API"],
+      summary: "A batch tool for media teams and educators that will subtitle videos, translate them between Urdu and English, and create chapters and summaries for long recordings.",
+      highlights: [
+        "Subtitles from speech in English and Urdu",
+        "Translation with editable subtitle files (SRT, VTT)",
+        "Chapters and summaries with timestamps",
+        "Batch processing of whole folders"
+      ]
+    },
+    {
+      id: "browser-ai",
+      title: "CorePilot Browser AI",
+      tagline: "On-device AI assistant inside CorePilot Browser for summarising, translating and asking about pages.",
+      domain: "ai",
+      status: "planned",
+      stack: ["C++", "Qt WebEngine", "llama.cpp"],
+      platforms: ["Windows", "Linux"],
+      summary: "A sidebar for CorePilot Browser that will read the current page and summarise it, translate it or answer questions about it using a local model, with policies for company deployments.",
+      highlights: [
+        "Page summaries and questions about the open tab",
+        "Translation between Urdu and English",
+        "Local model: page content never leaves the device",
+        "Admin policies for company deployments"
+      ]
+    },
+    {
+      id: "mobile-agent",
+      title: "CorePilot Mobile Agent: Android Test Automation",
+      tagline: "Describe a test in plain language and an AI agent runs it on real Android devices.",
+      domain: "ai",
+      status: "planned",
+      stack: ["Kotlin", "UIAutomator", "Python", "LLM"],
+      platforms: ["Android", "Windows", "Linux"],
+      summary: "A QA tool that will turn plain-language test steps into actions on real devices, record evidence, and run the same tests on many phones at once.",
+      highlights: [
+        "Tests written in plain language, run on real devices",
+        "Screenshots and video for every step",
+        "Parallel runs across many phones",
+        "CI integration with JUnit-style reports"
+      ]
+    },
+    {
+      id: "edge-runtime",
+      title: "CorePilot Edge Runtime",
+      tagline: "Deploy, update and monitor AI models on Jetson, Android and Windows devices from one console.",
+      domain: "ai",
+      status: "planned",
+      stack: ["C++", "TensorRT", "ONNX Runtime", "LiteRT", "gRPC"],
+      platforms: ["Jetson", "Android", "Windows", "Linux"],
+      summary: "One runtime and management console for models running on devices in the field, from drones to CCTV boxes to phones. It will handle the right engine per device, over-the-air updates and health monitoring.",
+      highlights: [
+        "Single API over TensorRT, ONNX Runtime and LiteRT",
+        "Over-the-air model updates with rollback",
+        "Device health and inference metrics",
+        "Device groups and staged rollouts"
+      ]
+    },
+    {
+      id: "benchmark",
+      title: "CorePilot Benchmark: Local LLM Sizing",
+      tagline: "Measures speed, memory and answer quality of local models on a company's own hardware, before buying more.",
+      domain: "ai",
+      status: "planned",
+      stack: ["C++", "llama.cpp", "Qt Charts"],
+      platforms: ["Windows", "Linux"],
+      summary: "Runs standard tasks on several local models and hardware setups and reports which model and machine meet the team's speed and quality targets.",
+      highlights: [
+        "Tokens per second, latency and memory use",
+        "Quality tests with automatic scoring",
+        "Hardware sizing recommendations",
+        "Shareable PDF reports"
+      ]
+    },
+    {
+      id: "edu",
+      title: "CorePilot Edu: Urdu AI Tutor",
+      tagline: "A curriculum-aligned AI tutor that explains maths and science step by step in Urdu, with a teacher dashboard.",
+      domain: "ai",
+      status: "planned",
+      stack: ["Flutter", "LLM", "OCR", "PostgreSQL"],
+      platforms: ["Android", "Web"],
+      summary: "Students will photograph a question and get a step-by-step explanation in simple Urdu, aligned to Pakistani boards, while teachers see progress and weak topics for each class.",
+      highlights: [
+        "Photo of a question as input",
+        "Step-by-step explanations in Urdu and English",
+        "Teacher dashboard with class progress",
+        "Practice sets for each weak topic"
+      ]
+    },
+    {
+      id: "market-sentiment",
+      title: "CorePilot Market Sentiment",
+      tagline: "Real-time news sentiment for each currency, delivered as a signal API for trading systems.",
+      domain: "ai",
+      status: "planned",
+      stack: ["Python", "Transformers", "Kafka", "FastAPI"],
+      platforms: ["Cloud API"],
+      summary: "A service that will read financial news as it arrives, score sentiment and impact for each currency and expose the result to trading systems and MetaTrader 5 Expert Advisors, with history for backtesting.",
+      highlights: [
+        "Per-currency sentiment and impact scores",
+        "Low-latency streaming API",
+        "MetaTrader 5 connector",
+        "Historical data for backtesting"
+      ]
+    },
+    {
+      id: "zikrify-ask",
+      title: "Zikrify Ask: Source-Grounded Islamic Q&A",
+      tagline: "Answers questions about the Quran and duas only from the app's own verified sources, always with references.",
+      domain: "ai",
+      status: "planned",
+      stack: ["Gemma", "LiteRT", "RAG"],
+      platforms: ["Android", "On-device"],
+      summary: "An on-device question-answering feature for Zikrify that will answer only from the tafsirs and books already in the app and refuse anything outside them.",
+      highlights: [
+        "Every answer shows its reference",
+        "Runs on the phone, offline",
+        "Refuses questions outside its sources",
+        "Urdu, English and Arabic"
+      ]
+    },
+    {
+      id: "tajweed",
+      title: "Tajweed Coach",
+      tagline: "A tajweed assessment engine that gives rule-by-rule feedback on Quran recitation, with a teacher mode.",
+      domain: "ai",
+      status: "planned",
+      stack: ["PyTorch", "Audio models", "Flutter"],
+      platforms: ["Android", "iOS"],
+      summary: "Extends my Quran recitation checker with feedback on tajweed rules such as madd, ghunnah and qalqalah, and a mode for teachers to follow their students' practice.",
+      highlights: [
+        "Feedback on common tajweed rules",
+        "Highlights the exact word and rule",
+        "Teacher mode with student progress",
+        "Practice drills per rule"
+      ]
+    },
+    {
+      id: "fleet",
+      title: "CorePilot Fleet: Drone Fleet Management",
+      tagline: "One platform for a drone operation: aircraft, pilots, flight logs, maintenance and compliance.",
+      domain: "drone",
+      status: "planned",
+      stack: ["Go", "PostgreSQL + PostGIS", "React", "MAVLink"],
+      platforms: ["Cloud", "On-premise"],
+      summary: "Software for companies that run many drones. It will import logs automatically from the GCS, track flight hours and maintenance, manage pilot certificates and produce compliance reports.",
+      highlights: [
+        "Aircraft, battery and component life tracking",
+        "Automatic flight log import from CorePilot GCS",
+        "Pilot records, certificates and duty time",
+        "Maintenance schedules and compliance reports"
+      ]
+    },
+    {
+      id: "cloud-gcs",
+      title: "CorePilot Cloud GCS",
+      tagline: "Browser-based ground control with live video over 4G/5G, for operating drones beyond visual line of sight.",
+      domain: "drone",
+      status: "planned",
+      stack: ["TypeScript", "WebRTC", "Go", "MAVLink"],
+      platforms: ["Web", "Cloud", "On-premise"],
+      summary: "A web ground station that will connect to drones over cellular networks, so operators can monitor and control missions from a control room or another city, with several operators on one mission.",
+      highlights: [
+        "Live telemetry and low-latency video over 4G/5G",
+        "Multi-operator missions with roles",
+        "Encrypted links end to end",
+        "Recording and replay of every flight"
+      ]
+    },
+    {
+      id: "mission-ai",
+      title: "CorePilot Mission AI",
+      tagline: "Plans survey, inspection and corridor missions from a plain-language request and a map selection.",
+      domain: "drone",
+      status: "planned",
+      stack: ["Python", "LLM tool calling", "MAVLink"],
+      platforms: ["Windows", "Linux"],
+      summary: "An assistant inside CorePilot GCS that will turn a request such as \"survey this field at 60 m\" into a complete ArduPilot mission, check it against terrain and airspace rules, and upload it.",
+      highlights: [
+        "Survey, orbit, corridor and inspection patterns",
+        "Terrain, battery and airspace checks before upload",
+        "Explains every choice it made",
+        "Built into CorePilot GCS"
+      ]
+    },
+    {
+      id: "log-intel",
+      title: "CorePilot Log Intelligence",
+      tagline: "Automatic analysis of ArduPilot flight logs that finds problems and explains their likely cause.",
+      domain: "drone",
+      status: "planned",
+      stack: ["Python", "pymavlink", "scikit-learn"],
+      platforms: ["Windows", "Cloud"],
+      summary: "A model trained on many flight logs that will flag vibration, power, GPS and control issues at the exact moment they happen, and show fleet-wide trends when used with CorePilot Fleet.",
+      highlights: [
+        "Detects vibration, power, GPS and control anomalies",
+        "Likely cause in plain language",
+        "Fleet-wide trend reports",
+        "Reads DataFlash .bin and .log and MAVLink .tlog files"
+      ]
+    },
+    {
+      id: "tune",
+      title: "CorePilot Tune: AI-Assisted Tuning",
+      tagline: "Suggests PID and filter settings from a flight log and verifies the improvement on the next flight.",
+      domain: "drone",
+      status: "planned",
+      stack: ["Python", "Signal processing", "ML"],
+      platforms: ["Windows", "Linux"],
+      summary: "Analyses step responses and noise in a log and suggests specific parameter changes, then compares before and after so tuning becomes repeatable instead of trial and error.",
+      highlights: [
+        "Parameter suggestions with reasons",
+        "Before and after comparison",
+        "Copter, plane and VTOL",
+        "Exports a parameter file for Mission Planner or CorePilot GCS"
+      ]
+    },
+    {
+      id: "agrimap",
+      title: "CorePilot AgriMap: Precision Agriculture",
+      tagline: "Turns drone imagery into crop health maps and variable-rate spray plans.",
+      domain: "drone",
+      status: "planned",
+      stack: ["Python", "OpenCV", "PyTorch", "GDAL"],
+      platforms: ["Windows", "Cloud"],
+      summary: "Software for farms and agri-service companies that will stitch drone images, compute vegetation indices, find stressed areas with a model and produce prescription maps for spray drones.",
+      highlights: [
+        "Orthomosaic stitching and NDVI maps",
+        "Stress and disease zones detected by AI",
+        "Variable-rate prescription maps for sprayers",
+        "Field reports for farmers"
+      ]
+    },
+    {
+      id: "inspect",
+      title: "CorePilot Inspect: Infrastructure Inspection AI",
+      tagline: "Finds defects in solar farms, power lines and telecom towers from drone photos and thermal images.",
+      domain: "drone",
+      status: "planned",
+      stack: ["YOLO", "Thermal imaging", "Python", "PostgreSQL"],
+      platforms: ["Windows", "Cloud"],
+      summary: "An inspection workflow that will detect hotspots, cracks, corrosion and damaged insulators, place every defect on a map and track its repair status over time.",
+      highlights: [
+        "Thermal and RGB defect detection",
+        "GPS location and photo for every defect",
+        "Defect tracking across inspections",
+        "PDF reports for asset owners"
+      ]
+    },
+    {
+      id: "track",
+      title: "CorePilot Track: AI Gimbal Payload",
+      tagline: "Locks the camera gimbal on a selected object using onboard detection and tracking.",
+      domain: "drone",
+      status: "planned",
+      stack: ["C++", "TensorRT", "SimpleBGC"],
+      platforms: ["Jetson"],
+      summary: "Tap an object in the GCS video and the gimbal will follow it, using onboard detection and tracking on a Jetson companion computer.",
+      highlights: [
+        "Tap-to-track from the GCS video",
+        "Smooth gimbal control with prediction",
+        "Works with the onboard AI detection",
+        "Track status and target position in telemetry"
+      ]
+    },
+    {
+      id: "swarm",
+      title: "CorePilot Swarm",
+      tagline: "Coordinated flight of multiple drones with formation control and collision avoidance.",
+      domain: "drone",
+      status: "planned",
+      stack: ["C++", "ROS 2", "PyTorch", "SITL"],
+      platforms: ["Jetson", "Linux"],
+      summary: "Formation flying and deconfliction for drone teams, with policies trained in simulation and tested in ArduPilot SITL before real flights.",
+      highlights: [
+        "Formation changes on command",
+        "Collision avoidance between drones",
+        "Training and testing in ArduPilot SITL",
+        "Swarm view in CorePilot GCS"
+      ]
+    },
+    {
+      id: "sar",
+      title: "CorePilot SAR: Search & Rescue",
+      tagline: "Onboard person detection in thermal and colour video, with GPS-tagged alerts to the ground station.",
+      domain: "drone",
+      status: "planned",
+      stack: ["YOLO", "TensorRT", "MAVLink"],
+      platforms: ["Jetson", "Windows"],
+      summary: "A payload and software package for rescue teams that will detect people during search flights and mark each detection on the GCS map with a photo and coordinates.",
+      highlights: [
+        "Thermal and colour person detection",
+        "GPS-tagged alerts on the GCS map",
+        "Search pattern planning",
+        "Works at night"
+      ]
+    },
+    {
+      id: "gcs-copilot",
+      title: "CorePilot GCS Copilot",
+      tagline: "An assistant inside the ground station that explains warnings and failsafes from live telemetry.",
+      domain: "drone",
+      status: "planned",
+      stack: ["LLM", "Qt 6", "MAVLink"],
+      platforms: ["Windows", "Linux"],
+      summary: "Answers questions such as \"why did it switch to RTL?\" from live telemetry and logs, and explains pre-arm errors in plain language, so operators fix problems faster.",
+      highlights: [
+        "Explains warnings, pre-arm errors and failsafes",
+        "Answers from live telemetry and logs",
+        "Voice input during flight",
+        "Built into CorePilot GCS"
+      ]
+    },
+
+    /* ------ Hidden: real projects kept here but not shown on the site. Delete the hidden line to show one again ------ */
+    {
+      id: "omni",
+      images: [
+        {
+          src: "assets/img/omni-architecture.webp",
+          w: 1400,
+          h: 724,
+          alt: "CorePilot-Omni architecture: vision and audio encoders feeding Qwen3-0.6B"
+        }
+      ],
+      title: "CorePilot-Omni",
+      tagline: "A small multimodal agent model (images, video, audio and tools) trained on a 6 GB laptop GPU, with a 181-page course.",
+      domain: "ai",
+      status: "build",
+      stack: ["PyTorch", "Transformers", "PEFT / LoRA", "SigLIP2", "Whisper"],
+      platforms: ["RTX 4050 Laptop (6 GB)"],
+      summary: "A small agentic model that sees images and video, hears audio, reasons in a short think block and acts through a real agent harness. Qwen3-0.6B (LoRA r=64) is connected to a frozen SigLIP2 vision tower and a frozen Whisper-small encoder through two trained projectors: about 0.93B parameters, of which 48.8M are trained.",
+      highlights: [
+        "97.6% on 41 held-out text agent tasks with real tools. The base model scores 39.0% in the same harness",
+        "Agent harness: tool registry with automatic JSON schemas, sandboxed workspace, 11 built-in tools, JSON repair, a duplicate-call guard and human confirmation for dangerous tools",
+        "Held-out video tests: 79% on colour change, 77% on growth, 68% on ordering",
+        "Known weaknesses are published with the results: open speech recognition and counting",
+        "181-page course PDF in Roman Urdu with English technical terms"
+      ],
+      metrics: [["97.6%", "agent tasks (base model: 39.0%)"], ["6 GB", "of GPU memory used to train it"], ["181", "page course written alongside"]],
+      hidden: true
+    },
+    {
+      id: "agentic-course",
+      title: "CorePilot Agentic AI Course",
+      tagline: "A 181-page course in Roman Urdu that explains step by step how CorePilot-Omni was designed, trained and tested.",
+      domain: "ai",
+      status: "live",
+      stack: ["Python", "PyTorch", "ReportLab", "Matplotlib"],
+      summary: "Written alongside the CorePilot-Omni model. It walks through the whole build (data, architecture, training stages, the agent harness and the evaluation) using the real loss curves and results from the training runs. Roman Urdu with English technical terms.",
+      highlights: [
+        "181 pages, generated as a PDF from source",
+        "Figures made from the real training runs: loss curves, data mix and learning-rate schedule",
+        "Also covers what didn't work, such as speech recognition and counting"
+      ],
+      hidden: true
+    },
+    {
+      id: "intelligence",
+      title: "AbduIntelligence Systems",
+      tagline: "Multi-client LLM inference platform: a Qt server, a FastAPI model host and concurrent chat slots that share one copy of the weights.",
+      domain: "ai",
+      status: "dev",
+      stack: ["C++ / Qt", "FastAPI", "llama.cpp", "QML", "WebSockets", "SSE"],
+      platforms: ["Windows"],
+      summary: "A streaming inference stack. A Qt server owns every WebSocket client plus authentication, the database and plans. A FastAPI backend owns the model and streams each chat. The weights load once and are shared across N independent slots through llama.cpp's memory-mapped pages.",
+      highlights: [
+        "N chats stream at the same time from one copy of the weights",
+        "Runs GGUF models through llama.cpp, or Hugging Face safetensors with LoRA / PEFT adapters from training runs",
+        "Qt / QML desktop client connects to the server over WebSockets",
+        "Includes its own 10,000-example fine-tuning dataset"
+      ],
+      hidden: true
+    },
+    {
+      id: "imager",
+      title: "CorePilot AI Imager",
+      tagline: "Offline image, video and video-with-sound generation in a native C++20 / Qt 6 app.",
+      domain: "ai",
+      status: "build",
+      stack: ["C++20", "Qt 6 / QML", "stable-diffusion.cpp", "CUDA", "Vulkan"],
+      platforms: ["Windows"],
+      summary: "A desktop studio that generates and edits images with Qwen-Image, makes short clips with Wan 2.2, and makes clips with a matching soundtrack with MiniMax-H3. It is built on stable-diffusion.cpp and runs on CUDA, Vulkan or the CPU. Nothing leaves the machine; the only network access is the optional model download.",
+      highlights: [
+        "Generate from text, edit with up to 10 reference images, and output transparent RGBA",
+        "Video clips of 1–5 s, saved as H.264 MP4 with the system encoder, so no ffmpeg install is needed",
+        "Live denoising preview, a queue, ETA and cancel",
+        "Model manager detects the hardware, recommends variants, checks SHA-256 and resumes broken downloads",
+        "Searchable gallery, full metadata embedded in every PNG, and a headless CLI for scripting"
+      ],
+      hidden: true
+    },
+    {
+      id: "ayah",
+      title: "Ayah AI",
+      tagline: "Quran recitation checker that listens and colours every word: correct, wrong or missed, or a harakat mistake.",
+      domain: "ai",
+      status: "dev",
+      stack: ["Flutter", "Dart", "On-device Arabic STT"],
+      platforms: ["Android", "iOS"],
+      summary: "The user recites a surah and the app follows word by word. A word turns green when it is read correctly, red when it is wrong or skipped, and blue when the word is right but a zabar, zer or pesh is wrong. Speech recognition runs on the device.",
+      highlights: [
+        "Live, word-level feedback during recitation",
+        "Separate detection for harakat (vowel-mark) errors",
+        "Demo mode that simulates a recitation with injected mistakes",
+        "Starts with Surah Al-Fatiha"
+      ],
+      hidden: true
+    },
+    {
+      id: "social-agent",
+      title: "Agentic Social Inbox",
+      tagline: "AI agent that answers a business's Facebook and Instagram messages, with a live dashboard and a multilingual fine-tuning set.",
+      domain: "ai",
+      status: "build",
+      stack: ["Node.js", "Claude API", "React", "Socket.IO", "FastAPI", "Transformers"],
+      summary: "An agentic messaging backend that replies to customers on Facebook and Instagram, queues and schedules follow-ups, and streams activity to a React dashboard. Built for an aviation-tourism client.",
+      highlights: [
+        "Uses the Claude API to understand messages and write replies",
+        "Request queue and scheduled follow-ups with node-cron",
+        "Real-time React dashboard with charts over Socket.IO",
+        "Local inference engine on FastAPI + Transformers as an alternative to the hosted model"
+      ],
+      hidden: true
+    },
+    {
+      id: "pgc-bot",
+      title: "Multilingual Customer-Service Bot",
+      tagline: "Fine-tuning dataset and LoRA training pipeline for a customer-service chatbot in English, Urdu, Roman Urdu and Arabic.",
+      domain: "ai",
+      status: "build",
+      stack: ["Python", "Transformers", "LoRA / PEFT", "Qwen"],
+      summary: "Built for an aviation-tourism client: 883 conversations about bookings, courses and services in four languages, plus scripts that train a Qwen model with LoRA, merge the adapter and test the result.",
+      highlights: [
+        "883 examples: English, Urdu, Roman Urdu, Arabic, multi-turn dialogues and edge cases",
+        "Teaches the model to politely turn down off-topic questions",
+        "Never invents prices, dates or facts",
+        "Prompt-injection resistance built into the training data"
+      ],
+      hidden: true
+    },
+    {
+      id: "zikrify-ai",
+      title: "Zikrify AI Model",
+      tagline: "Gemma 4 E2B fine-tuned with LoRA for the Zikrify app, exported to run on phones with LiteRT and as GGUF for llama.cpp.",
+      domain: "ai",
+      status: "build",
+      stack: ["Python", "Gemma 4 E2B", "LoRA", "LiteRT", "llama.cpp"],
+      summary: "A one-click pipeline that installs everything, checks the base model, trains a LoRA for two epochs, merges it, compares answers with the original model and exports a .litertlm file for the phone. The same model was also converted to GGUF, and llama.cpp was built for Android.",
+      highlights: [
+        "Dataset: 2,330 training, 124 validation and 88 test examples",
+        "Automatic before/after comparison against the base model",
+        "Exports .litertlm for on-device use and GGUF files for llama.cpp",
+        "llama.cpp built for Android arm64-v8a and x86_64"
+      ],
+      hidden: true
+    },
+    {
+      id: "messenger",
+      title: "CorePilot Messenger",
+      tagline: "Phone app for CorePilot Coder that shows your agents' reports, questions and urgent calls like a chat app.",
+      domain: "ai",
+      status: "dev",
+      stack: ["Flutter", "Dart", "Relay server"],
+      summary: "When an agent in CorePilot Coder finishes a task, needs an answer or runs into something urgent, the message reaches your phone through CorePilot's relay, so long jobs keep moving while you're away from the desk.",
+      highlights: [
+        "Reports, questions and urgent calls from every agent in one chat list",
+        "Messages travel through CorePilot's relay server",
+        "Companion to the CorePilot Coder desktop app"
+      ],
+      hidden: true
+    },
+    {
+      id: "voice",
+      title: "CorePilot Voice",
+      tagline: "Offline voice control with a wake word, voice commands and a check that the speaker is you.",
+      domain: "ai",
+      status: "dev",
+      stack: ["Python", "Speech recognition", "Speaker verification"],
+      summary: "Early work on an offline voice layer for CorePilot apps. It waits for a wake word, understands the command that follows and ignores other people's voices. Everything runs on the local machine.",
+      highlights: [
+        "Wake-word detection",
+        "Voice commands recognised offline",
+        "Speaker check so other voices don't trigger it"
+      ],
+      hidden: true
+    },
+    {
+      id: "abdustation",
+      title: "AbduStation GCS",
+      tagline: "Ground station for the AbduSky drone: live telemetry, offline maps, mission planning and video with an AI detection overlay.",
+      domain: "drone",
+      status: "dev",
+      stack: ["C++17", "Qt 6 / QML", "OpenSSL 3", "SQLite"],
+      platforms: ["Windows"],
+      summary: "The ground side of the AbduSky system. It shows 40+ live values, plans missions on a map that also works offline, streams video with AI detections drawn on top, and talks to the drone over the encrypted AbduLink v2 protocol.",
+      highlights: [
+        "Telemetry dashboard with 40+ live values",
+        "2D map with flight path, waypoints and geofence; offline tile caching and area download",
+        "Live video with an AI detection overlay",
+        "AbduLink v2: AES-256-GCM, Curve25519 key exchange and anti-replay nonces",
+        "PID tuning, motor output and RC views, a 10-phase flight simulator and a SITL connection",
+        "Encrypted SQLite settings database"
+      ],
+      hidden: true
+    },
+    {
+      id: "ai-detection",
+      title: "Onboard AI Object Detection",
+      tagline: "YOLOv8-nano on a Jetson with TensorRT FP16 for real-time detection and tracking from the drone's camera.",
+      domain: "drone",
+      status: "dev",
+      stack: ["Python", "ROS 2", "YOLOv8", "TensorRT", "OpenCV"],
+      platforms: ["Jetson Orin Nano"],
+      summary: "A ROS 2 node that subscribes to the camera, runs YOLOv8-nano on the Jetson GPU with TensorRT in FP16 and publishes detections in the standard vision_msgs format. A second node tracks the detected objects from frame to frame.",
+      highlights: [
+        "TensorRT FP16 inference on the Jetson Orin Nano",
+        "Publishes Detection2DArray messages for other nodes",
+        "Separate tracking node keeps object IDs stable between frames",
+        "Feeds the AI follow mode and the ground station's video overlay"
+      ],
+      hidden: true
+    },
+    {
+      id: "ai-follow",
+      title: "AI Follow Mode",
+      tagline: "Follows a tracked person or vehicle in follow-behind, orbit or side-follow mode, with Kalman smoothing and safety limits.",
+      domain: "drone",
+      status: "dev",
+      stack: ["C++", "ROS 2", "DeepSORT", "Kalman filter"],
+      summary: "Takes a target tracked with DeepSORT and turns it into GUIDED position targets that the companion bridge sends to the flight controller. Smoothing and limits keep the motion safe.",
+      highlights: [
+        "Three modes: follow behind, orbit and side follow",
+        "Kalman smoothing of the target track",
+        "Safety limits on the generated position targets"
+      ],
+      hidden: true
+    },
+    {
+      id: "obstacle-detection",
+      title: "Stereo Obstacle Detection",
+      tagline: "CUDA-accelerated stereo depth from two global-shutter cameras, publishing obstacle distances at 20 Hz.",
+      domain: "drone",
+      status: "dev",
+      stack: ["C++", "CUDA", "ROS 2", "OpenCV"],
+      platforms: ["Jetson Orin Nano"],
+      summary: "Uses a pair of OV9282 global-shutter cameras at 60 Hz to compute depth on the Jetson GPU, then reports the distance to obstacles around the drone for the avoidance logic.",
+      highlights: [
+        "60 Hz stereo input and 20 Hz obstacle distances",
+        "Depth computed on the GPU with CUDA",
+        "Calibrated stereo pair with a YAML calibration file",
+        "Debug depth image for tuning"
+      ],
+      hidden: true
+    },
+    {
+      id: "precision-landing",
+      title: "Precision Landing",
+      tagline: "ArUco marker detection from the downward camera, giving the landing target's position at 30 Hz.",
+      domain: "drone",
+      status: "dev",
+      stack: ["Python", "ROS 2", "OpenCV ArUco"],
+      summary: "During landing, the node finds an ArUco marker in the downward camera image and publishes its position, so the drone lands on the marker instead of only the GPS point.",
+      highlights: [
+        "Landing target pose published at 30 Hz",
+        "Target estimate smoothed over recent frames",
+        "Annotated debug image for checking detection"
+      ],
+      hidden: true
+    },
+    {
+      id: "slam",
+      title: "Visual-Inertial SLAM",
+      tagline: "ORB-SLAM3 with a stereo camera pair and an IMU, giving the drone its position where GPS isn't available.",
+      domain: "drone",
+      status: "dev",
+      stack: ["C++", "ROS 2", "ORB-SLAM3", "Eigen"],
+      summary: "Feeds the OV9282 stereo pair and the IMU into ORB-SLAM3 and publishes the drone's pose and a point cloud. The mission and fusion nodes use them when GPS is weak or missing.",
+      highlights: [
+        "Stereo + IMU visual-inertial mode",
+        "Publishes pose with covariance and a point cloud",
+        "Used for GPS-denied navigation"
+      ],
+      hidden: true
+    },
+    {
+      id: "gps-denied-missions",
+      title: "GPS-Denied Mission Execution",
+      tagline: "Keeps flying a waypoint mission after GPS is lost by switching to SLAM-based local navigation.",
+      domain: "drone",
+      status: "dev",
+      stack: ["C++", "ROS 2", "SLAM"],
+      summary: "While GPS and SLAM are both available, the node learns the transform between them. If GPS drops out, it converts the remaining GPS waypoints into SLAM coordinates and finishes the mission.",
+      highlights: [
+        "Automatic switch between GPS and SLAM navigation",
+        "GPS-to-SLAM transform computed while both are available",
+        "Remaining waypoints converted on the fly"
+      ],
+      hidden: true
+    },
+    {
+      id: "sensor-fusion",
+      title: "15-State EKF Sensor Fusion",
+      tagline: "Extended Kalman Filter that fuses IMU, GPS, barometer, optical flow and SLAM into one position estimate.",
+      domain: "drone",
+      status: "dev",
+      stack: ["C++", "ROS 2", "Eigen"],
+      summary: "A 15-state EKF on the companion computer. It combines all of the drone's position sources and keeps a usable estimate when any one of them is missing or noisy.",
+      highlights: [
+        "Fuses IMU, GPS, barometer, optical flow and SLAM pose",
+        "Noise parameters set in a YAML file",
+        "Odometry output for the navigation nodes"
+      ],
+      hidden: true
+    },
+    {
+      id: "antidrone",
+      title: "AntiDroneSystem",
+      tagline: "Secure drone command and control: an encrypted, forward-secret radio link, GPS-spoofing resilience and GPS-denied navigation.",
+      domain: "drone",
+      status: "dev",
+      stack: ["C++ / Qt 6", "QML", "Python", "OpenCV", "PlatformIO", "Kotlin", "MAVLink"],
+      platforms: ["Windows", "Linux", "Jetson", "Arduino Portenta", "Android"],
+      summary: "A defensive stack that makes a friendly drone resistant to spoofing and jamming, and lets it fly home when GPS is lost. It has five parts: a Qt 6 ground station, an encryption gateway between the radio and the ground software, a Jetson companion computer running sensor fusion, Portenta firmware, and an Android key app. A written wire protocol defines how they talk.",
+      highlights: [
+        "AH-COMMAND: a Qt 6 / QML ground station built to replace Mission Planner",
+        "gcs-gateway: AES-256-GCM with ephemeral ECDH keys between the RFD900x radio and the ground station",
+        "Hybrid multi-sensor fusion EKF for GPS-denied navigation, day and night, on a Jetson companion",
+        "Portenta firmware (PlatformIO) and an Android hardware-key app",
+        "Written wire-protocol specification and CI workflows"
+      ],
+      metrics: [["AES-256", "GCM with ECDH forward secrecy"], ["EKF", "for GPS-denied navigation"], ["5", "components working together"]],
+      hidden: true
+    },
+    {
+      id: "dronecontroller",
+      title: "DroneController",
+      tagline: "One server for controlling Pixhawk and DJI drones from desktop and Android, with telemetry fan-out over MQTT.",
+      domain: "drone",
+      status: "dev",
+      stack: ["Python", "MAVSDK", "MQTT", "FastAPI", "React", "Electron", "Capacitor"],
+      summary: "A three-tier, multi-vehicle control system. Agents on the drone side talk to the hardware (Pixhawk over MAVLink, DJI through Android). An MQTT broker with a FastAPI service relays telemetry and commands. A single React control app runs on desktop (Electron) and Android (Capacitor).",
+      highlights: [
+        "Pixhawk and DJI drones behind one protocol",
+        "Each drone's data fans out to many control apps at once",
+        "Missions, parameters and full control from a desktop or a phone, on Leaflet maps",
+        "One-click launcher for the server"
+      ],
+      hidden: true
+    },
+    {
+      id: "stream-analyzer",
+      title: "CorePilot Stream Analyzer",
+      tagline: "Desktop ArduPilot log analyzer with GPU plotting, a 3D globe replay and live telemetry.",
+      domain: "drone",
+      status: "live",
+      stack: ["Electron", "Python", "pymavlink", "Plotly", "CesiumJS", "Leaflet"],
+      platforms: ["Windows"],
+      summary: "Opens DataFlash .bin and .log files and MAVLink .tlog files. You can plot any field, browse every message, replay the flight on a 3D globe with a live HUD, and read parameters with full descriptions, all offline. It can also connect to a live vehicle.",
+      highlights: [
+        "GPU-accelerated plots with many traces and split Y-axes",
+        "3D flight replay on a CesiumJS globe with bundled offline imagery, plus optional satellite imagery",
+        "Parameter view in the style of Mission Planner, with units, ranges and descriptions from ArduPilot metadata",
+        "Flight-mode timeline, messages by severity and an overview of the flight",
+        "Live telemetry, MAVFTP and a SITL manager. The backend is compiled to native modules to protect the code"
+      ],
+      hidden: true
     },
     {
       id: "chess",
       title: "CP Chess",
       tagline: "Chess app with a live offline coach that rates every move and explains why, plus Lichess and chess.com integration.",
-      domain: "mobile", status: "build",
+      domain: "apps",
+      status: "build",
       stack: ["Flutter", "Dart", "C++ engine", "OAuth + PKCE"],
       platforms: ["Android"],
       summary: "Play a native chess engine at six levels while a coach rates each move from Best to Blunder, explains mistakes, draws the better move and warns about threats. Review games from chess.com and Lichess, practise your own mistakes, solve puzzles and learn openings.",
@@ -636,88 +1101,20 @@ window.PORTFOLIO = {
         "3,660 rated puzzles, 19 interactive lessons and 3,865 named opening positions",
         "Lichess login (OAuth + PKCE) and play; chess.com profile and games",
         "Real-board mode: enter moves by tapping or with the camera"
-      ]
-    },
-    {
-      id: "chatos",
-      title: "ChatOS",
-      tagline: "Dark-first messaging platform for SKYNEX: a Flutter app, an encrypted PHP relay, a website and a desktop archive.",
-      domain: "mobile", status: "build",
-      stack: ["Flutter", "PHP", "MySQL", "libsodium", "Electron"],
-      platforms: ["Android", "Web", "Windows"],
-      summary: "A messaging product built end to end: an Android app in Flutter, a relay on PHP 8 and MySQL that refuses to start without working sodium cryptography, a static website, and an Electron archive that runs on a Windows machine.",
-      highlights: [
-        "Username and email sign-up with live availability checks and a password-strength meter",
-        "Relay with libsodium cryptography and cron jobs, deployable on cPanel hosting",
-        "Electron archive machine that registers itself with the relay",
-        "Flutter UI covered by widget tests"
-      ]
-    },
-    {
-      id: "famiflix",
-      title: "FamiFlix",
-      tagline: "A family's own streaming service: a Flutter app and a self-hosted media server with transcoding and an admin dashboard.",
-      domain: "mobile", status: "live",
-      stack: ["Flutter", "Node.js", "Express", "FFmpeg", "JWT", "Electron"],
-      platforms: ["Android", "Windows"],
-      summary: "Movies and reels for one family, hosted at home. The server processes uploads with FFmpeg, issues JWT sessions, sends email codes and shows usage charts in an admin dashboard. The Flutter app streams it all.",
-      highlights: [
-        "Version 1.8 after 16 builds",
-        "Uploads processed with FFmpeg and ffprobe",
-        "bcrypt passwords, JWT authentication, and TLS certificates generated by the server",
-        "Server packaged as a desktop app"
-      ]
-    },
-    {
-      id: "quickx",
-      title: "QuickX",
-      tagline: "Delivery and marketplace platform: Flutter apps, a hardened Node.js API and a React admin dashboard.",
-      domain: "mobile", status: "dev",
-      stack: ["Flutter", "Node.js", "Prisma", "Redis", "Socket.IO", "React"],
-      platforms: ["Android", "Windows", "Linux", "Web"],
-      summary: "Customer, rider and vendor flows in Flutter, a real-time backend with Prisma, Redis and Socket.IO, and an operations dashboard with live maps.",
-      highlights: [
-        "Security middleware: Helmet, rate limiting, input sanitising, HPP protection and validation",
-        "Real-time order tracking over Socket.IO, with geo calculations",
-        "S3 uploads with image processing, and Firebase push notifications",
-        "React + Tailwind dashboard with Leaflet maps and charts"
-      ]
-    },
-    {
-      id: "keyboard",
-      title: "CorePilot Keyboard",
-      tagline: "System keyboard for HarmonyOS NEXT and Android: Urdu and English by default, and 22 languages from one shared core.",
-      domain: "mobile", status: "build",
-      stack: ["ArkTS", "Kotlin", "Python", "HarmonyOS IME"],
-      platforms: ["HarmonyOS", "Android"],
-      summary: "Each OS gets a thin native shell around its own input-method API, while the layouts and dictionaries live in a shared core that both use. One Python tool generates and validates every layout.",
-      highlights: [
-        "22 languages, with Urdu and English by default",
-        "Word suggestions and a personal dictionary",
-        "All layouts generated and validated from one source",
-        "AppGallery listing assets ready"
-      ]
-    },
-    {
-      id: "homehub",
-      title: "HomeHub",
-      tagline: "Home Assistant client for Flutter, with live WebSocket state, cameras, an encrypted local store and biometric app lock.",
-      domain: "mobile", status: "dev",
-      stack: ["Flutter", "Bloc", "Dio", "Drift", "MQTT"],
-      platforms: ["Android", "iOS"],
-      summary: "A smart-home control app that connects to Home Assistant over REST and WebSockets and keeps devices in sync in real time. It is built in Clean Architecture layers with dependency injection, typed errors and localisation.",
-      highlights: [
-        "Home Assistant REST and WebSocket clients, plus MQTT",
-        "App lock with biometrics or a PIN, secure storage and encryption",
-        "Bloc state management with get_it / injectable dependency injection and fpdart results",
-        "Demo data mode for working without a live home"
-      ]
+      ],
+      metrics: [["6", "bot levels with a live coach"], ["3,660", "rated puzzles"], ["19", "interactive lessons"]],
+      images: [
+        { src: "assets/img/chess-home.webp", w: 540, h: 1080, alt: "CP Chess home screen", phone: true },
+        { src: "assets/img/chess-coach.webp", w: 540, h: 1080, alt: "CP Chess coach rating a move", phone: true }
+      ],
+      hidden: true
     },
     {
       id: "madrasa",
       title: "Madrasa Management System",
       tagline: "Offline-first school management for Android and Windows, with on-device face attendance.",
-      domain: "mobile", status: "build",
+      domain: "apps",
+      status: "build",
       stack: ["Flutter", "SQLite", "Provider", "Google ML Kit", "fl_chart"],
       platforms: ["Android", "Windows"],
       summary: "Students, fees, expenses, attendance and reports for a madrasa, from a single Flutter code base. Attendance can be marked by face: the camera detects the face on the device and matches it to an enrolled student.",
@@ -726,129 +1123,8 @@ window.PORTFOLIO = {
         "Fee history per student, expense categories and monthly totals",
         "AI face attendance on Android",
         "Clean layering: models → repositories → providers → screens"
-      ]
-    },
-    {
-      id: "stepup",
-      title: "StepUp",
-      tagline: "Step tracker with a foreground counting service, levels, challenges, rewards and a water tracker.",
-      domain: "mobile", status: "build",
-      stack: ["Flutter", "Dart", "Sensors", "Provider"],
-      platforms: ["Android"],
-      summary: "Counts steps in a foreground service using the pedometer and its own sensor-based step detector, then turns them into levels, challenges and achievements. History, analytics charts and reminders are built in.",
-      highlights: [
-        "Foreground service with its own accelerometer step detector",
-        "Levels, challenges, achievements and confetti rewards",
-        "History calendar, analytics charts and a water tracker",
-        "Local notifications and themes"
-      ]
-    },
-    {
-      id: "cv-generator",
-      title: "CV Generator",
-      tagline: "Build a CV once and export it in six designs as PDF or PNG, fully offline.",
-      domain: "mobile", status: "build",
-      stack: ["Flutter", "pdf", "Hive", "Provider"],
-      platforms: ["Android"],
-      summary: "Fill in your details once, then pick from six templates (Classic, Minimal, Modern, Sidebar, Timeline and Spec) with your own accent colour and photo. Export as PDF or PNG, print or share.",
-      highlights: [
-        "Six templates built on a shared layout kit",
-        "Preview, print and share",
-        "Offline storage with Hive"
-      ]
-    },
-    {
-      id: "games",
-      title: "Indie Games Collection",
-      tagline: "Five Flutter / Flame games, each built around one mechanic: kite fights, time-loop ghosts, shadow puzzles and more.",
-      domain: "mobile", status: "dev",
-      stack: ["Flutter", "Flame", "Dart"],
-      platforms: ["Android"],
-      summary: "Patang Bazi (top-down kite fighting against three AI opponents), Time Echoes (a time-loop platformer where your recorded inputs become ghosts), Shadow Solver (rotate a 3D mesh until its shadow matches the target), Echo (see the world by sending out sound waves) and Dhaba Tycoon (a time-management sim).",
-      highlights: [
-        "Patang Bazi: complete first version with an Android build",
-        "Four more games with playable core mechanics and 3–5 levels each",
-        "All five pass flutter analyze with no issues"
-      ]
-    },
-
-    /* ---------------------------------------------------------- Trading */
-    {
-      id: "abdutrading",
-      title: "AbduTrading EA",
-      tagline: "Multi-strategy MetaTrader 5 Expert Advisor for gold, with confluence scoring and an optional C++ HFT module.",
-      domain: "trading", status: "build",
-      stack: ["MQL5", "C++", "Qt", "FastAPI", "Flutter"],
-      platforms: ["MetaTrader 5", "Android"],
-      summary: "Ten plug-in strategies vote on every setup. A trade opens only when the weighted score passes a threshold and enough strategies agree. It has full risk and position management, an on-chart control panel and a Flutter app for remote control.",
-      highlights: [
-        "Strategies: ICT, SMC order blocks and FVG, liquidity sweep with CHoCH, supply and demand, price action, session breakout, multi-timeframe confluence and HFT",
-        "Risk caps per trade and per day, plus session and spread filters",
-        "Partial take-profit at 1R, break-even and an ATR trailing stop",
-        "Tick-level C++ DLL, with a pure-MQL5 fallback"
-      ]
-    },
-    {
-      id: "tradebeacon",
-      title: "CorePilot TradeBeacon",
-      tagline: "Multi-timeframe RSI alerts that ring like a phone call, for MT5 and TradingView, with optional auto-trading.",
-      domain: "trading", status: "live",
-      stack: ["Electron", "MQL5", "Pine Script", "Android", "Lightweight Charts"],
-      platforms: ["Windows", "Android", "MetaTrader 5", "TradingView"],
-      summary: "Pick up to eight timeframes and any number of pairs. When all the selected timeframes are oversold or overbought at the same moment, the app calls you. It can also build a calculated timeframe (the average of the selected ones) and auto-trade on its signal, but only when risk and reward are set.",
-      highlights: [
-        "Builds custom timeframes itself, for example 1 + 5 + 15 + 30 + 45 + 60 → 26m",
-        "Minute-based and second-based methods running side by side",
-        "Pair × timeframe grid with charts and buttons for manual trades",
-        "Desktop app, MT5 Expert Advisor, TradingView indicator and an Android app"
-      ]
-    },
-    {
-      id: "whale-bot",
-      title: "Whale-Follow Forex Bot",
-      tagline: "Python bot for MT5 that follows institutional positioning and trades liquidity sweeps in the London and New York sessions.",
-      domain: "trading", status: "build",
-      stack: ["Python", "MetaTrader5", "pandas", "pytest"],
-      platforms: ["MetaTrader 5"],
-      summary: "Every morning it sets a bias for each pair from CFTC COT data, open interest, the daily EMA200 trend and, optionally, retail sentiment. During the London and New York killzones it waits for a liquidity sweep and a structure break in the direction of that bias.",
-      highlights: [
-        "1% risk per trade, 2R target and break-even at 1R",
-        "3% daily loss limit, a halt at 20% drawdown, and all positions closed by 4 PM New York time",
-        "Handles daylight-saving shifts against Pakistan time automatically",
-        "Trades EURUSD, GBPUSD and XAUUSD; tested with pytest"
-      ]
-    },
-
-    /* ------------------------------------------------------------- Docs */
-    {
-      id: "learning-guide", short: "Learning Guide",
-      title: "ArduPilot & Mission Planner Learning Guide",
-      tagline: "Zero-to-advanced drone course as print-quality PDFs in English and Urdu Nastaliq, with every parameter name verified.",
-      domain: "docs", status: "live",
-      stack: ["Python", "Markdown", "SVG", "Headless Chromium"],
-      summary: "Written for ArduCopter / ArduPlane 4.7 and Mission Planner 1.3. Markdown chapters become HTML and then PDF, with a two-pass table of contents, bookmarks and diagrams drawn in SVG. A checker verifies every parameter name against the official metadata and keeps the Urdu edition structurally identical to the English one.",
-      highlights: [
-        "Two editions: English, and Urdu in Nastaliq with a right-to-left print stylesheet",
-        "Parameter names checked against the official 4.7.3 metadata",
-        "Every diagram generated as inline SVG",
-        "Contact-sheet previews for visual review"
       ],
-      layers: ["design"]
-    },
-    {
-      id: "vtol-handbook", short: "VTOL Handbook",
-      title: "ArduPilot VTOL Handbook",
-      tagline: "Complete VTOL and Mission Planner handbook with a release-pinned reference of 5,948 ArduPlane parameters.",
-      domain: "docs", status: "live",
-      stack: ["Python", "ReportLab", "PyMuPDF", "pytest"],
-      summary: "Covers setup, calibration, missions, transitions, tuning, failsafes and logs for QuadPlane, tiltrotor and tailsitter aircraft on ArduPlane 4.7.3, with a Roman Urdu quick-start. The parameter reference is generated from the official metadata, pinned by commit and SHA-256.",
-      highlights: [
-        "5,948 documented entries, including 231 Q_ parameters",
-        "Build manifest with source URLs, the commit and file hashes",
-        "Automated checks of the PDF's content and layout",
-        "Filterable CSV catalogue alongside the PDF"
-      ],
-      layers: ["design"]
+      hidden: true
     }
   ]
 };
