@@ -1,19 +1,3 @@
-/* Background music for the portfolio.
-
-   By default a soft ambient track is generated live with the Web Audio API:
-   slow chords (Am – Fmaj7 – Cmaj7 – G6), a sine bass and a few bell notes,
-   with reverb and echo. No audio file or licence needed.
-
-   Settings (js/data.js → profile.music):
-     file       path to your own track, e.g. "assets/music/track.mp3" (looped); if it
-                can't be played, the generated music is used instead
-     volume     0..1 (default 0.5)
-     autoStart  true = try to play as soon as the page opens; if the browser blocks
-                sound (most do until the visitor interacts), start on the first
-                click, tap or key press
-   The track is preloaded after the page loads so it starts without delay. Music
-   keeps playing in background tabs; only the music button stops it. Pausing lasts
-   for the current visit; the next visit starts the music again. */
 (function () {
   "use strict";
 
@@ -31,12 +15,9 @@
   var VOLUME = typeof cfg.volume === "number" ? Math.max(0, Math.min(1, cfg.volume)) : 0.5;
   var AC = window.AudioContext || window.webkitAudioContext;
 
-  var mode = null;          // "file" | "synth" once decided
+  var mode = null;
   var playing = false;
 
-  /* -------------------------------------------------------- preferences */
-  // The visitor's on/off choice lasts for this visit only (sessionStorage), so every new visit
-  // starts the music again. Clear any old permanent choice from earlier versions of the site.
   try { localStorage.removeItem("music"); } catch (e) {}
   function getPref() { try { return sessionStorage.getItem("music"); } catch (e) { return null; } }
   function setPref(v) { try { sessionStorage.setItem("music", v); } catch (e) {} }
@@ -46,16 +27,15 @@
     btn.setAttribute("aria-label", on ? "Pause background music" : "Play background music");
   }
 
-  /* ------------------------------------------------------ generated music */
   var ctx, master, dry, verbSend, echoIn, timer, nextChord = 0, chordIdx = 0, nextBell = 0;
   var CHORDS = [
-    { bass: 45, notes: [57, 60, 64, 67, 71] },  // Am9
-    { bass: 41, notes: [57, 60, 64, 65, 69] },  // Fmaj7
-    { bass: 48, notes: [55, 59, 64, 67, 71] },  // Cmaj7
-    { bass: 43, notes: [55, 59, 62, 64, 67] }   // G6
+    { bass: 45, notes: [57, 60, 64, 67, 71] },
+    { bass: 41, notes: [57, 60, 64, 65, 69] },
+    { bass: 48, notes: [55, 59, 64, 67, 71] },
+    { bass: 43, notes: [55, 59, 62, 64, 67] }
   ];
-  var BELLS = [69, 72, 74, 76, 79, 81, 84];     // A minor pentatonic
-  var CHORD_LEN = 9;                            // seconds per chord
+  var BELLS = [69, 72, 74, 76, 79, 81, 84];
+  var CHORD_LEN = 9;
 
   function hz(m) { return 440 * Math.pow(2, (m - 69) / 12); }
 
@@ -81,7 +61,6 @@
     verbSend = ctx.createGain(); verbSend.gain.value = 0.55;
     verbSend.connect(verb); verb.connect(master);
 
-    // echo for the bell notes
     echoIn = ctx.createGain();
     var delay = ctx.createDelay(2); delay.delayTime.value = 0.42;
     var fb = ctx.createGain(); fb.gain.value = 0.38;
@@ -173,11 +152,9 @@
     setTimeout(function () { if (!playing && ctx.state === "running") ctx.suspend(); }, 900);
   }
 
-  /* ---------------------------------------------------------- controls */
-  var soundOn = false;   // audio is really playing (the button shows this, nothing else)
-  var attempt = 0;       // ignores results of older play() calls
+  var soundOn = false;
+  var attempt = 0;
 
-  // Download the track in the background once the page has loaded, so it starts instantly later.
   function preloadFile() {
     if (!fileEl || fileEl.preload === "auto") return;
     fileEl.preload = "auto";
@@ -187,7 +164,6 @@
     if (document.readyState === "complete") preloadFile();
     else window.addEventListener("load", preloadFile);
 
-    // Keep the button in sync with what the audio element is really doing.
     fileEl.addEventListener("playing", function () {
       if (mode !== "file") return;
       soundOn = true; setUI(true); disarm();
@@ -195,11 +171,10 @@
     fileEl.addEventListener("pause", function () {
       if (mode !== "file") return;
       soundOn = false; setUI(false);
-      if (playing) arm();   // paused by the browser, not by the visitor: resume on the next tap or click
+      if (playing) arm();
     });
   }
 
-  // Starts the music. If the browser blocks sound, the next click, tap or key press tries again.
   function play() {
     var my = ++attempt;
     playing = true;
@@ -218,7 +193,7 @@
       }, function (err) {
         if (my !== attempt) return false;
         if (err && (err.name === "NotAllowedError" || err.name === "AbortError")) { waitForTap(); return false; }
-        mode = "synth";                      // file missing or unsupported: use generated music
+        mode = "synth";
         return playing ? playSynth(my) : false;
       });
     }
@@ -230,7 +205,6 @@
     if (!AC) { fail(); return Promise.resolve(false); }
     if (!ctx) buildGraph();
     ctx.resume();
-    // a context the browser hasn't allowed yet stays "suspended"
     return new Promise(function (res) {
       setTimeout(function () {
         if (my !== attempt) return res(false);
@@ -259,11 +233,9 @@
     else { play(); setPref("on"); }
   });
 
-  // Retry on the next real interaction. Only these events let a page start sound in every
-  // browser (a touch "pointerdown" does not), so music starts on the first tap or click.
   var EVENTS = ["click", "touchend", "keydown"], armed = false;
   function onInteract(e) {
-    if (e.target && e.target.closest && e.target.closest("#music-btn, #intro")) return; // their own handlers decide
+    if (e.target && e.target.closest && e.target.closest("#music-btn, #intro")) return;
     if (playing && !soundOn) play();
   }
   function arm() {
@@ -277,11 +249,6 @@
     EVENTS.forEach(function (t) { window.removeEventListener(t, onInteract, true); });
   }
 
-  // Music keeps playing when the visitor switches tabs or windows; only the button stops it.
-
-  /* --------------------------------------------------------- welcome page */
-  // Shown once per visit (the class is set in <head> before the page paints). Entering is the
-  // interaction browsers require, so the music starts right away for every visitor.
   var intro = document.getElementById("intro");
   var root = document.documentElement;
   var behind = [".skip", "#nav", "main", ".footer"].map(function (s) { return document.querySelector(s); }).filter(Boolean);
@@ -298,22 +265,21 @@
   }
   function enter() {
     if (!introOpen) return;
-    play(); setPref("on");                   // inside the visitor's click, so the browser allows the sound
+    play(); setPref("on");
     closeIntro();
   }
 
   if (intro && root.classList.contains("show-intro")) {
     introOpen = true;
     if (!cfg.autoStart) {
-      closeIntro();                          // music isn't set to start by itself: no need for the page
+      closeIntro();
     } else {
-      // greeting in the visitor's own time of day
       var hr = new Date().getHours();
       var hello = document.getElementById("intro-hello");
       if (hello) hello.textContent = (hr < 5 ? "Good evening" : hr < 12 ? "Good morning" : hr < 17 ? "Good afternoon" : "Good evening") + ", welcome to my portfolio";
 
       behind.forEach(function (el) { el.inert = true; });
-      intro.addEventListener("click", enter);          // the button, or anywhere on the page
+      intro.addEventListener("click", enter);
       document.addEventListener("keydown", function (e) {
         if (introOpen && (e.key === "Enter" || e.key === " " || e.key === "Escape")) { e.preventDefault(); enter(); }
       });
@@ -321,8 +287,6 @@
     }
   }
 
-  // Auto start: try right away (works when the browser allows sound for this site);
-  // if it's blocked, the welcome screen's Enter or the first click, tap or key press starts it.
   var pref = getPref();
   if (pref === "on" || (cfg.autoStart && pref !== "off")) play();
 })();

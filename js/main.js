@@ -1,6 +1,3 @@
-/* Renders the projects from js/data.js and handles the page's interactions:
-   project list filters, project details dialog (with ?p=<id> links),
-   theme toggle, mobile menu and the mailto contact form. */
 (function () {
   "use strict";
 
@@ -9,7 +6,6 @@
   var P = D.projects;
   var byId = {};
   P.forEach(function (p, i) { p._i = i; byId[p.id] = p; });
-  // LIST = everything shown on the site (hidden: true is skipped). Planned projects are in it, labelled "Planned".
   var LIST = P.filter(function (p) { return !p.hidden; });
   var REAL = LIST.filter(function (p) { return p.status !== "planned"; });
   var PLANNED = LIST.filter(function (p) { return p.status === "planned"; });
@@ -32,11 +28,9 @@
   }
   function statusHTML(p) { return '<span class="status s-' + esc(p.status) + '">' + esc(statusLabel(p)) + "</span>"; }
   function tagsHTML(list) { return '<ul class="tags">' + list.map(function (s) { return "<li>" + esc(s) + "</li>"; }).join("") + "</ul>"; }
-  // width/height let the browser reserve the image space before it loads
   function dims(im) { return im.w && im.h ? ' width="' + im.w + '" height="' + im.h + '"' : ""; }
   function scrollToEl(el) { if (el) el.scrollIntoView({ behavior: reduce ? "auto" : "smooth" }); }
 
-  /* ---------------------------------------------------------------- toast */
   var toastEl = $("#toast"), toastTimer;
   function toast(msg) {
     toastEl.textContent = msg;
@@ -46,7 +40,6 @@
   }
   window.portfolioToast = toast;
 
-  /* ---------------------------------------------------------------- theme */
   var themeBtn = $("#theme-toggle");
   function syncThemeUI() {
     var t = document.documentElement.getAttribute("data-theme");
@@ -63,7 +56,6 @@
   });
   syncThemeUI();
 
-  /* ------------------------------------------------------------- featured */
   var featured = REAL.filter(function (p) { return p.featured; });
 
   function visualHTML(p) {
@@ -98,7 +90,6 @@
     }).join("");
   }
 
-  /* --------------------------------------------------------- all projects */
   var INDEX_LIMIT = 12;
   var state = { q: "", domain: "all", expanded: false }, visibleList = LIST.slice();
   var listEl = $("#index-list"), countEl = $("#index-count"), emptyEl = $("#index-empty"), searchEl = $("#index-search");
@@ -141,7 +132,6 @@
     visibleList = LIST.filter(function (p) {
       return (state.domain === "all" || p.domain === state.domain) && matches(p, toks);
     });
-    // Unfiltered, the list starts collapsed; any filter or search shows every match.
     var collapsed = !state.expanded && state.domain === "all" && !toks.length && visibleList.length > INDEX_LIMIT;
     var shown = collapsed ? visibleList.slice(0, INDEX_LIMIT) : visibleList;
     moreEl.hidden = !collapsed;
@@ -200,7 +190,6 @@
     });
   }
 
-  /* ------------------------------------------------------ project details */
   var modal = $("#project-modal"), navList = P, current = null, lastFocus = null;
 
   function openProject(id, ctx) {
@@ -294,7 +283,6 @@
     openProject(t.dataset.open, t.dataset.ctx);
   });
 
-  /* ---------------------------------------------------------- mobile menu */
   var menuBtn = $("#menu-btn"), menu = $("#mobile-menu");
   function setMenu(open) {
     menu.hidden = !open;
@@ -306,7 +294,6 @@
   document.addEventListener("keydown", function (e) { if (e.key === "Escape" && !menu.hidden) setMenu(false); });
   window.addEventListener("resize", function () { if (window.innerWidth > 1100 && !menu.hidden) setMenu(false); });
 
-  /* ------------------------------------------------- nav state on scroll */
   var nav = $("#nav"), ticking = false;
   window.addEventListener("scroll", function () {
     if (ticking) return;
@@ -325,7 +312,6 @@
     $$("main > section[id]").forEach(function (s) { obs.observe(s); });
   }
 
-  /* ---------------------------------------------------------------- clock */
   function tickClock() {
     var s;
     try {
@@ -334,7 +320,6 @@
     $$("[data-clock]").forEach(function (el) { el.textContent = s; });
   }
 
-  /* -------------------------------------------------------------- contact */
   function copyEmail() {
     var done = function () { toast("Email address copied"); };
     if (navigator.clipboard && window.isSecureContext) {
@@ -374,7 +359,6 @@
     toast("Opening your email app…");
   });
 
-  /* ----------------------------------------------------------------- boot */
   renderFeatured();
   renderFilters();
   renderIndex();

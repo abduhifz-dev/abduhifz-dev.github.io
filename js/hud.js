@@ -1,6 +1,3 @@
-/* Hero instrument: an attitude indicator with a pitch ladder, bank scale and
-   heading tape. Pointer position sets roll and pitch; scrolling sets altitude
-   and turns the heading. Pauses when off-screen or the tab is hidden. */
 (function () {
   "use strict";
   var canvas = document.getElementById("hud");
@@ -52,7 +49,7 @@
     var t = (now - t0) / 1000;
     var cx = W / 2, cy = H * 0.46;
     var R = Math.min(W, H) * 0.31;
-    var px = R / 26; // pixels per degree of pitch
+    var px = R / 26;
     var heading = ((312 + window.scrollY * 0.06 + (reduce ? 0 : t * 1.5)) % 360 + 360) % 360;
 
     ctx.clearRect(0, 0, W, H);
@@ -61,7 +58,6 @@
     ctx.textAlign = "center";
     ctx.textBaseline = "middle";
 
-    /* ---- attitude ball (clipped) */
     ctx.save();
     ctx.beginPath(); ctx.arc(cx, cy, R, 0, Math.PI * 2); ctx.clip();
     ctx.translate(cx, cy);
@@ -71,17 +67,13 @@
     ctx.globalAlpha = 0.05; ctx.fillStyle = C.text; ctx.fillRect(-R * 2, -R * 3, R * 4, R * 3);
     ctx.globalAlpha = 0.11; ctx.fillStyle = C.accent; ctx.fillRect(-R * 2, 0, R * 4, R * 3);
 
-    // perspective lines on the ground
     ctx.globalAlpha = 0.22; ctx.strokeStyle = C.accent; ctx.lineWidth = 1;
     for (var g = -6; g <= 6; g++) line(0, 0, g * R * 0.55, R * 2.2);
-    // receding ground rows
     for (var k = 1; k <= 6; k++) { var yy = R * 0.06 * k * k; line(-R * 2, yy, R * 2, yy); }
 
-    // horizon
     ctx.globalAlpha = 1; ctx.strokeStyle = C.accent; ctx.lineWidth = 1.6;
     line(-R * 2, 0, R * 2, 0);
 
-    // pitch ladder
     ctx.strokeStyle = C.text; ctx.fillStyle = C.text; ctx.lineWidth = 1.2;
     for (var p = -30; p <= 30; p += 5) {
       if (p === 0) continue;
@@ -98,7 +90,6 @@
     }
     ctx.restore();
 
-    /* ---- ring and bank scale */
     ctx.save();
     ctx.translate(cx, cy);
     ctx.globalAlpha = 0.5; ctx.strokeStyle = C.text; ctx.lineWidth = 1;
@@ -113,13 +104,11 @@
       ctx.lineWidth = marks[i] === 0 ? 2 : 1.2;
       line(Math.cos(a) * (R + 2), Math.sin(a) * (R + 2), Math.cos(a) * (R + 2 + len), Math.sin(a) * (R + 2 + len));
     }
-    // bank pointer
     ctx.rotate(-roll * DEG);
     ctx.globalAlpha = 1; ctx.fillStyle = C.accent;
     ctx.beginPath(); ctx.moveTo(0, -R + 3); ctx.lineTo(-7, -R + 15); ctx.lineTo(7, -R + 15); ctx.closePath(); ctx.fill();
     ctx.restore();
 
-    /* ---- fixed aircraft symbol */
     ctx.save();
     ctx.translate(cx, cy);
     ctx.strokeStyle = C.bg; ctx.lineWidth = 6; ctx.lineJoin = "round";
@@ -137,7 +126,6 @@
       ctx.stroke();
     }
 
-    /* ---- heading tape */
     var tapeY = cy + R + Math.max(26, R * 0.24), tapeW = Math.min(W * 0.56, R * 2), spacing = tapeW / 60;
     ctx.save();
     ctx.beginPath(); ctx.rect(cx - tapeW / 2, tapeY - 18, tapeW, 40); ctx.clip();
@@ -156,7 +144,6 @@
       }
     }
     ctx.restore();
-    // heading box
     ctx.save();
     ctx.globalAlpha = 1; ctx.fillStyle = C.accent;
     ctx.beginPath(); ctx.moveTo(cx, tapeY - 12); ctx.lineTo(cx - 5, tapeY - 20); ctx.lineTo(cx + 5, tapeY - 20); ctx.closePath(); ctx.fill();
@@ -164,7 +151,6 @@
     ctx.fillText("HDG " + pad(heading, 3) + "°", cx, tapeY + Math.max(22, R * 0.18));
     ctx.restore();
 
-    /* ---- side readouts in the DOM, throttled */
     if (now - lastRead > 120) {
       lastRead = now;
       var alt = 120 + window.scrollY * 0.18;
@@ -206,7 +192,6 @@
   }
 
   if (reduce) {
-    // one still frame plus readout updates on scroll, no continuous animation
     draw(performance.now());
     window.addEventListener("scroll", function () { draw(performance.now()); }, { passive: true });
   } else {

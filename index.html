@@ -27,8 +27,6 @@
         if (!t) t = matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark";
         document.documentElement.setAttribute("data-theme", t);
       } catch (e) {}
-      // welcome screen once per visit (it starts the music when the visitor enters)
-      // (not for shared project links like ?p=coder, which open straight to the project)
       try { if (!sessionStorage.getItem("entered") && !/[?&]p=/.test(location.search)) document.documentElement.classList.add("show-intro"); } catch (e) {}
     })();
   </script>
@@ -47,11 +45,10 @@
   </script>
 </head>
 <body>
-  <!-- Welcome page: entering is the click browsers need before they allow music -->
   <div class="intro" id="intro" role="dialog" aria-modal="true" aria-labelledby="intro-title">
     <div class="intro-inner">
       <div class="intro-photo">
-        <img src="assets/avatar.jpg" alt="Photo of Abdul Rehman" width="460" height="460">
+        <img src="assets/avatar-styled.webp" alt="Photo of Abdul Rehman" width="460" height="460">
         <svg class="intro-ring" viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="48" pathLength="100"/></svg>
       </div>
       <p class="intro-hello" id="intro-hello">Welcome to my portfolio</p>
@@ -68,7 +65,6 @@
 
   <a class="skip" href="#main">Skip to content</a>
 
-  <!-- ============================================================ NAV -->
   <header class="nav" id="nav">
     <div class="wrap nav-inner">
       <a class="brand" href="#top" aria-label="Abdul Rehman, back to top">
@@ -109,7 +105,6 @@
 
   <main id="main">
 
-    <!-- ========================================================== HERO -->
     <section class="hero" id="top">
       <div class="wrap hero-inner">
         <div class="hero-copy">
@@ -141,7 +136,6 @@
       </div>
     </section>
 
-    <!-- ===================================================== FEATURED -->
     <section class="section" id="work">
       <div class="wrap">
         <header class="sec-head">
@@ -152,7 +146,6 @@
       </div>
     </section>
 
-    <!-- ===================================================== ALL PROJECTS -->
     <section class="section section-alt" id="all">
       <div class="wrap">
         <header class="sec-head">
@@ -185,7 +178,6 @@
       </div>
     </section>
 
-    <!-- ========================================================= SKILLS -->
     <section class="section" id="skills">
       <div class="wrap">
         <header class="sec-head">
@@ -226,7 +218,6 @@
       </div>
     </section>
 
-    <!-- ========================================================== ABOUT -->
     <section class="section section-alt" id="about">
       <div class="wrap">
         <header class="sec-head">
@@ -235,7 +226,10 @@
 
         <div class="about">
           <figure class="portrait">
-            <img src="assets/avatar.jpg" alt="Photo of Abdul Rehman" width="460" height="460" loading="lazy">
+            <div class="portrait-media">
+              <img src="assets/avatar.jpg" alt="" width="460" height="460" loading="lazy" aria-hidden="true">
+              <img class="portrait-styled" src="assets/avatar-styled.webp" alt="Photo of Abdul Rehman" width="460" height="460" loading="lazy">
+            </div>
             <figcaption>Abdul Rehman · Islamabad · <span data-clock>--:--</span> PKT</figcaption>
           </figure>
 
@@ -273,7 +267,6 @@
       </div>
     </section>
 
-    <!-- ======================================================== CONTACT -->
     <section class="section" id="contact">
       <div class="wrap">
         <header class="sec-head">
@@ -337,7 +330,6 @@
     </div>
   </footer>
 
-  <!-- Project details -->
   <dialog class="modal" id="project-modal" aria-labelledby="pm-title">
     <div class="modal-inner">
       <header class="modal-head">

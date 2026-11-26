@@ -1,6 +1,3 @@
-/* Abdul Rehman — portfolio
-   Full-width, responsive layout. Dark theme by default, light theme via the toggle. */
-
 :root {
   --bg: #0d0e10;
   --bg-2: #141619;
@@ -47,7 +44,6 @@
   color-scheme: light;
 }
 
-/* ----------------------------------------------------------------- base */
 *, *::before, *::after { box-sizing: border-box; }
 html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; scroll-padding-top: calc(var(--nav-h) + 12px); }
 html:has(dialog[open]) { overflow: hidden; }
@@ -72,7 +68,6 @@ em { font-style: normal; }
 .skip { position: fixed; left: 16px; top: -60px; z-index: 200; background: var(--accent); color: #fff; padding: 10px 16px; border-radius: 8px; font-weight: 600; }
 .skip:focus { top: 16px; }
 
-/* -------------------------------------------------------------- buttons */
 .btn {
   display: inline-flex; align-items: center; justify-content: center; gap: 8px;
   min-height: 46px; padding: 0 22px; border-radius: 10px;
@@ -92,7 +87,6 @@ em { font-style: normal; }
 }
 .icon-btn:hover { color: var(--text); border-color: var(--text); }
 
-/* ------------------------------------------------------------------ nav */
 .nav { position: sticky; top: 0; z-index: 100; background: color-mix(in srgb, var(--bg) 88%, transparent); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-bottom: 1px solid transparent; transition: border-color .3s; }
 .nav.scrolled { border-bottom-color: var(--line); }
 .nav-inner { display: flex; align-items: center; gap: 20px; height: var(--nav-h); }
@@ -113,7 +107,6 @@ em { font-style: normal; }
 .mobile-menu a { padding: 14px 2px; font-size: 18px; font-weight: 500; border-bottom: 1px solid var(--line); }
 .mobile-menu a:last-child { border-bottom: 0; }
 
-/* music button: note icon when off, moving bars when on */
 .music-btn .eq { display: none; align-items: flex-end; gap: 2px; height: 14px; }
 .music-btn .eq i { width: 3px; height: 100%; border-radius: 1px; background: var(--accent); transform-origin: bottom; animation: eq 1s ease-in-out infinite; }
 .music-btn .eq i:nth-child(2) { animation-delay: -.35s; }
@@ -123,7 +116,6 @@ em { font-style: normal; }
 .music-btn[aria-pressed="true"] .eq { display: flex; }
 @keyframes eq { 0%, 100% { transform: scaleY(.3); } 50% { transform: scaleY(1); } }
 
-/* ----------------------------------------------------------------- hero */
 .hero { padding: clamp(40px, 7vw, 120px) 0 clamp(56px, 8vw, 130px); }
 .hero-inner { display: grid; grid-template-columns: minmax(0, 1fr) minmax(260px, min(720px, max(520px, 27vw))); gap: clamp(32px, 6vw, 120px); align-items: center; }
 .hero-copy { max-width: max(780px, 46vw); }
@@ -145,7 +137,6 @@ em { font-style: normal; }
 .r-bl { bottom: 20px; left: 22px; }
 .r-br { bottom: 20px; right: 22px; text-align: right; }
 
-/* -------------------------------------------------------------- section */
 .section { padding: clamp(64px, 8vw, 130px) 0; }
 .section-alt { background: var(--bg-2); border-block: 1px solid var(--line); }
 .sec-head { margin-bottom: clamp(28px, 4vw, 56px); }
@@ -153,7 +144,6 @@ em { font-style: normal; }
 .sec-sub { margin-top: 10px; max-width: 64ch; color: var(--muted); }
 .sub-title { font-size: 20px; font-weight: 600; margin: 48px 0 6px; }
 
-/* chips, status, tags */
 .chip { font-size: 13px; font-weight: 500; color: var(--muted); }
 .status { display: inline-flex; align-items: center; gap: 7px; font-size: 13px; font-weight: 500; white-space: nowrap; }
 .status::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: currentColor; flex: none; }
@@ -165,7 +155,6 @@ em { font-style: normal; }
 .tags { display: flex; flex-wrap: wrap; gap: 6px; }
 .tags li { font-family: var(--font-mono); font-size: 12px; padding: 4px 9px; border-radius: 6px; background: var(--bg-3); color: var(--muted); }
 
-/* ------------------------------------------------------------- featured */
 .features { display: grid; }
 .feature {
   display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr); gap: clamp(24px, 5vw, 96px); align-items: center;
@@ -196,7 +185,6 @@ em { font-style: normal; }
 .f-specs b { font-size: clamp(26px, 1.6vw + 16px, 46px); font-weight: 700; letter-spacing: -.03em; line-height: 1; color: var(--accent-text); white-space: nowrap; }
 .f-specs span { color: var(--muted); font-size: 15px; }
 
-/* -------------------------------------------------------- all projects */
 .index-tools { display: flex; flex-wrap: wrap; gap: 14px 20px; align-items: center; margin-bottom: 16px; }
 .search-field { display: flex; align-items: center; gap: 10px; flex: 1 1 280px; max-width: 460px; height: 46px; padding: 0 14px; border-radius: 10px; border: 1px solid var(--line-2); background: var(--bg-2); color: var(--dim); }
 .search-field:focus-within { border-color: var(--accent); }
@@ -227,7 +215,6 @@ em { font-style: normal; }
 .index-empty { padding: 48px 0; text-align: center; color: var(--muted); display: grid; justify-items: center; gap: 14px; }
 mark { background: var(--accent-soft); color: var(--accent-text); border-radius: 3px; padding: 0 1px; }
 
-/* --------------------------------------------------------------- skills */
 .tools { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
 .tool { display: flex; flex-direction: column; gap: 14px; padding: clamp(20px, 2vw, 28px); border-radius: var(--radius); background: var(--bg-2); border: 1px solid var(--line); }
 .tool h3 { font-size: 18px; font-weight: 600; }
@@ -236,9 +223,11 @@ mark { background: var(--accent-soft); color: var(--accent-text); border-radius:
 .tool-link { margin-top: auto; align-self: flex-start; padding-top: 4px; font-size: 14px; font-weight: 600; color: var(--accent-text); }
 .tool-link:hover { text-decoration: underline; text-underline-offset: 4px; }
 
-/* ---------------------------------------------------------------- about */
 .about { display: grid; grid-template-columns: minmax(220px, 380px) minmax(0, 1fr); gap: clamp(28px, 5vw, 96px); align-items: start; }
 .portrait img { width: 100%; height: auto; aspect-ratio: 1 / 1; object-fit: cover; border-radius: var(--radius); border: 1px solid var(--line); background: var(--bg-3); }
+.portrait-media { position: relative; }
+.portrait-styled { position: absolute; inset: 0; transition: opacity .6s ease; }
+.portrait-media:hover .portrait-styled { opacity: 0; }
 .portrait figcaption { margin-top: 12px; font-size: 14px; color: var(--dim); }
 .about-body { max-width: 860px; }
 .about-text { display: grid; gap: 16px; font-size: clamp(16px, .4vw + 15px, 20px); color: var(--muted); }
@@ -249,7 +238,6 @@ mark { background: var(--accent-soft); color: var(--accent-text); border-radius:
 .journey em { display: block; font-size: 15px; color: var(--muted); }
 .journey p { margin-top: 8px; font-size: 15.5px; color: var(--muted); }
 
-/* -------------------------------------------------------------- contact */
 .contact-grid { display: grid; grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr); gap: clamp(28px, 5vw, 96px); align-items: start; }
 .email-row { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
 .email-link { font-size: clamp(20px, 1.2vw + 14px, 32px); font-weight: 600; letter-spacing: -.02em; overflow-wrap: anywhere; }
@@ -275,14 +263,12 @@ mark { background: var(--accent-soft); color: var(--accent-text); border-radius:
 .form-error { font-size: 14px; color: #e5484d; }
 .form-error[hidden] { display: none; }
 
-/* --------------------------------------------------------------- footer */
 .footer { border-top: 1px solid var(--line); padding: 26px 0 34px; font-size: 14px; color: var(--dim); }
 .footer-inner { display: flex; justify-content: space-between; align-items: center; gap: 12px 24px; flex-wrap: wrap; }
 .footer-links { display: flex; gap: 20px; flex-wrap: wrap; }
 .footer a:hover { color: var(--text); }
 .footer-credit { font-size: 12.5px; }
 
-/* ---------------------------------------------------------------- modal */
 dialog { padding: 0; border: 0; color: var(--text); background: transparent; max-width: none; max-height: none; }
 dialog::backdrop { background: rgba(5, 6, 8, .6); }
 [data-theme="light"] dialog::backdrop { background: rgba(30, 28, 24, .4); }
@@ -314,7 +300,6 @@ dialog::backdrop { background: rgba(5, 6, 8, .6); }
 .modal-foot { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 12px 16px; border-top: 1px solid var(--line); }
 .pm-pos { font-size: 13px; color: var(--dim); font-variant-numeric: tabular-nums; }
 
-/* ---------------------------------------------------------- welcome page */
 .intro {
   display: none; position: fixed; inset: 0; z-index: 500; align-items: center; justify-content: center;
   padding: 32px 20px; overflow-y: auto; background: var(--bg); text-align: center; cursor: pointer;
@@ -329,10 +314,9 @@ html.show-intro { overflow: hidden; }
 .intro-ring {
   position: absolute; inset: -12px; width: calc(100% + 24px); height: calc(100% + 24px); max-width: none;
   fill: none; stroke: var(--accent); stroke-width: 1.4; stroke-linecap: round;
-  stroke-dasharray: 18 3 1 3;   /* sums to 25: repeats exactly 4 times around (pathLength 100) */
+  stroke-dasharray: 18 3 1 3;
   animation: intro-ring 18s linear infinite;
 }
-/* move the dashes along the circle (no transform, so the ring always stays centred) */
 @keyframes intro-ring { to { stroke-dashoffset: -100; } }
 .intro-hello { font-size: clamp(14px, .3vw + 13px, 17px); font-weight: 500; color: var(--accent-text); }
 .intro-title { font-size: clamp(40px, 4.5vw + 18px, 88px); font-weight: 700; letter-spacing: -.03em; line-height: 1.04; }
@@ -351,11 +335,9 @@ html.show-intro { overflow: hidden; }
 .intro-inner > :nth-child(7) { animation-delay: .5s; }
 @keyframes intro-in { from { opacity: 0; transform: translateY(12px); } }
 
-/* ---------------------------------------------------------------- toast */
 .toast { position: fixed; left: 50%; bottom: 24px; z-index: 300; transform: translate(-50%, 16px); opacity: 0; pointer-events: none; max-width: calc(100vw - 32px); padding: 11px 16px; border-radius: 10px; background: var(--text); color: var(--bg); font-size: 14.5px; font-weight: 500; transition: opacity .25s, transform .25s; }
 .toast.show { opacity: 1; transform: translate(-50%, 0); }
 
-/* ----------------------------------------------------------- responsive */
 @media (max-width: 1200px) {
   .tools { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .index-head, .row-btn { grid-template-columns: minmax(0, 2fr) 130px 140px 20px; }
