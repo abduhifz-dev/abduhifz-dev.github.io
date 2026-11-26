@@ -433,7 +433,7 @@ window.PORTFOLIO = {
     },
     {
       id: "secured-browser",
-      title: "SoloPilot Secured Browser",
+      title: "CorePilot Secured Browser",
       tagline: "One C++ / Qt 6 code base for a secured browser on Windows, Linux, macOS and Android, with a hand-drawn interface.",
       domain: "desktop", status: "build",
       stack: ["C++", "Qt 6", "QPainter", "CMake"],
@@ -492,7 +492,7 @@ window.PORTFOLIO = {
     },
     {
       id: "player",
-      title: "SoloPilot Player",
+      title: "CorePilot Media Player",
       tagline: "Media player in the style of VLC, built on mpv with a modern React interface.",
       domain: "desktop", status: "build",
       stack: ["Electron", "React", "TypeScript", "mpv", "Tailwind"],
